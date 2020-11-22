@@ -1,4 +1,4 @@
-
+"""Provides the REST API class as well as all cryptowat.ch API resources"""
 import requests
 import urllib.parse
 
