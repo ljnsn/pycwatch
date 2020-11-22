@@ -31,8 +31,8 @@ class HTTPClient:
     raw_response = None
 
     def __init__(self, api_key, headers):
+        header_apikey = {'X-CW-API-Key': api_key} if api_key else dict()
         headers = headers or dict()
-        header_apikey = {'X-CW-API-Key': api_key}
         self.headers = {**self.DEFAULT_HEADERS, **headers, **header_apikey}
 
     def with_header(self, header, value):
@@ -315,8 +315,19 @@ class RestAPI:
     allowance = None
 
     def __init__(self, api_key=None, headers=None, client_class=HTTPClient):
-        self.api_key = api_key
+        self._api_key = api_key
         self.client = client_class(api_key, headers)
+
+    @property
+    def api_key(self):
+        return self._api_key
+
+    @api_key.setter
+    def api_key(self, api_key):
+        if not api_key:
+            raise APIKeyError("Please provide a valid API key")
+        self._api_key = api_key
+        self.client.with_header("X-CW-API-Key", api_key)
 
     @property
     def is_authenticated(self):
