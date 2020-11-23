@@ -21,6 +21,7 @@ PERIOD_VALUES = {
     '3d': 259200,
     '1w': 604800
 }
+KEY_HEADER = 'X-CW-API-Key'
 
 
 class HTTPClient:
@@ -31,7 +32,7 @@ class HTTPClient:
     raw_response = None
 
     def __init__(self, api_key, headers):
-        header_apikey = {'X-CW-API-Key': api_key} if api_key else dict()
+        header_apikey = {KEY_HEADER: api_key} if api_key else dict()
         headers = headers or dict()
         self.headers = {**self.DEFAULT_HEADERS, **headers, **header_apikey}
 
@@ -327,7 +328,7 @@ class RestAPI:
         if not api_key:
             raise APIKeyError("Please provide a valid API key")
         self._api_key = api_key
-        self.client.with_header("X-CW-API-Key", api_key)
+        self.client.with_header(KEY_HEADER, api_key)
 
     @property
     def is_authenticated(self):
