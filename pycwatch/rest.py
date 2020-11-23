@@ -46,17 +46,17 @@ class HTTPClient:
         self.headers = {**old_headers, **additional_headers}
 
     @staticmethod
-    def get_resource(request):
-        resource = PRODUCTION_URL.format(endpoint=request.endpoint)
-        if request.query_parameters:
-            query_string = urllib.parse.urlencode(request.query_parameters)
-            resource = '{}?{}'.format(resource, query_string)
-        return resource
+    def get_resource(resource):
+        uri = PRODUCTION_URL.format(endpoint=resource.endpoint)
+        if resource.query_parameters:
+            query_string = urllib.parse.urlencode(resource.query_parameters)
+            uri = '{}?{}'.format(uri, query_string)
+        return uri
 
-    def perform(self, request):
-        resource = self.get_resource(request)
+    def perform(self, resource):
+        uri = self.get_resource(resource)
 
-        raw_response = requests.get(resource, headers=self.headers)
+        raw_response = requests.get(uri, headers=self.headers)
         self.raw_response = raw_response
         if raw_response.status_code != 200:
             raise APIError(raw_response.text)
@@ -80,7 +80,7 @@ class Allowance:
         }
 
 
-class BaseRequest:
+class BaseResource:
     params = []
 
     @property
@@ -96,13 +96,13 @@ class BaseRequest:
         return params
 
 
-class ListAssetsRequest(BaseRequest):
+class ListAssetsResource(BaseResource):
     @property
     def endpoint(self):
         return '/assets'
 
 
-class AssetDetailsRequest(BaseRequest):
+class AssetDetailsResource(BaseResource):
     def __init__(self, asset_code):
         self.asset_code = asset_code
 
@@ -111,13 +111,13 @@ class AssetDetailsRequest(BaseRequest):
         return '/assets/{asset_code}'.format(asset_code=self.asset_code)
 
 
-class ListPairsRequest(BaseRequest):
+class ListPairsResource(BaseResource):
     @property
     def endpoint(self):
         return '/pairs'
 
 
-class PairDetailsRequest(BaseRequest):
+class PairDetailsResource(BaseResource):
     def __init__(self, pair):
         self.pair = pair
 
@@ -126,13 +126,13 @@ class PairDetailsRequest(BaseRequest):
         return '/pairs/{pair}'.format(pair=self.pair)
 
 
-class ListMarketsResource(BaseRequest):
+class ListMarketsResource(BaseResource):
     @property
     def endpoint(self):
         return '/markets'
 
 
-class MarketDetailsRequest(BaseRequest):
+class MarketDetailsResource(BaseResource):
     def __init__(self, exchange, pair):
         self.exchange = exchange
         self.pair = pair
@@ -144,7 +144,7 @@ class MarketDetailsRequest(BaseRequest):
         )
 
 
-class MarketPriceRequest(BaseRequest):
+class MarketPriceResource(BaseResource):
     def __init__(self, exchange, pair):
         self.exchange = exchange
         self.pair = pair
@@ -156,13 +156,13 @@ class MarketPriceRequest(BaseRequest):
         )
 
 
-class AllMarketPricesRequest(BaseRequest):
+class AllMarketPricesResource(BaseResource):
     @property
     def endpoint(self):
         return '/markets/prices'
 
 
-class MarketTradesRequest(BaseRequest):
+class MarketTradesResource(BaseResource):
     """
     Query Parameters
     ----------------
@@ -188,7 +188,7 @@ class MarketTradesRequest(BaseRequest):
         )
 
 
-class MarketSummaryRequest(BaseRequest):
+class MarketSummaryResource(BaseResource):
     def __init__(self, exchange, pair):
         self.exchange = exchange
         self.pair = pair
@@ -200,7 +200,7 @@ class MarketSummaryRequest(BaseRequest):
         )
 
 
-class AllMarketSummariesRequest(BaseRequest):
+class AllMarketSummariesResource(BaseResource):
     """
     Query Parameters
     ----------------
@@ -218,7 +218,7 @@ class AllMarketSummariesRequest(BaseRequest):
         return '/markets/summaries'
 
 
-class MarketOrderBookRequest(BaseRequest):
+class MarketOrderBookResource(BaseResource):
     """
     Query Parameters
     ----------------
@@ -246,7 +246,7 @@ class MarketOrderBookRequest(BaseRequest):
         )
 
 
-class MarketOrderBookLiquidityRequest(BaseRequest):
+class MarketOrderBookLiquidityResource(BaseResource):
     def __init__(self, exchange, pair):
         self.exchange = exchange
         self.pair = pair
@@ -258,7 +258,7 @@ class MarketOrderBookLiquidityRequest(BaseRequest):
         )
 
 
-class MarketOHLCRequest(BaseRequest):
+class MarketOHLCResource(BaseResource):
     """
     Query Parameters
     ----------------
@@ -288,13 +288,13 @@ class MarketOHLCRequest(BaseRequest):
         )
 
 
-class ListExchangesRequest(BaseRequest):
+class ListExchangesResource(BaseResource):
     @property
     def endpoint(self):
         return '/exchanges'
 
 
-class ExchangeDetailsRequest(BaseRequest):
+class ExchangeDetailsResource(BaseResource):
     def __init__(self, exchange):
         self.exchange = exchange
 
@@ -303,7 +303,7 @@ class ExchangeDetailsRequest(BaseRequest):
         return '/exchanges/{exchange}'.format(exchange=self.exchange)
 
 
-class ExchangeMarketsRequest(BaseRequest):
+class ExchangeMarketsResource(BaseResource):
     def __init__(self, exchange):
         self.exchange = exchange
 
@@ -338,27 +338,27 @@ class RestAPI:
         if 'allowance' in response:
             self.allowance = Allowance(response)
 
-    def perform_request(self, request):
+    def perform_request(self, resource):
         if not self.is_authenticated:
             raise APIError("API Key needs to be set")
-        response = self.client.perform(request)
+        response = self.client.perform(resource)
         self.update_allowance(response)
         return response['result']
 
     def list_assets(self):
-        request = ListAssetsRequest()
+        request = ListAssetsResource()
         return self.perform_request(request)
 
     def get_asset_details(self, asset_code):
-        request = AssetDetailsRequest(asset_code)
+        request = AssetDetailsResource(asset_code)
         return self.perform_request(request)
 
     def list_pairs(self):
-        request = ListPairsRequest()
+        request = ListPairsResource()
         return self.perform_request(request)
 
     def get_pair_details(self, pair):
-        request = PairDetailsRequest(pair)
+        request = PairDetailsResource(pair)
         return self.perform_request(request)
 
     def list_markets(self):
@@ -366,36 +366,36 @@ class RestAPI:
         return self.perform_request(request)
 
     def get_market_details(self, exchange, pair):
-        request = MarketDetailsRequest(exchange, pair)
+        request = MarketDetailsResource(exchange, pair)
         return self.perform_request(request)
 
     def get_market_price(self, exchange, pair):
-        request = MarketPriceRequest(exchange, pair)
+        request = MarketPriceResource(exchange, pair)
         return self.perform_request(request)
 
     def get_all_market_prices(self):
-        request = AllMarketPricesRequest()
+        request = AllMarketPricesResource()
         return self.perform_request(request)
 
     def get_market_trades(self, exchange, pair, since=None, limit=None):
-        request = MarketTradesRequest(exchange, pair, since, limit)
+        request = MarketTradesResource(exchange, pair, since, limit)
         return self.perform_request(request)
 
     def get_market_summary(self, exchange, pair):
-        request = MarketSummaryRequest(exchange, pair)
+        request = MarketSummaryResource(exchange, pair)
         return self.perform_request(request)
 
     def get_all_market_summaries(self, key_by=None):
-        request = AllMarketSummariesRequest(key_by)
+        request = AllMarketSummariesResource(key_by)
         return self.perform_request(request)
 
     def get_market_order_book(self, exchange, pair, depth=None, span=None,
                               limit=None):
-        request = MarketOrderBookRequest(exchange, pair, depth, span, limit)
+        request = MarketOrderBookResource(exchange, pair, depth, span, limit)
         return self.perform_request(request)
 
     def get_market_order_book_liquidity(self, exchange, pair):
-        request = MarketOrderBookLiquidityRequest(exchange, pair)
+        request = MarketOrderBookLiquidityResource(exchange, pair)
         return self.perform_request(request)
 
     def get_market_ohlc(self, exchange, pair, before=None, after=None,
@@ -407,17 +407,17 @@ class RestAPI:
                 str(PERIOD_VALUES[period]).lower() for period in periods
             ]
             periods = ','.join(sec_periods)
-        request = MarketOHLCRequest(exchange, pair, before, after, periods)
+        request = MarketOHLCResource(exchange, pair, before, after, periods)
         return self.perform_request(request)
 
     def list_exchanges(self):
-        request = ListExchangesRequest()
+        request = ListExchangesResource()
         return self.perform_request(request)
 
     def get_exchange_details(self, exchange):
-        request = ExchangeDetailsRequest(exchange)
+        request = ExchangeDetailsResource(exchange)
         return self.perform_request(request)
 
     def list_exchange_markets(self, exchange):
-        request = ExchangeMarketsRequest(exchange)
+        request = ExchangeMarketsResource(exchange)
         return self.perform_request(request)
