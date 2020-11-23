@@ -9,3 +9,6 @@ __pycache__/
 # jupyter stuff
 .ipynb_checkpoints/
 *.ipynb
+
+# tests stuff
+.coverage
