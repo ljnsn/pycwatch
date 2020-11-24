@@ -59,7 +59,12 @@ class HTTPClient:
         raw_response = requests.get(uri, headers=self.headers)
         self.raw_response = raw_response
         if raw_response.status_code != 200:
-            raise APIError(raw_response.text)
+            if hasattr(raw_response, 'json'):
+                res = raw_response.json()
+                exc = res.get('error', raw_response.text)
+            else:
+                exc = raw_response.text
+            raise APIError(exc)
         return raw_response.json()
 
 
