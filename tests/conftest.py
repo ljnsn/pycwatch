@@ -2,7 +2,7 @@ from functools import reduce
 
 import pytest
 
-from pycwatch import resources
+from pycwatch import resources, RestAPI
 from pycwatch.rest import HTTPClient
 
 
@@ -49,3 +49,11 @@ def register_resource(mocker, resource, method, status_code, json=None,
                       text=None):
     mocker.register_uri(method, resource, status_code=status_code, json=json,
                         text=text)
+
+
+def get_patched_api(mocker, api_key):
+    api = RestAPI(api_key)
+    mocker.patch("pycwatch.rest", api)
+    update_allowance_mock = mocker.MagicMock()
+    mocker.patch("pycwatch.rest.update_allowance", update_allowance_mock)
+    return api
