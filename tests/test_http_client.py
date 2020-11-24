@@ -2,7 +2,7 @@ import pytest
 import requests
 import requests_mock
 
-from tests.conftest import log_has
+from tests.conftest import log_has, register_resource
 from pycwatch.errors import APIError
 from pycwatch.rest import HTTPClient, KEY_HEADER, PRODUCTION_URL
 
@@ -52,8 +52,8 @@ def test_get_resource(http_client, mock_resource):
 def test_perform_good_response(http_client, mock_resource, **kwargs):
     resource = http_client.get_resource(mock_resource)
     response_expected = {'a': 2}
-    kwargs['rmock'].register_uri('GET', resource, json=response_expected,
-                                 status_code=200)
+    register_resource(kwargs['rmock'], resource, 'GET', 200,
+                      json=response_expected)
     assert http_client.raw_response is None
     response = http_client.perform(mock_resource)
     assert response == response_expected
@@ -63,12 +63,12 @@ def test_perform_good_response(http_client, mock_resource, **kwargs):
 @requests_mock.Mocker(kw='rmock')
 def test_perform_bad_response(http_client, mock_resource, caplog, **kwargs):
     resource = http_client.get_resource(mock_resource)
-    response_expected = 'Not Found'
-    kwargs['rmock'].register_uri('GET', resource, text=response_expected,
-                                 status_code=404)
+    response_expected = {"error": "Route not found"}
+    register_resource(kwargs['rmock'], resource, 'GET', 404,
+                      json=response_expected)
     assert http_client.raw_response is None
     with pytest.raises(APIError):
         response = http_client.perform(mock_resource)
-        assert response.text == response_expected
+        assert response == response_expected
         assert isinstance(http_client.raw_response, requests.models.Response)
         assert log_has(response.text, caplog)
