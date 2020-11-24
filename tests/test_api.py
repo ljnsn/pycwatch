@@ -70,6 +70,7 @@ def test_update_allowance(mocker, api_key, mock_resource, **kwargs):
     allowance = Allowance(response_expected)
     register_resource(kwargs['rmock'], resource, 'GET', 200,
                       json=response_expected)
+    assert api.allowance is None
     _ = api.perform_request(mock_resource)
     assert str(allowance) == str({
             'last_request_cost': 0.015,
