@@ -2,7 +2,8 @@ from functools import reduce
 
 import pytest
 
-from pycwatch.rest import HTTPClient, BaseResource
+from pycwatch import resources
+from pycwatch.rest import HTTPClient
 
 
 def log_has(line, logs):
@@ -26,7 +27,7 @@ def http_client():
     return client
 
 
-class MockResource(BaseResource):
+class MockResource(resources.BaseResource):
     params = ['param']
 
     def __init__(self, part, param):

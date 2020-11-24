@@ -1,17 +1,10 @@
 import pytest
 
-from pycwatch.rest import (
-    AssetDetailsResource, BaseResource, ListAssetsResource, ListPairsResource,
-    ListMarketsResource, MarketDetailsResource, MarketPriceResource,
-    AllMarketPricesResource, PairDetailsResource, MarketTradesResource,
-    MarketSummaryResource, AllMarketSummariesResource, MarketOrderBookResource,
-    MarketOrderBookLiquidityResource, MarketOHLCResource, ListExchangesResource,
-    ExchangeDetailsResource, ExchangeMarketsResource
-)
+from pycwatch import resources
 
 
 def test_base_resource():
-    resource = BaseResource()
+    resource = resources.BaseResource()
     with pytest.raises(NotImplementedError):
         resource.endpoint
     assert resource.query_parameters == dict()
@@ -22,7 +15,7 @@ def test_base_resource():
 
 
 def test_list_assets_resource():
-    resource = ListAssetsResource()
+    resource = resources.ListAssetsResource()
     assert resource.endpoint == '/assets'
     assert resource.params == []
     assert resource.query_parameters == {}
@@ -30,7 +23,7 @@ def test_list_assets_resource():
 
 def test_asset_details_resource():
     asset_code = 'eur'
-    resource = AssetDetailsResource(asset_code)
+    resource = resources.AssetDetailsResource(asset_code)
     assert resource.asset_code == asset_code
     assert resource.endpoint == '/assets/eur'
     assert resource.params == []
@@ -38,7 +31,7 @@ def test_asset_details_resource():
 
 
 def test_list_pairs_resource():
-    resource = ListPairsResource()
+    resource = resources.ListPairsResource()
     assert resource.endpoint == '/pairs'
     assert resource.params == []
     assert resource.query_parameters == {}
@@ -46,7 +39,7 @@ def test_list_pairs_resource():
 
 def test_pair_details_resource():
     pair = 'btceur'
-    resource = PairDetailsResource(pair)
+    resource = resources.PairDetailsResource(pair)
     assert resource.pair == pair
     assert resource.endpoint == '/pairs/btceur'
     assert resource.params == []
@@ -54,7 +47,7 @@ def test_pair_details_resource():
 
 
 def test_list_markets_resource():
-    resource = ListMarketsResource()
+    resource = resources.ListMarketsResource()
     assert resource.endpoint == '/markets'
     assert resource.params == []
     assert resource.query_parameters == {}
@@ -63,7 +56,7 @@ def test_list_markets_resource():
 def test_market_details_resource():
     exchange = 'binance'
     pair = 'btceur'
-    resource = MarketDetailsResource(exchange, pair)
+    resource = resources.MarketDetailsResource(exchange, pair)
     assert resource.exchange == exchange
     assert resource.pair == pair
     assert resource.endpoint == '/markets/binance/btceur'
@@ -74,7 +67,7 @@ def test_market_details_resource():
 def test_market_price_resource():
     exchange = 'binance'
     pair = 'btceur'
-    resource = MarketPriceResource(exchange, pair)
+    resource = resources.MarketPriceResource(exchange, pair)
     assert resource.exchange == exchange
     assert resource.pair == pair
     assert resource.endpoint == '/markets/binance/btceur/price'
@@ -83,7 +76,7 @@ def test_market_price_resource():
 
 
 def test_all_market_prices_resource():
-    resource = AllMarketPricesResource()
+    resource = resources.AllMarketPricesResource()
     assert resource.endpoint == '/markets/prices'
     assert resource.params == []
     assert resource.query_parameters == {}
@@ -92,7 +85,7 @@ def test_all_market_prices_resource():
 def test_market_trades_resource():
     exchange = 'binance'
     pair = 'btceur'
-    resource = MarketTradesResource(exchange, pair)
+    resource = resources.MarketTradesResource(exchange, pair)
     assert resource.endpoint == '/markets/binance/btceur/trades'
     assert resource.params == ['since', 'limit']
     assert resource.query_parameters == {}
@@ -101,7 +94,7 @@ def test_market_trades_resource():
     assert resource.since is None
     assert resource.limit is None
     since, limit = 100, 1000
-    resource = MarketTradesResource(exchange, pair, since, limit)
+    resource = resources.MarketTradesResource(exchange, pair, since, limit)
     assert resource.endpoint == '/markets/binance/btceur/trades'
     assert resource.since == since
     assert resource.limit == limit
@@ -111,7 +104,7 @@ def test_market_trades_resource():
 def test_market_summary_resource():
     exchange = 'binance'
     pair = 'btceur'
-    resource = MarketSummaryResource(exchange, pair)
+    resource = resources.MarketSummaryResource(exchange, pair)
     assert resource.endpoint == '/markets/binance/btceur/summary'
     assert resource.exchange == exchange
     assert resource.pair == pair
@@ -120,12 +113,12 @@ def test_market_summary_resource():
 
 
 def test_all_market_summary_resource():
-    resource = AllMarketSummariesResource()
+    resource = resources.AllMarketSummariesResource()
     assert resource.endpoint == '/markets/summaries'
     assert resource.params == ['keyBy']
     assert resource.keyBy is None
     assert resource.query_parameters == {}
-    resource = AllMarketSummariesResource(key_by='id')
+    resource = resources.AllMarketSummariesResource(key_by='id')
     assert resource.endpoint == '/markets/summaries'
     assert resource.keyBy == 'id'
     assert resource.query_parameters == dict(keyBy='id')
@@ -134,7 +127,7 @@ def test_all_market_summary_resource():
 def test_market_order_book_resource():
     exchange = 'binance'
     pair = 'btceur'
-    resource = MarketOrderBookResource(exchange, pair)
+    resource = resources.MarketOrderBookResource(exchange, pair)
     assert resource.endpoint == '/markets/binance/btceur/orderbook'
     assert resource.params == ['depth', 'span', 'limit']
     assert resource.query_parameters == {}
@@ -144,18 +137,20 @@ def test_market_order_book_resource():
     assert resource.span is None
     assert resource.limit is None
     depth, span, limit = 1, .5, 10
-    resource = MarketOrderBookResource(exchange, pair, depth, span, limit)
+    resource = resources.MarketOrderBookResource(exchange, pair, depth, span,
+                                                 limit)
     assert resource.endpoint == '/markets/binance/btceur/orderbook'
     assert resource.depth == depth
     assert resource.span == span
     assert resource.limit == limit
-    assert resource.query_parameters == dict(depth=depth, span=span, limit=limit)
+    assert resource.query_parameters == dict(depth=depth, span=span,
+                                             limit=limit)
 
 
 def test_market_order_book_liquidity_resource():
     exchange = 'binance'
     pair = 'btceur'
-    resource = MarketOrderBookLiquidityResource(exchange, pair)
+    resource = resources.MarketOrderBookLiquidityResource(exchange, pair)
     assert resource.endpoint == '/markets/binance/btceur/orderbook/liquidity'
     assert resource.exchange == exchange
     assert resource.pair == pair
@@ -166,7 +161,7 @@ def test_market_order_book_liquidity_resource():
 def test_market_ohlc_resource():
     exchange = 'binance'
     pair = 'btceur'
-    resource = MarketOHLCResource(exchange, pair)
+    resource = resources.MarketOHLCResource(exchange, pair)
     assert resource.endpoint == '/markets/binance/btceur/ohlc'
     assert resource.params == ['before', 'after', 'periods']
     assert resource.query_parameters == {}
@@ -176,16 +171,18 @@ def test_market_ohlc_resource():
     assert resource.after is None
     assert resource.periods is None
     before, after, periods = 1000, 2000, '60,180,108000'
-    resource = MarketOHLCResource(exchange, pair, before, after, periods)
+    resource = resources.MarketOHLCResource(exchange, pair, before, after,
+                                            periods)
     assert resource.endpoint == '/markets/binance/btceur/ohlc'
     assert resource.before == before
     assert resource.after == after
     assert resource.periods == periods
-    assert resource.query_parameters == dict(before=before, after=after, periods=periods)
+    assert resource.query_parameters == dict(before=before, after=after,
+                                             periods=periods)
 
 
 def test_list_exchanges_resource():
-    resource = ListExchangesResource()
+    resource = resources.ListExchangesResource()
     assert resource.endpoint == '/exchanges'
     assert resource.params == []
     assert resource.query_parameters == {}
@@ -193,7 +190,7 @@ def test_list_exchanges_resource():
 
 def test_exchange_details_resource():
     exchange = 'binance'
-    resource = ExchangeDetailsResource(exchange)
+    resource = resources.ExchangeDetailsResource(exchange)
     assert resource.endpoint == '/exchanges/binance'
     assert resource.exchange == exchange
     assert resource.params == []
@@ -202,7 +199,7 @@ def test_exchange_details_resource():
 
 def test_exchange_markets_resource():
     exchange = 'binance'
-    resource = ExchangeMarketsResource(exchange)
+    resource = resources.ExchangeMarketsResource(exchange)
     assert resource.endpoint == '/markets/binance'
     assert resource.exchange == exchange
     assert resource.params == []

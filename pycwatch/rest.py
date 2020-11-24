@@ -2,6 +2,7 @@
 import requests
 import urllib.parse
 
+from pycwatch import resources
 from pycwatch.errors import *
 
 
@@ -85,238 +86,6 @@ class Allowance:
         })
 
 
-class BaseResource:
-    params = []
-
-    @property
-    def endpoint(self):
-        raise NotImplementedError()
-
-    @property
-    def query_parameters(self):
-        params = {}
-        for param in self.params:
-            if getattr(self, param):
-                params[param] = getattr(self, param)
-        return params
-
-
-class ListAssetsResource(BaseResource):
-    @property
-    def endpoint(self):
-        return '/assets'
-
-
-class AssetDetailsResource(BaseResource):
-    def __init__(self, asset_code):
-        self.asset_code = asset_code
-
-    @property
-    def endpoint(self):
-        return '/assets/{asset_code}'.format(asset_code=self.asset_code)
-
-
-class ListPairsResource(BaseResource):
-    @property
-    def endpoint(self):
-        return '/pairs'
-
-
-class PairDetailsResource(BaseResource):
-    def __init__(self, pair):
-        self.pair = pair
-
-    @property
-    def endpoint(self):
-        return '/pairs/{pair}'.format(pair=self.pair)
-
-
-class ListMarketsResource(BaseResource):
-    @property
-    def endpoint(self):
-        return '/markets'
-
-
-class MarketDetailsResource(BaseResource):
-    def __init__(self, exchange, pair):
-        self.exchange = exchange
-        self.pair = pair
-
-    @property
-    def endpoint(self):
-        return '/markets/{exchange}/{pair}'.format(
-            exchange=self.exchange, pair=self.pair
-        )
-
-
-class MarketPriceResource(BaseResource):
-    def __init__(self, exchange, pair):
-        self.exchange = exchange
-        self.pair = pair
-
-    @property
-    def endpoint(self):
-        return '/markets/{exchange}/{pair}/price'.format(
-            exchange=self.exchange, pair=self.pair
-        )
-
-
-class AllMarketPricesResource(BaseResource):
-    @property
-    def endpoint(self):
-        return '/markets/prices'
-
-
-class MarketTradesResource(BaseResource):
-    """
-    Query Parameters
-    ----------------
-    since : integer
-        Limit response to trades after this date (unix timestamp,
-        Ex: 1589571417. NOTE: this can only be used to filter recent trades,
-        not get historical trades
-    limit : integer
-        Limit the number of trades in the response. Max: 1000
-    """
-    params = ['since', 'limit']
-
-    def __init__(self, exchange, pair, since=None, limit=None):
-        self.exchange = exchange
-        self.pair = pair
-        self.since = since
-        self.limit = limit
-
-    @property
-    def endpoint(self):
-        return '/markets/{exchange}/{pair}/trades'.format(
-            exchange=self.exchange, pair=self.pair
-        )
-
-
-class MarketSummaryResource(BaseResource):
-    def __init__(self, exchange, pair):
-        self.exchange = exchange
-        self.pair = pair
-
-    @property
-    def endpoint(self):
-        return '/markets/{exchange}/{pair}/summary'.format(
-            exchange=self.exchange, pair=self.pair
-        )
-
-
-class AllMarketSummariesResource(BaseResource):
-    """
-    Query Parameters
-    ----------------
-    keyBy : string
-        Values can be "id" or "symbols". This determines how each market
-        object is indexed in the response.
-    """
-    params = ['keyBy']
-
-    def __init__(self, key_by=None):
-        self.keyBy = key_by
-
-    @property
-    def endpoint(self):
-        return '/markets/summaries'
-
-
-class MarketOrderBookResource(BaseResource):
-    """
-    Query Parameters
-    ----------------
-    depth : number
-        Only return orders cumulating up to this size
-    span : number
-        Only return orders within this percentage of the midpoint.
-        Example: 0.5 (meaning 0.5%)
-    limit : integer
-        Limits the number of orders on each side of the book
-    """
-    params = ['depth', 'span', 'limit']
-
-    def __init__(self, exchange, pair, depth=None, span=None, limit=None):
-        self.exchange = exchange
-        self.pair = pair
-        self.depth = depth
-        self.span = span
-        self.limit = limit
-
-    @property
-    def endpoint(self):
-        return '/markets/{exchange}/{pair}/orderbook'.format(
-            exchange=self.exchange, pair=self.pair
-        )
-
-
-class MarketOrderBookLiquidityResource(BaseResource):
-    def __init__(self, exchange, pair):
-        self.exchange = exchange
-        self.pair = pair
-
-    @property
-    def endpoint(self):
-        return '/markets/{exchange}/{pair}/orderbook/liquidity'.format(
-            exchange=self.exchange, pair=self.pair
-        )
-
-
-class MarketOHLCResource(BaseResource):
-    """
-    Query Parameters
-    ----------------
-    before : integer
-        Unix timestamp. Only return candles opening before this time.
-        Example: 1481663244
-    after : integer
-        Unix timestamp. Only return candles opening after this time.
-        Example 1481663244
-    periods : array
-        Comma separated integers. Only return these time periods.
-        Example: 60,180,108000
-    """
-    params = ['before', 'after', 'periods']
-
-    def __init__(self, exchange, pair, before=None, after=None, periods=None):
-        self.exchange = exchange
-        self.pair = pair
-        self.before = before
-        self.after = after
-        self.periods = periods
-
-    @property
-    def endpoint(self):
-        return '/markets/{exchange}/{pair}/ohlc'.format(
-            exchange=self.exchange, pair=self.pair
-        )
-
-
-class ListExchangesResource(BaseResource):
-    @property
-    def endpoint(self):
-        return '/exchanges'
-
-
-class ExchangeDetailsResource(BaseResource):
-    def __init__(self, exchange):
-        self.exchange = exchange
-
-    @property
-    def endpoint(self):
-        return '/exchanges/{exchange}'.format(exchange=self.exchange)
-
-
-class ExchangeMarketsResource(BaseResource):
-    def __init__(self, exchange):
-        self.exchange = exchange
-
-    @property
-    def endpoint(self):
-        return '/markets/{exchange}'.format(exchange=self.exchange)
-
-
 class RestAPI:
     allowance = None
 
@@ -351,56 +120,57 @@ class RestAPI:
         return response['result']
 
     def list_assets(self):
-        resource = ListAssetsResource()
+        resource = resources.ListAssetsResource()
         return self.perform_request(resource)
 
     def get_asset_details(self, asset_code):
-        resource = AssetDetailsResource(asset_code)
+        resource = resources.AssetDetailsResource(asset_code)
         return self.perform_request(resource)
 
     def list_pairs(self):
-        resource = ListPairsResource()
+        resource = resources.ListPairsResource()
         return self.perform_request(resource)
 
     def get_pair_details(self, pair):
-        resource = PairDetailsResource(pair)
+        resource = resources.PairDetailsResource(pair)
         return self.perform_request(resource)
 
     def list_markets(self):
-        resource = ListMarketsResource()
+        resource = resources.ListMarketsResource()
         return self.perform_request(resource)
 
     def get_market_details(self, exchange, pair):
-        resource = MarketDetailsResource(exchange, pair)
+        resource = resources.MarketDetailsResource(exchange, pair)
         return self.perform_request(resource)
 
     def get_market_price(self, exchange, pair):
-        resource = MarketPriceResource(exchange, pair)
+        resource = resources.MarketPriceResource(exchange, pair)
         return self.perform_request(resource)
 
     def get_all_market_prices(self):
-        resource = AllMarketPricesResource()
+        resource = resources.AllMarketPricesResource()
         return self.perform_request(resource)
 
     def get_market_trades(self, exchange, pair, since=None, limit=None):
-        resource = MarketTradesResource(exchange, pair, since, limit)
+        resource = resources.MarketTradesResource(exchange, pair, since, limit)
         return self.perform_request(resource)
 
     def get_market_summary(self, exchange, pair):
-        resource = MarketSummaryResource(exchange, pair)
+        resource = resources.MarketSummaryResource(exchange, pair)
         return self.perform_request(resource)
 
     def get_all_market_summaries(self, key_by=None):
-        resource = AllMarketSummariesResource(key_by)
+        resource = resources.AllMarketSummariesResource(key_by)
         return self.perform_request(resource)
 
     def get_market_order_book(self, exchange, pair, depth=None, span=None,
                               limit=None):
-        resource = MarketOrderBookResource(exchange, pair, depth, span, limit)
+        resource = resources.MarketOrderBookResource(exchange, pair, depth,
+                                                     span, limit)
         return self.perform_request(resource)
 
     def get_market_order_book_liquidity(self, exchange, pair):
-        resource = MarketOrderBookLiquidityResource(exchange, pair)
+        resource = resources.MarketOrderBookLiquidityResource(exchange, pair)
         return self.perform_request(resource)
 
     def get_market_ohlc(self, exchange, pair, before=None, after=None,
@@ -413,17 +183,18 @@ class RestAPI:
                 str(PERIOD_VALUES[period]).lower() for period in periods
             ]
             periods = ','.join(sec_periods)
-        resource = MarketOHLCResource(exchange, pair, before, after, periods)
+        resource = resources.MarketOHLCResource(exchange, pair, before, after,
+                                                periods)
         return self.perform_request(resource)
 
     def list_exchanges(self):
-        resource = ListExchangesResource()
+        resource = resources.ListExchangesResource()
         return self.perform_request(resource)
 
     def get_exchange_details(self, exchange):
-        resource = ExchangeDetailsResource(exchange)
+        resource = resources.ExchangeDetailsResource(exchange)
         return self.perform_request(resource)
 
     def list_exchange_markets(self, exchange):
-        resource = ExchangeMarketsResource(exchange)
+        resource = resources.ExchangeMarketsResource(exchange)
         return self.perform_request(resource)
