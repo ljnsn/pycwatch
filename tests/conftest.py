@@ -1,7 +1,6 @@
 from functools import reduce
 
 import pytest
-from unittest.mock import MagicMock
 
 from pycwatch.rest import HTTPClient, BaseResource
 
@@ -41,10 +40,11 @@ class MockResource(BaseResource):
 
 @pytest.fixture
 def mock_resource():
-    request = MockResource('test-part', 'test-value')
-    return request
+    resource = MockResource('test-part', 'test-value')
+    return resource
 
 
-@pytest.fixture
-def mock_response():
-    return MagicMock(return_value={})
+def register_resource(mocker, resource, method, status_code, json=None,
+                      text=None):
+    mocker.register_uri(method, resource, status_code=status_code, json=json,
+                        text=text)
