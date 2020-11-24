@@ -73,11 +73,11 @@ class Allowance:
         self.account = allowance.get('upgrade')
 
     def __repr__(self):
-        return {
+        return str({
             'last_request_cost': self.cost,
             'remaining': self.remaining,
             'remaining_paid': self.remainingPaid
-        }
+        })
 
 
 class BaseResource:
