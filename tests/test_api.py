@@ -111,3 +111,128 @@ def test_list_assets(mocker, http_client, api_key, **kwargs):
                       json=response_expected)
     result = api.list_assets()
     assert result == response_expected['result']
+
+
+@requests_mock.Mocker(kw='rmock')
+def test_get_asset_details(mocker, http_client, api_key, **kwargs):
+    api = get_patched_api(mocker, api_key)
+    asset_code = 'eur'
+    resource_ = resources.AssetDetailsResource(asset_code)
+    resource = http_client.get_resource(resource_)
+    response_expected = {
+        'result': {
+            'id': 108,
+            'symbol': 'eur',
+            'name': 'euro',
+            'fiat': True,
+            'markets': {
+                'base': [
+                    {'id': 63898,
+                     'exchange': 'bitfinex',
+                     'pair': 'eurusdt-perpetual-future-inverse',
+                     'active': True,
+                     'route': 'https://api.cryptowat.ch/markets/bitfinex/eurusdt-perpetual-future-inverse'},
+                    {'id': 61603,
+                     'exchange': 'binance',
+                     'pair': 'eurbusd',
+                     'active': True,
+                     'route': 'https://api.cryptowat.ch/markets/binance/eurbusd'},
+                    {'id': 61604,
+                     'exchange': 'binance',
+                     'pair': 'eurusdt',
+                     'active': True,
+                     'route': 'https://api.cryptowat.ch/markets/binance/eurusdt'},
+                    {'id': 82,
+                     'exchange': 'bitstamp',
+                     'pair': 'eurusd',
+                     'active': True,
+                     'route': 'https://api.cryptowat.ch/markets/bitstamp/eurusd'}
+                ],
+                'quote': [
+                    {'id': 415,
+                     'exchange': 'bitfinex',
+                     'pair': 'btceur',
+                     'active': True,
+                     'route': 'https://api.cryptowat.ch/markets/bitfinex/btceur'},
+                    {'id': 473,
+                     'exchange': 'bitfinex',
+                     'pair': 'iotaeur',
+                     'active': True,
+                     'route': 'https://api.cryptowat.ch/markets/bitfinex/iotaeur'},
+                    {'id': 1028,
+                     'exchange': 'bitfinex',
+                     'pair': 'etheur',
+                     'active': True,
+                     'route': 'https://api.cryptowat.ch/markets/bitfinex/etheur'},
+                    {'id': 1031,
+                     'exchange': 'bitfinex',
+                     'pair': 'neoeur',
+                     'active': True,
+                     'route': 'https://api.cryptowat.ch/markets/bitfinex/neoeur'},
+                    {'id': 1034,
+                     'exchange': 'bitfinex',
+                     'pair': 'eoseur',
+                     'active': True,
+                     'route': 'https://api.cryptowat.ch/markets/bitfinex/eoseur'}
+                ],
+            }
+        }
+    }
+    register_resource(kwargs['rmock'], resource, 'GET', 200,
+                      json=response_expected)
+    result = api.get_asset_details(asset_code)
+    assert result == response_expected['result']
+
+
+@requests_mock.Mocker(kw='rmock')
+def test_list_pairs(mocker, http_client, api_key, **kwargs):
+    api = get_patched_api(mocker, api_key)
+    resource_ = resources.ListPairsResource()
+    resource = http_client.get_resource(resource_)
+    response_expected = {
+        'result': [
+            {'id': 984,
+             'symbol': '1stbtc',
+             'base': {'id': 404,
+                      'symbol': '1st',
+                      'name': 'FirstBlood',
+                      'fiat': False,
+                      'route': 'https://api.cryptowat.ch/assets/1st'},
+             'quote': {'id': 60,
+                       'symbol': 'btc',
+                       'name': 'Bitcoin',
+                       'fiat': False,
+                       'route': 'https://api.cryptowat.ch/assets/btc'},
+             'route': 'https://api.cryptowat.ch/pairs/1stbtc'},
+            {'id': 809,
+             'symbol': '1steth',
+             'base': {'id': 404,
+                      'symbol': '1st',
+                      'name': 'FirstBlood',
+                      'fiat': False,
+                      'route': 'https://api.cryptowat.ch/assets/1st'},
+             'quote': {'id': 77,
+                       'symbol': 'eth',
+                       'name': 'Ethereum',
+                       'fiat': False,
+                       'route': 'https://api.cryptowat.ch/assets/eth'},
+             'route': 'https://api.cryptowat.ch/pairs/1steth'},
+            {'id': 5179,
+             'symbol': '1wobtc',
+             'base': {'id': 3733,
+                      'symbol': '1wo',
+                      'name': '1World',
+                      'fiat': False,
+                      'route': 'https://api.cryptowat.ch/assets/1wo'},
+             'quote': {'id': 60,
+                       'symbol': 'btc',
+                       'name': 'Bitcoin',
+                       'fiat': False,
+                       'route': 'https://api.cryptowat.ch/assets/btc'},
+             'route': 'https://api.cryptowat.ch/pairs/1wobtc'}
+        ]
+    }
+    register_resource(kwargs['rmock'], resource, 'GET', 200,
+                      json=response_expected)
+    result = api.list_pairs()
+    assert result == response_expected['result']
