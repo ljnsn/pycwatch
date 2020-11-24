@@ -351,57 +351,57 @@ class RestAPI:
         return response['result']
 
     def list_assets(self):
-        request = ListAssetsResource()
-        return self.perform_request(request)
+        resource = ListAssetsResource()
+        return self.perform_request(resource)
 
     def get_asset_details(self, asset_code):
-        request = AssetDetailsResource(asset_code)
-        return self.perform_request(request)
+        resource = AssetDetailsResource(asset_code)
+        return self.perform_request(resource)
 
     def list_pairs(self):
-        request = ListPairsResource()
-        return self.perform_request(request)
+        resource = ListPairsResource()
+        return self.perform_request(resource)
 
     def get_pair_details(self, pair):
-        request = PairDetailsResource(pair)
-        return self.perform_request(request)
+        resource = PairDetailsResource(pair)
+        return self.perform_request(resource)
 
     def list_markets(self):
-        request = ListMarketsResource()
-        return self.perform_request(request)
+        resource = ListMarketsResource()
+        return self.perform_request(resource)
 
     def get_market_details(self, exchange, pair):
-        request = MarketDetailsResource(exchange, pair)
-        return self.perform_request(request)
+        resource = MarketDetailsResource(exchange, pair)
+        return self.perform_request(resource)
 
     def get_market_price(self, exchange, pair):
-        request = MarketPriceResource(exchange, pair)
-        return self.perform_request(request)
+        resource = MarketPriceResource(exchange, pair)
+        return self.perform_request(resource)
 
     def get_all_market_prices(self):
-        request = AllMarketPricesResource()
-        return self.perform_request(request)
+        resource = AllMarketPricesResource()
+        return self.perform_request(resource)
 
     def get_market_trades(self, exchange, pair, since=None, limit=None):
-        request = MarketTradesResource(exchange, pair, since, limit)
-        return self.perform_request(request)
+        resource = MarketTradesResource(exchange, pair, since, limit)
+        return self.perform_request(resource)
 
     def get_market_summary(self, exchange, pair):
-        request = MarketSummaryResource(exchange, pair)
-        return self.perform_request(request)
+        resource = MarketSummaryResource(exchange, pair)
+        return self.perform_request(resource)
 
     def get_all_market_summaries(self, key_by=None):
-        request = AllMarketSummariesResource(key_by)
-        return self.perform_request(request)
+        resource = AllMarketSummariesResource(key_by)
+        return self.perform_request(resource)
 
     def get_market_order_book(self, exchange, pair, depth=None, span=None,
                               limit=None):
-        request = MarketOrderBookResource(exchange, pair, depth, span, limit)
-        return self.perform_request(request)
+        resource = MarketOrderBookResource(exchange, pair, depth, span, limit)
+        return self.perform_request(resource)
 
     def get_market_order_book_liquidity(self, exchange, pair):
-        request = MarketOrderBookLiquidityResource(exchange, pair)
-        return self.perform_request(request)
+        resource = MarketOrderBookLiquidityResource(exchange, pair)
+        return self.perform_request(resource)
 
     def get_market_ohlc(self, exchange, pair, before=None, after=None,
                         periods=None):
@@ -412,17 +412,17 @@ class RestAPI:
                 str(PERIOD_VALUES[period]).lower() for period in periods
             ]
             periods = ','.join(sec_periods)
-        request = MarketOHLCResource(exchange, pair, before, after, periods)
-        return self.perform_request(request)
+        resource = MarketOHLCResource(exchange, pair, before, after, periods)
+        return self.perform_request(resource)
 
     def list_exchanges(self):
-        request = ListExchangesResource()
-        return self.perform_request(request)
+        resource = ListExchangesResource()
+        return self.perform_request(resource)
 
     def get_exchange_details(self, exchange):
-        request = ExchangeDetailsResource(exchange)
-        return self.perform_request(request)
+        resource = ExchangeDetailsResource(exchange)
+        return self.perform_request(resource)
 
     def list_exchange_markets(self, exchange):
-        request = ExchangeMarketsResource(exchange)
-        return self.perform_request(request)
+        resource = ExchangeMarketsResource(exchange)
+        return self.perform_request(resource)
