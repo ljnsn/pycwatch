@@ -3,7 +3,8 @@ import logging
 import pytest
 import requests_mock
 
-from tests.conftest import log_has, register_resource
+from tests.conftest import get_patched_api, log_has, register_resource
+from pycwatch import resources
 from pycwatch.errors import APIError
 from pycwatch.rest import Allowance, RestAPI, KEY_HEADER
 
@@ -80,3 +81,33 @@ def test_update_allowance(mocker, api_key, mock_resource, **kwargs):
     assert str(api.allowance) == str(allowance)
     assert api.allowance.cost == 0.015
     assert api.allowance.remaining == 9.985
+
+
+@requests_mock.Mocker(kw='rmock')
+def test_list_assets(mocker, http_client, api_key, **kwargs):
+    api = get_patched_api(mocker, api_key)
+    resource_ = resources.ListAssetsResource()
+    resource = http_client.get_resource(resource_)
+    response_expected = {
+        'result': [
+            {'id': 470,
+             'symbol': 'trac',
+             'name': 'OriginTrail',
+             'fiat': False,
+             'route': 'https://api.cryptowat.ch/assets/trac'},
+            {'id': 4972,
+             'symbol': 'trade',
+             'name': 'Unitrade',
+             'fiat': False,
+             'route': 'https://api.cryptowat.ch/assets/trade'},
+            {'id': 4971,
+             'symbol': 'trb',
+             'name': 'Tellor',
+             'fiat': False,
+             'route': 'https://api.cryptowat.ch/assets/trb'},
+        ]
+    }
+    register_resource(kwargs['rmock'], resource, 'GET', 200,
+                      json=response_expected)
+    result = api.list_assets()
+    assert result == response_expected['result']
