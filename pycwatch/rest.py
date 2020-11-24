@@ -405,6 +405,7 @@ class RestAPI:
 
     def get_market_ohlc(self, exchange, pair, before=None, after=None,
                         periods=None):
+        # TODO: provide option to return period values or integers as keys
         if periods:
             if not isinstance(periods, list):
                 periods = [periods]
