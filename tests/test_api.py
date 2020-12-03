@@ -548,7 +548,7 @@ def test_market_order_book_liquidity(mocker, http_client, api_key, **kwargs):
 
 
 @requests_mock.Mocker(kw='rmock')
-def test_get_ohlc(mocker, http_client, api_key, **kwargs):
+def test_get_ohlc(mocker, http_client, api_key, caplog, **kwargs):
     api = get_patched_api(mocker, api_key)
     exchange = 'binance'
     pair = 'btceur'
@@ -571,7 +571,14 @@ def test_get_ohlc(mocker, http_client, api_key, **kwargs):
     register_resource(kwargs['rmock'], resource, 'GET', 200,
                       json=response_expected)
     result = api.get_market_ohlc(exchange, pair, before, after, periods)
-    assert result == response_expected['result']
+    assert result['1m'] == response_expected['result']['60']
+    result = api.get_market_ohlc(exchange, pair, before, after, periods,
+                                 key_type='int')
+    assert result['60'] == response_expected['result']['60']
+    with pytest.raises(ValueError):
+        _ = api.get_market_ohlc(exchange, pair, before, after, periods,
+                                key_type='period')
+        assert log_has("`key_type` can be either 'str' or 'int'", caplog)
 
 
 @requests_mock.Mocker(kw='rmock')

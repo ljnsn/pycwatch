@@ -170,15 +170,18 @@ def test_market_ohlc_resource():
     assert resource.before is None
     assert resource.after is None
     assert resource.periods is None
-    before, after, periods = 1000, 2000, '60,180,108000'
+    before, after, periods = 1000, 2000, ['1m', '3m', '30m']
+    sec_periods = ','.join([
+        str(resources.PERIOD_VALUES[period]).lower() for period in periods
+    ])
     resource = resources.MarketOHLCResource(exchange, pair, before, after,
                                             periods)
     assert resource.endpoint == '/markets/binance/btceur/ohlc'
     assert resource.before == before
     assert resource.after == after
-    assert resource.periods == periods
+    assert resource.periods == sec_periods
     assert resource.query_parameters == dict(before=before, after=after,
-                                             periods=periods)
+                                             periods=sec_periods)
 
 
 def test_list_exchanges_resource():
