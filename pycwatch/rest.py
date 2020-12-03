@@ -7,21 +7,6 @@ from pycwatch.errors import *
 
 
 PRODUCTION_URL = 'https://api.cryptowat.ch{endpoint}'
-PERIOD_VALUES = {
-    '1m': 60,
-    '3m': 180,
-    '5m': 300,
-    '15m': 900,
-    '30m': 1800,
-    '1h': 3600,
-    '2h': 7200,
-    '4h': 14400,
-    '6h': 21600,
-    '12h': 43200,
-    '1d': 86400,
-    '3d': 259200,
-    '1w': 604800
-}
 KEY_HEADER = 'X-CW-API-Key'
 
 
@@ -174,18 +159,16 @@ class RestAPI:
         return self.perform_request(resource)
 
     def get_market_ohlc(self, exchange, pair, before=None, after=None,
-                        periods=None):
-        # TODO: provide option to return period values or integers as keys
-        if periods:
-            if not isinstance(periods, list):
-                periods = [periods]
-            sec_periods = [
-                str(PERIOD_VALUES[period]).lower() for period in periods
-            ]
-            periods = ','.join(sec_periods)
+                        periods=None, key_type='str'):
+        if key_type not in ['str', 'int']:
+            raise ValueError("`key_type` can be either 'str' or 'int'")
         resource = resources.MarketOHLCResource(exchange, pair, before, after,
                                                 periods)
-        return self.perform_request(resource)
+        response = self.perform_request(resource)
+        if key_type == 'str':
+            period_mapping_inv = {v: k for k, v in resources.PERIOD_VALUES.items()}
+            return {period_mapping_inv[int(k)]: r for k, r in response.items()}
+        return response
 
     def list_exchanges(self):
         resource = resources.ListExchangesResource()
