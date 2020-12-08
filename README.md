@@ -22,7 +22,7 @@ You can set your API key as an environment variable before you use `pycwatch` li
 export CRYPTO_WATCH_KEY="my-awesome-key"
 ```
 
-If you do that, you can skip setting you key in the instructions below.
+If you do that, you can skip setting your key in the instructions below.
 
 ```python
 import pycwatch
