@@ -11,7 +11,7 @@ def log_has(line, logs):
     # and we want to match line against `message` in the tuple
     return reduce(
         lambda a, b: a or b,
-        filter(lambda x: x[2] == line, logs.record_tuples),
+        filter(lambda x: line in x[2], logs.record_tuples),
         False
     )
 

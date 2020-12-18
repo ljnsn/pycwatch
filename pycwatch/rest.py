@@ -1,4 +1,5 @@
 """Provides the REST API class as well as all cryptowat.ch API resources"""
+import logging
 import requests
 import urllib.parse
 
@@ -8,6 +9,13 @@ from pycwatch.errors import *
 
 PRODUCTION_URL = 'https://api.cryptowat.ch{endpoint}'
 KEY_HEADER = 'X-CW-API-Key'
+NO_KEY_MESSAGE = """\
+You have not set an API Key. Anonymous users are limited to 10 Cryptowatch \
+Credits worth of API calls per 24-hour period.
+
+See https://docs.cryptowat.ch/rest-api/rate-limit#api-request-pricing-structure \
+for more information.\
+"""
 
 
 class HTTPClient:
@@ -99,7 +107,7 @@ class RestAPI:
 
     def perform_request(self, resource):
         if not self.is_authenticated:
-            raise APIError("API Key needs to be set")
+            logging.debug(NO_KEY_MESSAGE)
         response = self.client.perform(resource)
         self.update_allowance(response)
         return response['result']

@@ -27,13 +27,26 @@ def test_init_with_key(api_key):
     assert api.client.headers[KEY_HEADER] == api_key
 
 
-def test_perform_request_no_key(caplog, mock_resource):
+@requests_mock.Mocker(kw='rmock')
+def test_perform_request_no_key(mocker, caplog, mock_resource, **kwargs):
     caplog.set_level(logging.INFO)
     api = RestAPI()
-    line = "API Key needs to be set"
-    with pytest.raises(APIError):
-        api.perform_request(mock_resource)
-        assert log_has(line, caplog)
+    mocker.patch("pycwatch.rest", api)
+    resource = api.client.get_resource(mock_resource)
+    response_expected = {
+        "result": {
+            "the-result": [1, 2, 3, 4, 5]
+        }
+    }
+    update_allowance_mock = mocker.MagicMock()
+    mocker.patch("pycwatch.rest.update_allowance", update_allowance_mock)
+    register_resource(kwargs['rmock'], resource, 'GET', 200,
+                      json=response_expected)
+    line = "You have not set an API Key"
+    result = api.perform_request(mock_resource)
+    assert log_has(line, caplog)
+    assert result == response_expected['result']
+    update_allowance_mock.assert_called_once()
 
 
 @requests_mock.Mocker(kw='rmock')
