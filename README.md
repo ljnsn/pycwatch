@@ -4,7 +4,7 @@ The `pycwatch` library provides access to the [Cryptowatch API](https://docs.cry
 
 ## Installation
 
-Install from pypi:
+Install from pypi (soon):
 
 `pip install pycwatch`
 
@@ -16,25 +16,30 @@ or clone this repository and install from there.
 
 ## Quick Start
 
-You can set your API key as an environment variable before you use `pycwatch` like so:
-
-```shell
-export CRYPTO_WATCH_KEY="my-awesome-key"
-```
-
-If you do that, you can skip setting your key in the instructions below.
-
 ```python
 import pycwatch
 
 # create api
 api = pycwatch.rest
-# assign api key
-api.api_key = 'my-awesome-key'
 
 # get assets
 assets = api.list_assets()
 # get some price info
 exchange, pair = 'binance', 'btceur'
 price = api.get_market_price(exchange, pair)
+```
+
+If you have an account at [cryptowat.ch](https://cryptowat.ch), you can either set your key as an environment variable or in the code.
+
+```shell
+export CRYPTO_WATCH_KEY="my-awesome-key"
+```
+
+or
+
+```python
+import pycwatch
+
+api = pycwatch.rest
+api.api_key = 'my-awesome-key'
 ```
