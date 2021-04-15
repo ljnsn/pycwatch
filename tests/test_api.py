@@ -589,11 +589,11 @@ def test_get_ohlc(mocker, http_client, api_key, caplog, **kwargs):
     result = api.get_market_ohlc(exchange, pair, before, after, periods)
     assert result['1m'] == response_expected['result']['60']
     result = api.get_market_ohlc(exchange, pair, before, after, periods,
-                                 key_type='int')
+                                 result_key_type='int')
     assert result['60'] == response_expected['result']['60']
     with pytest.raises(ValueError):
         _ = api.get_market_ohlc(exchange, pair, before, after, periods,
-                                key_type='period')
+                                result_key_type='period')
         assert log_has("`key_type` can be either 'str' or 'int'", caplog)
 
 

@@ -167,15 +167,23 @@ class RestAPI:
         return self.perform_request(resource)
 
     def get_market_ohlc(self, exchange, pair, before=None, after=None,
-                        periods=None, key_type='str'):
-        if key_type not in ['str', 'int']:
-            raise ValueError("`key_type` can be either 'str' or 'int'")
-        resource = resources.MarketOHLCResource(exchange, pair, before, after,
-                                                periods)
+                        periods=None, result_key_type='str'):
+
+        if result_key_type not in ['str', 'int']:
+            raise ValueError("`key_type' can be either 'str' or 'int'")
+
+        resource = resources.MarketOHLCResource(
+            exchange, pair, before, after, periods)
+
         response = self.perform_request(resource)
-        if key_type == 'str':
-            period_mapping_inv = {v: k for k, v in resources.PERIOD_VALUES.items()}
+
+        # FIXME: should we convert the response key to int?
+        if result_key_type == 'str':
+            period_mapping_inv = {
+                v: k for k, v in resources.PERIOD_VALUES.items()
+            }
             return {period_mapping_inv[int(k)]: r for k, r in response.items()}
+
         return response
 
     def list_exchanges(self):
