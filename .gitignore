@@ -12,3 +12,6 @@ __pycache__/
 
 # tests stuff
 .coverage
+
+# other stuff
+venv/
