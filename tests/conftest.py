@@ -55,5 +55,5 @@ def get_patched_api(mocker, api_key):
     api = RestAPI(api_key)
     mocker.patch("pycwatch.rest", api)
     update_allowance_mock = mocker.MagicMock()
-    mocker.patch("pycwatch.rest.update_allowance", update_allowance_mock)
+    mocker.patch("pycwatch.rest._update_allowance", update_allowance_mock)
     return api

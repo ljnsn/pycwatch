@@ -43,10 +43,10 @@ def test_perform_request_no_key(mocker, caplog, mock_resource, **kwargs):
         }
     }
     update_allowance_mock = mocker.MagicMock()
-    mocker.patch("pycwatch.rest.update_allowance", update_allowance_mock)
+    mocker.patch("pycwatch.rest._update_allowance", update_allowance_mock)
     register_resource(kwargs['rmock'], resource, 'GET', 200,
                       json=response_expected)
-    result = api.perform_request(mock_resource)
+    result = api._perform_request(mock_resource)
     assert log_has(NO_KEY_MESSAGE, caplog)
     assert result == response_expected['result']
     update_allowance_mock.assert_called_once()
@@ -63,10 +63,10 @@ def test_perform_request(mocker, api_key, mock_resource, **kwargs):
         }
     }
     update_allowance_mock = mocker.MagicMock()
-    mocker.patch("pycwatch.rest.update_allowance", update_allowance_mock)
+    mocker.patch("pycwatch.rest._update_allowance", update_allowance_mock)
     register_resource(kwargs['rmock'], resource, 'GET', 200,
                       json=response_expected)
-    result = api.perform_request(mock_resource)
+    result = api._perform_request(mock_resource)
     assert result == response_expected['result']
     update_allowance_mock.assert_called_once()
 
@@ -88,7 +88,7 @@ def test_update_allowance(mocker, api_key, mock_resource, **kwargs):
     register_resource(kwargs['rmock'], resource, 'GET', 200,
                       json=response_expected)
     assert api.allowance is None
-    _ = api.perform_request(mock_resource)
+    _ = api._perform_request(mock_resource)
     assert str(allowance) == str({
             'last_request_cost': 0.015,
             'remaining': 9.985,
