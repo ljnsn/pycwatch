@@ -1,4 +1,5 @@
 """Defines all API resources"""
+
 PERIOD_VALUES = {
     '1m': 60,
     '3m': 180,

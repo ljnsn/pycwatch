@@ -38,5 +38,12 @@ setup(
     author_email='cryptodemigod@protonmail.com',
     description='Implements the Cryptowatch Rest API',
     long_description=long_description,
-    install_requires=dependencies
+    install_requires=dependencies,
+    extras_require={
+        "dev": [
+            "pytest",
+            "requests-mock",
+            "pytest-mock",
+        ]
+    }
 )
