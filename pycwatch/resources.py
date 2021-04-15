@@ -1,4 +1,6 @@
 """Defines all API resources"""
+from typing import Dict, List, Optional, Union
+
 
 PERIOD_VALUES = {
     '1m': 60,
@@ -18,14 +20,14 @@ PERIOD_VALUES = {
 
 
 class BaseResource:
-    params = []
+    params: list = []
 
     @property
-    def endpoint(self):
+    def endpoint(self) -> str:
         raise NotImplementedError()
 
     @property
-    def query_parameters(self):
+    def query_parameters(self) -> Dict[str, str]:
         params = {}
         for param in self.params:
             if getattr(self, param):
@@ -35,59 +37,59 @@ class BaseResource:
 
 class ListAssetsResource(BaseResource):
     @property
-    def endpoint(self):
+    def endpoint(self) -> str:
         return '/assets'
 
 
 class AssetDetailsResource(BaseResource):
-    def __init__(self, asset_code):
+    def __init__(self, asset_code: str) -> None:
         self.asset_code = asset_code
 
     @property
-    def endpoint(self):
+    def endpoint(self) -> str:
         return '/assets/{asset_code}'.format(asset_code=self.asset_code)
 
 
 class ListPairsResource(BaseResource):
     @property
-    def endpoint(self):
+    def endpoint(self) -> str:
         return '/pairs'
 
 
 class PairDetailsResource(BaseResource):
-    def __init__(self, pair):
+    def __init__(self, pair: str) -> None:
         self.pair = pair
 
     @property
-    def endpoint(self):
+    def endpoint(self) -> str:
         return '/pairs/{pair}'.format(pair=self.pair)
 
 
 class ListMarketsResource(BaseResource):
     @property
-    def endpoint(self):
+    def endpoint(self) -> str:
         return '/markets'
 
 
 class MarketDetailsResource(BaseResource):
-    def __init__(self, exchange, pair):
+    def __init__(self, exchange: str, pair: str) -> None:
         self.exchange = exchange
         self.pair = pair
 
     @property
-    def endpoint(self):
+    def endpoint(self) -> str:
         return '/markets/{exchange}/{pair}'.format(
             exchange=self.exchange, pair=self.pair
         )
 
 
 class MarketPriceResource(BaseResource):
-    def __init__(self, exchange, pair):
+    def __init__(self, exchange: str, pair: str) -> None:
         self.exchange = exchange
         self.pair = pair
 
     @property
-    def endpoint(self):
+    def endpoint(self) -> str:
         return '/markets/{exchange}/{pair}/price'.format(
             exchange=self.exchange, pair=self.pair
         )
@@ -95,7 +97,7 @@ class MarketPriceResource(BaseResource):
 
 class AllMarketPricesResource(BaseResource):
     @property
-    def endpoint(self):
+    def endpoint(self) -> str:
         return '/markets/prices'
 
 
@@ -112,26 +114,32 @@ class MarketTradesResource(BaseResource):
     """
     params = ['since', 'limit']
 
-    def __init__(self, exchange, pair, since=None, limit=None):
+    def __init__(
+            self,
+            exchange: str,
+            pair: str,
+            since: Optional[Union[int, str]] = None,
+            limit: Optional[Union[int, str]] = None
+    ) -> None:
         self.exchange = exchange
         self.pair = pair
         self.since = since
         self.limit = limit
 
     @property
-    def endpoint(self):
+    def endpoint(self) -> str:
         return '/markets/{exchange}/{pair}/trades'.format(
             exchange=self.exchange, pair=self.pair
         )
 
 
 class MarketSummaryResource(BaseResource):
-    def __init__(self, exchange, pair):
+    def __init__(self, exchange: str, pair: str) -> None:
         self.exchange = exchange
         self.pair = pair
 
     @property
-    def endpoint(self):
+    def endpoint(self) -> str:
         return '/markets/{exchange}/{pair}/summary'.format(
             exchange=self.exchange, pair=self.pair
         )
@@ -147,11 +155,11 @@ class AllMarketSummariesResource(BaseResource):
     """
     params = ['keyBy']
 
-    def __init__(self, key_by=None):
+    def __init__(self, key_by: Optional[str] = None) -> None:
         self.keyBy = key_by
 
     @property
-    def endpoint(self):
+    def endpoint(self) -> str:
         return '/markets/summaries'
 
 
@@ -169,7 +177,14 @@ class MarketOrderBookResource(BaseResource):
     """
     params = ['depth', 'span', 'limit']
 
-    def __init__(self, exchange, pair, depth=None, span=None, limit=None):
+    def __init__(
+            self,
+            exchange: str,
+            pair: str,
+            depth: Optional[Union[float, int, str]] = None,
+            span: Optional[Union[float, int, str]] = None,
+            limit: Optional[Union[int, str]] = None
+    ) -> None:
         self.exchange = exchange
         self.pair = pair
         self.depth = depth
@@ -177,19 +192,19 @@ class MarketOrderBookResource(BaseResource):
         self.limit = limit
 
     @property
-    def endpoint(self):
+    def endpoint(self) -> str:
         return '/markets/{exchange}/{pair}/orderbook'.format(
             exchange=self.exchange, pair=self.pair
         )
 
 
 class MarketOrderBookLiquidityResource(BaseResource):
-    def __init__(self, exchange, pair):
+    def __init__(self, exchange: str, pair: str) -> None:
         self.exchange = exchange
         self.pair = pair
 
     @property
-    def endpoint(self):
+    def endpoint(self) -> str:
         return '/markets/{exchange}/{pair}/orderbook/liquidity'.format(
             exchange=self.exchange, pair=self.pair
         )
@@ -211,22 +226,34 @@ class MarketOHLCResource(BaseResource):
     """
     params = ['before', 'after', 'periods']
 
-    def __init__(self, exchange, pair, before=None, after=None, periods=None):
+    def __init__(
+            self,
+            exchange: str,
+            pair: str,
+            before: Optional[Union[int, str]] = None,
+            after: Optional[Union[int, str]] = None,
+            periods: Optional[Union[List[Union[int, str]], str]] = None
+    ) -> None:
         self.exchange = exchange
         self.pair = pair
         self.before = before
         self.after = after
+
         if periods:
+
             if not isinstance(periods, list):
                 periods = [periods]
-            sec_periods = [
-                str(PERIOD_VALUES[period]).lower() for period in periods
-            ]
-            periods = ','.join(sec_periods)
+
+            if all(isinstance(p, str) for p in periods):
+                periods = [
+                    str(PERIOD_VALUES[period]).lower() for period in periods
+                ]
+            periods = ','.join(periods)
+
         self.periods = periods
 
     @property
-    def endpoint(self):
+    def endpoint(self) -> str:
         return '/markets/{exchange}/{pair}/ohlc'.format(
             exchange=self.exchange, pair=self.pair
         )
@@ -234,23 +261,44 @@ class MarketOHLCResource(BaseResource):
 
 class ListExchangesResource(BaseResource):
     @property
-    def endpoint(self):
+    def endpoint(self) -> str:
         return '/exchanges'
 
 
 class ExchangeDetailsResource(BaseResource):
-    def __init__(self, exchange):
+    def __init__(self, exchange) -> None:
         self.exchange = exchange
 
     @property
-    def endpoint(self):
+    def endpoint(self) -> str:
         return '/exchanges/{exchange}'.format(exchange=self.exchange)
 
 
 class ExchangeMarketsResource(BaseResource):
-    def __init__(self, exchange):
+    def __init__(self, exchange) -> None:
         self.exchange = exchange
 
     @property
-    def endpoint(self):
+    def endpoint(self) -> str:
         return '/markets/{exchange}'.format(exchange=self.exchange)
+
+
+Resource = Union[
+    AllMarketPricesResource,
+    AllMarketSummariesResource,
+    AssetDetailsResource,
+    ExchangeDetailsResource,
+    ExchangeMarketsResource,
+    ListAssetsResource,
+    ListExchangesResource,
+    ListMarketsResource,
+    ListPairsResource,
+    MarketDetailsResource,
+    MarketOHLCResource,
+    MarketOrderBookLiquidityResource,
+    MarketOrderBookResource,
+    MarketPriceResource,
+    MarketSummaryResource,
+    MarketTradesResource,
+    PairDetailsResource
+]
