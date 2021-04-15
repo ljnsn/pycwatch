@@ -5,11 +5,11 @@ import requests_mock
 
 from tests.conftest import get_patched_api, log_has, register_resource
 from pycwatch import resources
-from pycwatch.errors import APIError
-from pycwatch.rest import Allowance, RestAPI, KEY_HEADER
+from pycwatch.errors import APIError, APIKeyError
+from pycwatch.rest import Allowance, RestAPI, KEY_HEADER, NO_KEY_MESSAGE
 
 
-def test_key_setter(api_key):
+def test_key_setter(api_key, caplog):
     api = RestAPI()
     assert api.api_key is None
     assert KEY_HEADER not in list(api.client.headers)
@@ -18,6 +18,10 @@ def test_key_setter(api_key):
     assert api.api_key == api_key
     assert api.is_authenticated
     assert api.client.headers[KEY_HEADER] == api_key
+    # test that `None' keys raise an error
+    with pytest.raises(APIKeyError):
+        api.api_key = None
+        log_has("Please provide a valid API key", caplog)
 
 
 def test_init_with_key(api_key):
@@ -29,7 +33,7 @@ def test_init_with_key(api_key):
 
 @requests_mock.Mocker(kw='rmock')
 def test_perform_request_no_key(mocker, caplog, mock_resource, **kwargs):
-    caplog.set_level(logging.INFO)
+    caplog.set_level(logging.DEBUG)
     api = RestAPI()
     mocker.patch("pycwatch.rest", api)
     resource = api.client.get_resource(mock_resource)
@@ -42,9 +46,8 @@ def test_perform_request_no_key(mocker, caplog, mock_resource, **kwargs):
     mocker.patch("pycwatch.rest.update_allowance", update_allowance_mock)
     register_resource(kwargs['rmock'], resource, 'GET', 200,
                       json=response_expected)
-    line = "You have not set an API Key"
     result = api.perform_request(mock_resource)
-    assert log_has(line, caplog)
+    assert log_has(NO_KEY_MESSAGE, caplog)
     assert result == response_expected['result']
     update_allowance_mock.assert_called_once()
 
