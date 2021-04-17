@@ -6,7 +6,7 @@ from typing import Dict, Optional, Type
 import requests
 
 from pycwatch import resources
-from pycwatch.errors import *
+import pycwatch.errors
 
 
 PRODUCTION_URL = 'https://api.cryptowat.ch{endpoint}'
@@ -66,7 +66,7 @@ class HTTPClient:
 
                 exc = raw_response.text
 
-            raise APIError(exc)
+            raise pycwatch.errors.APIError(exc)
 
         return raw_response.json()
 
@@ -128,7 +128,7 @@ class RestAPI:
     @api_key.setter
     def api_key(self, api_key: str) -> None:
         if not api_key:
-            raise APIKeyError("Please provide a valid API key")
+            raise pycwatch.errors.APIKeyError("Please provide a valid API key")
         self._api_key = api_key
         self.client.with_header(KEY_HEADER, api_key)
 
