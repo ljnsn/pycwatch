@@ -94,6 +94,7 @@ def test_update_allowance(mocker, api_key, mock_resource, **kwargs):
             'remaining': 9.985,
             'remaining_paid': None
     })
+    assert api.allowance is not None
     assert str(api.allowance) == str(allowance)
     assert api.allowance.cost == 0.015
     assert api.allowance.remaining == 9.985
