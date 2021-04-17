@@ -42,8 +42,9 @@ setup(
     extras_require={
         "dev": [
             "pytest",
-            "requests-mock",
+            "pytest-cov",
             "pytest-mock",
+            "requests-mock",
         ]
     }
 )
