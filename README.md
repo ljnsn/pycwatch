@@ -4,11 +4,11 @@ The `pycwatch` library provides access to the [Cryptowatch API](https://docs.cry
 
 ## Installation
 
-Install from pypi (soon):
+Either install from pypi or clone this repository and install locally.
 
-`pip install pycwatch`
-
-or clone this repository and install from there.
+```fish
+pip install pycwatch
+```
 
 ### Dependencies
 
