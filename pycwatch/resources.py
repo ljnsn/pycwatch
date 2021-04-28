@@ -254,7 +254,7 @@ class MarketOHLCResource(BaseResource):
                     period = PERIOD_VALUES[period.lower()]
                 parsed_periods.append(str(period))
 
-            periods = ','.join(parsed_periods)
+            periods = ",".join(parsed_periods)
 
         self.periods = periods
 
