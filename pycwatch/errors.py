@@ -1,4 +1,3 @@
-
 class CryptowatchError(Exception):
     def __init__(
         self,

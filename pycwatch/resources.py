@@ -3,19 +3,19 @@ from typing import Dict, List, Optional, Union
 
 
 PERIOD_VALUES = {
-    '1m': 60,
-    '3m': 180,
-    '5m': 300,
-    '15m': 900,
-    '30m': 1800,
-    '1h': 3600,
-    '2h': 7200,
-    '4h': 14400,
-    '6h': 21600,
-    '12h': 43200,
-    '1d': 86400,
-    '3d': 259200,
-    '1w': 604800
+    "1m": 60,
+    "3m": 180,
+    "5m": 300,
+    "15m": 900,
+    "30m": 1800,
+    "1h": 3600,
+    "2h": 7200,
+    "4h": 14400,
+    "6h": 21600,
+    "12h": 43200,
+    "1d": 86400,
+    "3d": 259200,
+    "1w": 604800,
 }
 
 
@@ -38,7 +38,7 @@ class BaseResource:
 class ListAssetsResource(BaseResource):
     @property
     def endpoint(self) -> str:
-        return '/assets'
+        return "/assets"
 
 
 class AssetDetailsResource(BaseResource):
@@ -47,13 +47,13 @@ class AssetDetailsResource(BaseResource):
 
     @property
     def endpoint(self) -> str:
-        return '/assets/{asset_code}'.format(asset_code=self.asset_code)
+        return "/assets/{asset_code}".format(asset_code=self.asset_code)
 
 
 class ListPairsResource(BaseResource):
     @property
     def endpoint(self) -> str:
-        return '/pairs'
+        return "/pairs"
 
 
 class PairDetailsResource(BaseResource):
@@ -62,13 +62,13 @@ class PairDetailsResource(BaseResource):
 
     @property
     def endpoint(self) -> str:
-        return '/pairs/{pair}'.format(pair=self.pair)
+        return "/pairs/{pair}".format(pair=self.pair)
 
 
 class ListMarketsResource(BaseResource):
     @property
     def endpoint(self) -> str:
-        return '/markets'
+        return "/markets"
 
 
 class MarketDetailsResource(BaseResource):
@@ -78,7 +78,7 @@ class MarketDetailsResource(BaseResource):
 
     @property
     def endpoint(self) -> str:
-        return '/markets/{exchange}/{pair}'.format(
+        return "/markets/{exchange}/{pair}".format(
             exchange=self.exchange, pair=self.pair
         )
 
@@ -90,7 +90,7 @@ class MarketPriceResource(BaseResource):
 
     @property
     def endpoint(self) -> str:
-        return '/markets/{exchange}/{pair}/price'.format(
+        return "/markets/{exchange}/{pair}/price".format(
             exchange=self.exchange, pair=self.pair
         )
 
@@ -98,7 +98,7 @@ class MarketPriceResource(BaseResource):
 class AllMarketPricesResource(BaseResource):
     @property
     def endpoint(self) -> str:
-        return '/markets/prices'
+        return "/markets/prices"
 
 
 class MarketTradesResource(BaseResource):
@@ -112,14 +112,15 @@ class MarketTradesResource(BaseResource):
     limit : integer
         Limit the number of trades in the response. Max: 1000
     """
-    params = ['since', 'limit']
+
+    params = ["since", "limit"]
 
     def __init__(
-            self,
-            exchange: str,
-            pair: str,
-            since: Optional[Union[int, str]] = None,
-            limit: Optional[Union[int, str]] = None
+        self,
+        exchange: str,
+        pair: str,
+        since: Optional[Union[int, str]] = None,
+        limit: Optional[Union[int, str]] = None,
     ) -> None:
         self.exchange = exchange
         self.pair = pair
@@ -128,7 +129,7 @@ class MarketTradesResource(BaseResource):
 
     @property
     def endpoint(self) -> str:
-        return '/markets/{exchange}/{pair}/trades'.format(
+        return "/markets/{exchange}/{pair}/trades".format(
             exchange=self.exchange, pair=self.pair
         )
 
@@ -140,7 +141,7 @@ class MarketSummaryResource(BaseResource):
 
     @property
     def endpoint(self) -> str:
-        return '/markets/{exchange}/{pair}/summary'.format(
+        return "/markets/{exchange}/{pair}/summary".format(
             exchange=self.exchange, pair=self.pair
         )
 
@@ -153,14 +154,15 @@ class AllMarketSummariesResource(BaseResource):
         Values can be "id" or "symbols". This determines how each market
         object is indexed in the response.
     """
-    params = ['keyBy']
+
+    params = ["keyBy"]
 
     def __init__(self, key_by: Optional[str] = None) -> None:
         self.keyBy = key_by
 
     @property
     def endpoint(self) -> str:
-        return '/markets/summaries'
+        return "/markets/summaries"
 
 
 class MarketOrderBookResource(BaseResource):
@@ -175,15 +177,16 @@ class MarketOrderBookResource(BaseResource):
     limit : integer
         Limits the number of orders on each side of the book
     """
-    params = ['depth', 'span', 'limit']
+
+    params = ["depth", "span", "limit"]
 
     def __init__(
-            self,
-            exchange: str,
-            pair: str,
-            depth: Optional[Union[float, int, str]] = None,
-            span: Optional[Union[float, int, str]] = None,
-            limit: Optional[Union[int, str]] = None
+        self,
+        exchange: str,
+        pair: str,
+        depth: Optional[Union[float, int, str]] = None,
+        span: Optional[Union[float, int, str]] = None,
+        limit: Optional[Union[int, str]] = None,
     ) -> None:
         self.exchange = exchange
         self.pair = pair
@@ -193,7 +196,7 @@ class MarketOrderBookResource(BaseResource):
 
     @property
     def endpoint(self) -> str:
-        return '/markets/{exchange}/{pair}/orderbook'.format(
+        return "/markets/{exchange}/{pair}/orderbook".format(
             exchange=self.exchange, pair=self.pair
         )
 
@@ -205,7 +208,7 @@ class MarketOrderBookLiquidityResource(BaseResource):
 
     @property
     def endpoint(self) -> str:
-        return '/markets/{exchange}/{pair}/orderbook/liquidity'.format(
+        return "/markets/{exchange}/{pair}/orderbook/liquidity".format(
             exchange=self.exchange, pair=self.pair
         )
 
@@ -224,15 +227,16 @@ class MarketOHLCResource(BaseResource):
         Comma separated integers. Only return these time periods.
         Example: 60,180,108000
     """
-    params = ['before', 'after', 'periods']
+
+    params = ["before", "after", "periods"]
 
     def __init__(
-            self,
-            exchange: str,
-            pair: str,
-            before: Optional[Union[int, str]] = None,
-            after: Optional[Union[int, str]] = None,
-            periods: Optional[Union[List[Union[int, str]], str]] = None
+        self,
+        exchange: str,
+        pair: str,
+        before: Optional[Union[int, str]] = None,
+        after: Optional[Union[int, str]] = None,
+        periods: Optional[Union[List[Union[int, str]], str]] = None,
     ) -> None:
         self.exchange = exchange
         self.pair = pair
@@ -256,7 +260,7 @@ class MarketOHLCResource(BaseResource):
 
     @property
     def endpoint(self) -> str:
-        return '/markets/{exchange}/{pair}/ohlc'.format(
+        return "/markets/{exchange}/{pair}/ohlc".format(
             exchange=self.exchange, pair=self.pair
         )
 
@@ -264,7 +268,7 @@ class MarketOHLCResource(BaseResource):
 class ListExchangesResource(BaseResource):
     @property
     def endpoint(self) -> str:
-        return '/exchanges'
+        return "/exchanges"
 
 
 class ExchangeDetailsResource(BaseResource):
@@ -273,7 +277,7 @@ class ExchangeDetailsResource(BaseResource):
 
     @property
     def endpoint(self) -> str:
-        return '/exchanges/{exchange}'.format(exchange=self.exchange)
+        return "/exchanges/{exchange}".format(exchange=self.exchange)
 
 
 class ExchangeMarketsResource(BaseResource):
@@ -282,7 +286,7 @@ class ExchangeMarketsResource(BaseResource):
 
     @property
     def endpoint(self) -> str:
-        return '/markets/{exchange}'.format(exchange=self.exchange)
+        return "/markets/{exchange}".format(exchange=self.exchange)
 
 
 Resource = Union[
@@ -302,5 +306,5 @@ Resource = Union[
     MarketPriceResource,
     MarketSummaryResource,
     MarketTradesResource,
-    PairDetailsResource
+    PairDetailsResource,
 ]

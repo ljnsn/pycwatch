@@ -9,8 +9,8 @@ from pycwatch import resources
 import pycwatch.errors
 
 
-PRODUCTION_URL = 'https://api.cryptowat.ch{endpoint}'
-KEY_HEADER = 'X-CW-API-Key'
+PRODUCTION_URL = "https://api.cryptowat.ch{endpoint}"
+KEY_HEADER = "X-CW-API-Key"
 NO_KEY_MESSAGE = """\
 You have not set an API Key. Anonymous users are limited to 10 Cryptowatch \
 Credits worth of API calls per 24-hour period.
@@ -22,8 +22,8 @@ for more information.\
 
 class HTTPClient:
     DEFAULT_HEADERS: Dict[str, str] = {
-        'Accept': 'application/json',
-        'Accept-Encoding': 'deflate, gzip'
+        "Accept": "application/json",
+        "Accept-Encoding": "deflate, gzip",
     }
     raw_response: Optional[requests.Response] = None
 
@@ -46,7 +46,7 @@ class HTTPClient:
         uri = PRODUCTION_URL.format(endpoint=resource.endpoint)
         if resource.query_parameters:
             query_string = urllib.parse.urlencode(resource.query_parameters)
-            uri = '{}?{}'.format(uri, query_string)
+            uri = "{}?{}".format(uri, query_string)
         return uri
 
     def perform(self, resource: resources.Resource) -> dict:
@@ -57,10 +57,10 @@ class HTTPClient:
 
         if raw_response.status_code != 200:
 
-            if hasattr(raw_response, 'json'):
+            if hasattr(raw_response, "json"):
 
                 res = raw_response.json()
-                exc = res.get('error', raw_response.text)
+                exc = res.get("error", raw_response.text)
 
             else:
 
@@ -72,23 +72,24 @@ class HTTPClient:
 
 
 class Allowance:
-
     def __init__(self, response: dict) -> None:
 
-        allowance = response['allowance']
-        self.cost = allowance['cost']
-        self.remaining = allowance['remaining']
-        self.remainingPaid = allowance.get('remainingPaid')
-        self.upgrade = allowance.get('upgrade')
-        self.account = allowance.get('upgrade')
+        allowance = response["allowance"]
+        self.cost = allowance["cost"]
+        self.remaining = allowance["remaining"]
+        self.remainingPaid = allowance.get("remainingPaid")
+        self.upgrade = allowance.get("upgrade")
+        self.account = allowance.get("upgrade")
 
     def __repr__(self) -> str:
 
-        return str({
-            'last_request_cost': self.cost,
-            'remaining': self.remaining,
-            'remaining_paid': self.remainingPaid
-        })
+        return str(
+            {
+                "last_request_cost": self.cost,
+                "remaining": self.remaining,
+                "remaining_paid": self.remainingPaid,
+            }
+        )
 
 
 class RestAPI:
@@ -96,13 +97,14 @@ class RestAPI:
 
     Provides methods to retrieve each available resource.
     """
+
     allowance: Optional[Allowance] = None
 
     def __init__(
-            self,
-            api_key: Optional[str] = None,
-            headers: Optional[dict] = None,
-            client_class: Type[HTTPClient] = HTTPClient
+        self,
+        api_key: Optional[str] = None,
+        headers: Optional[dict] = None,
+        client_class: Type[HTTPClient] = HTTPClient,
     ) -> None:
         """Initialize the RestAPI class.
 
@@ -137,7 +139,7 @@ class RestAPI:
         return self.api_key is not None
 
     def _update_allowance(self, response: dict) -> None:
-        if 'allowance' in response:
+        if "allowance" in response:
             self.allowance = Allowance(response)
 
     def _perform_request(self, resource: resources.Resource) -> dict:
@@ -145,7 +147,7 @@ class RestAPI:
             logging.debug(NO_KEY_MESSAGE)
         response = self.client.perform(resource)
         self._update_allowance(response)
-        return response['result']
+        return response["result"]
 
     def list_assets(self):
         resource = resources.ListAssetsResource()
@@ -191,32 +193,34 @@ class RestAPI:
         resource = resources.AllMarketSummariesResource(key_by)
         return self._perform_request(resource)
 
-    def get_market_order_book(self, exchange, pair, depth=None, span=None,
-                              limit=None):
-        resource = resources.MarketOrderBookResource(exchange, pair, depth,
-                                                     span, limit)
+    def get_market_order_book(self, exchange, pair, depth=None, span=None, limit=None):
+        resource = resources.MarketOrderBookResource(exchange, pair, depth, span, limit)
         return self._perform_request(resource)
 
     def get_market_order_book_liquidity(self, exchange, pair):
         resource = resources.MarketOrderBookLiquidityResource(exchange, pair)
         return self._perform_request(resource)
 
-    def get_market_ohlc(self, exchange, pair, before=None, after=None,
-                        periods=None, result_key_type='str'):
+    def get_market_ohlc(
+        self,
+        exchange,
+        pair,
+        before=None,
+        after=None,
+        periods=None,
+        result_key_type="str",
+    ):
 
-        if result_key_type not in ['str', 'int']:
+        if result_key_type not in ["str", "int"]:
             raise ValueError("`key_type' can be either 'str' or 'int'")
 
-        resource = resources.MarketOHLCResource(
-            exchange, pair, before, after, periods)
+        resource = resources.MarketOHLCResource(exchange, pair, before, after, periods)
 
         response = self._perform_request(resource)
 
         # FIXME: should we convert the response key to int?
-        if result_key_type == 'str':
-            period_mapping_inv = {
-                v: k for k, v in resources.PERIOD_VALUES.items()
-            }
+        if result_key_type == "str":
+            period_mapping_inv = {v: k for k, v in resources.PERIOD_VALUES.items()}
             return {period_mapping_inv[int(k)]: r for k, r in response.items()}
 
         return response
