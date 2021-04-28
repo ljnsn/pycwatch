@@ -12,17 +12,17 @@ or clone this repository and install from there.
 
 ### Dependencies
 
--   `requests`
+- `requests`
 
 ## Quick Start
 
 ```python
 import pycwatch
 
-# create api
+# create api client
 api = pycwatch.rest
 
-# get assets
+# get list of available assets
 assets = api.list_assets()
 # get some price info
 exchange, pair = 'binance', 'btceur'
@@ -31,7 +31,7 @@ price = api.get_market_price(exchange, pair)
 
 If you have an account at [cryptowat.ch](https://cryptowat.ch), you can either set your key as an environment variable or in the code.
 
-```shell
+```bash
 export CRYPTO_WATCH_KEY="my-awesome-key"
 ```
 
