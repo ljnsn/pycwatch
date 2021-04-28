@@ -32,12 +32,13 @@ setup(
     name="pycwatch",
     version=__version__,
     packages=find_packages(),
-    url="",
-    license="",
+    url="https://github.com/iuvbio/pycwatch",
+    license="MIT License",
     author="Crypto God",
     author_email="cryptodemigod@protonmail.com",
     description="Implements the Cryptowatch Rest API",
     long_description=long_description,
+    long_description_content_type="text/markdown",
     install_requires=dependencies,
     extras_require={
         "dev": [
