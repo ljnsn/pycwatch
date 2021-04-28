@@ -1,3 +1,4 @@
+"""Tests for the REST API methods."""
 import logging
 
 import pytest

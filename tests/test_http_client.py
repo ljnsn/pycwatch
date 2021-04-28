@@ -1,3 +1,4 @@
+"""Tests for the HTTP client."""
 import pytest
 import requests
 import requests_mock

@@ -1,12 +1,10 @@
-import pytest
-
+"""Tests for each individual resource."""
 from pycwatch import resources
 
 
 def test_base_resource():
     resource = resources.BaseResource()
-    with pytest.raises(NotImplementedError):
-        resource.endpoint
+    resource.endpoint == NotImplemented
     assert resource.query_parameters == dict()
     resource.params = ['param1', 'param2']
     resource.param1 = 'val1'

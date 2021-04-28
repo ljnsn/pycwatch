@@ -1,3 +1,4 @@
+"""Fixtures and configuration for the test suite."""
 from functools import reduce
 
 import pytest
