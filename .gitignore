@@ -1,14 +1,13 @@
 # IDE stuff
 .idea/
 .vscode/
+.vim/
 
 # python stuff
 __pycache__/
 *.egg-info/
-
-# jupyter stuff
-.ipynb_checkpoints/
-*.ipynb
+build/
+dist/
 
 # tests stuff
 .coverage
