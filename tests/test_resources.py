@@ -168,9 +168,10 @@ def test_market_ohlc_resource():
     assert resource.before is None
     assert resource.after is None
     assert resource.periods is None
-    before, after, periods = 1000, 2000, ['1m', '3m', '30m']
+    before, after, periods = 1000, 2000, ['1m', '3m', '30m', 60]
     sec_periods = ','.join([
-        str(resources.PERIOD_VALUES[period]).lower() for period in periods
+        str(resources.PERIOD_VALUES[period.lower()])
+        if isinstance(period, str) else str(period) for period in periods
     ])
     resource = resources.MarketOHLCResource(exchange, pair, before, after,
                                             periods)

@@ -239,16 +239,18 @@ class MarketOHLCResource(BaseResource):
         self.before = before
         self.after = after
 
-        if periods:
+        if periods is not None:
 
             if not isinstance(periods, list):
                 periods = [periods]
 
-            if all(isinstance(p, str) for p in periods):
-                periods = [
-                    str(PERIOD_VALUES[period]).lower() for period in periods
-                ]
-            periods = ','.join(periods)
+            parsed_periods = []
+            for period in periods:
+                if isinstance(period, str):
+                    period = PERIOD_VALUES[period.lower()]
+                parsed_periods.append(str(period))
+
+            periods = ','.join(parsed_periods)
 
         self.periods = periods
 
