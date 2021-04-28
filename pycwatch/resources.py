@@ -24,7 +24,7 @@ class BaseResource:
 
     @property
     def endpoint(self) -> str:
-        raise NotImplementedError()
+        return NotImplemented
 
     @property
     def query_parameters(self) -> Dict[str, str]:
