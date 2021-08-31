@@ -11,6 +11,7 @@ dist/
 
 # tests stuff
 .coverage
+.pytest_cache/
 
 # other stuff
 venv/
