@@ -1,7 +1,11 @@
+from typing import Optional
+
 from apiclient import APIClient
+from apiclient.authentication_methods import HeaderAuthentication, NoAuthentication
 from apiclient.response_handlers import JsonResponseHandler
 from apiclient_pydantic import serialize_all_methods
 
+from .config import settings
 from .endpoints import Endpoint
 from .models import (
     AllPrices,
@@ -37,10 +41,31 @@ from .models import (
 )
 
 
+NO_KEY_MESSAGE = """\
+You have not set an API Key. Anonymous users are limited to 10 Cryptowatch
+Credits worth of API calls per 24-hour period.
+
+See https://docs.cryptowat.ch/rest-api/rate-limit#api-request-pricing-structure
+for more information.\
+"""
+
+
 @serialize_all_methods()
 class CryptoWatchClient(APIClient):
-    def __init__(self) -> None:
-        super().__init__(response_handler=JsonResponseHandler)
+    def __init__(self, api_key: Optional[str] = None) -> None:
+        api_key = api_key or settings.CW_API_KEY
+        if not api_key:
+            print(NO_KEY_MESSAGE)
+            authentication_method = NoAuthentication()
+        else:
+            authentication_method = HeaderAuthentication(
+                token=api_key, parameter="X-CW-API-Key", scheme=None
+            )
+
+        super().__init__(
+            response_handler=JsonResponseHandler,
+            authentication_method=authentication_method,
+        )
 
     def list_assets(
         self, params: PaginationQueryParams
