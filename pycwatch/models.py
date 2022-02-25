@@ -317,6 +317,8 @@ class OrderBookCalculator(Base):
 
 
 class OHLCV(Base):
+    _list: list[Any]
+
     close_time: int
     open_price: Price
     high_price: Price
@@ -328,6 +330,7 @@ class OHLCV(Base):
     @classmethod
     def validate(cls, v: list[Any]) -> "OHLCV":
         return cls(
+            _list=v,
             close_time=v[0],
             open_price=v[1],
             high_price=v[2],
@@ -336,6 +339,9 @@ class OHLCV(Base):
             volume=v[5],
             quote_volume=v[6],
         )
+
+    def to_list(self) -> list[Any]:
+        return self._list
 
 
 OHLCVDict = dict[str, list[OHLCV]]
