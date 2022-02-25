@@ -74,7 +74,7 @@ class OHLCVQueryParams(Base):
     periods: Optional[str]
 
     @validator("periods", pre=True)
-    def list_to_str(cls, v: list[Any]) -> Optional[str]:
+    def list_to_str(cls, v: list[int]) -> Optional[str]:
         if not v:
             return None
 
