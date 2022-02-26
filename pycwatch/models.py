@@ -165,6 +165,7 @@ class PairBase(Base):
     symbol: str
     base: AssetMember
     quote: AssetMember
+    futuresContractPeriod: Optional[str] = None
 
 
 class PairMember(ListMember, PairBase):
@@ -193,7 +194,6 @@ class MarketList(CustomList):
 
 
 class Pair(PairBase):
-    futuresContractPeriod: Optional[str] = None
     route: Route
     markets: MarketList
 
