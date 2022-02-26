@@ -4,7 +4,7 @@ from apiclient import endpoint
 @endpoint(base_url="https://api.cryptowat.ch")
 class Endpoint:
     list_assets = "/assets"
-    asset_detail = "/assets/{asset_code}"
+    asset_detail = "/assets/{assetCode}"
     list_pairs = "/pairs"
     pair_detail = "/pairs/{pair}"
     list_markets = "/markets"
