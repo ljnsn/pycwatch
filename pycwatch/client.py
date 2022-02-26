@@ -54,6 +54,7 @@ for more information.\
 class CryptoWatchClient(APIClient):
     def __init__(self, api_key: Optional[str] = None) -> None:
         api_key = api_key or settings.CW_API_KEY
+        self._api_key = api_key
         if not api_key:
             print(NO_KEY_MESSAGE)
             authentication_method = NoAuthentication()
@@ -66,6 +67,10 @@ class CryptoWatchClient(APIClient):
             response_handler=JsonResponseHandler,
             authentication_method=authentication_method,
         )
+
+    @property
+    def is_authenticated(self):
+        return self._api_key is not None
 
     def list_assets(
         self, params: PaginationQueryParams
