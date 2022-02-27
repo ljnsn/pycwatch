@@ -3,11 +3,9 @@ import json
 
 from apiclient.exceptions import ClientError
 import pytest
-import requests_mock
 from vcr.cassette import Cassette
 
-from .conftest import api_vcr, log_has
-from tests.conftest import log_has
+from .conftest import api_vcr
 from pycwatch import CryptoWatchClient, models
 from pycwatch.models import PaginatedResponse, Response
 from pycwatch.errors import APIError, APIKeyError
@@ -70,9 +68,7 @@ def test_get_asset(cassette: Cassette, live_client: CryptoWatchClient):
 @with_cassette("list_pairs.yml")
 def test_list_pairs(cassette: Cassette, live_client: CryptoWatchClient):
     pairs = live_client.list_pairs()
-    assert pairs == models.PaginatedResponse[models.PairList](
-        **load_response(cassette, 0)
-    )
+    assert pairs == PaginatedResponse[models.PairList](**load_response(cassette, 0))
 
     pairs = live_client.list_pairs(limit=20)
     assert pairs == PaginatedResponse[models.PairList](**load_response(cassette, 1))
@@ -86,3 +82,31 @@ def test_list_pairs(cassette: Cassette, live_client: CryptoWatchClient):
     assert (
         cassette.requests[2].uri == Endpoint.list_pairs + f"?cursor={cursor}&limit=20"
     )
+
+
+@with_cassette("get_pair.yml")
+def test_get_pair(cassette: Cassette, live_client: CryptoWatchClient):
+    pairs = ["btceur", "ethbtc", "xmrbtc"]
+    for i, pair_ in enumerate(pairs):
+        pair = live_client.get_pair(pair=pair_)
+        assert pair == Response[models.Pair](**load_response(cassette, i))
+
+    with pytest.raises(ClientError, match="404 Error: Not Found"):
+        pair = live_client.get_pair(pair="aaa")
+
+
+@with_cassette("list_exchanges")
+def test_list_exchanges(cassette: Cassette, live_client: CryptoWatchClient):
+    exchanges = live_client.list_exchanges()
+    assert exchanges == Response[models.ExchangeList](**load_response(cassette, 0))
+
+
+@with_cassette("get_exchange")
+def test_get_exchange(cassette: Cassette, live_client: CryptoWatchClient):
+    exchanges = ["kraken", "binance", "bittrex"]
+    for i, ex in enumerate(exchanges):
+        exchange = live_client.get_exchange(exchange=ex)
+        assert exchange == Response[models.Exchange](**load_response(cassette, i))
+
+    with pytest.raises(ClientError, match="404 Error: Not Found"):
+        exchange = live_client.get_exchange(exchange="aaa")
