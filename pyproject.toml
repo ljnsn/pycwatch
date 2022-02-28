@@ -34,7 +34,7 @@ source = "init"
 
 [tool.coverage.run]
 branch = true
-source = "pycwatch"
+source = ["pycwatch"]
 
 [tool.coverage.report]
 fail_under = 100
@@ -87,7 +87,7 @@ addopts =[
   "--strict-markers",
   "--strict-config",
   "--tb=short",
-  "--cov=apiclient_pydantic",
+  "--cov=pycwatch",
   "--cov-report=term-missing:skip-covered",
   "--cov-report=html",
   "--no-cov-on-fail",
