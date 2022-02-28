@@ -1,0 +1,55 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://api.cryptowat.ch/markets/kraken/btceur/orderbook/calculator?amount=10.0
+  response:
+    body:
+      string: '{"result":{"buy":{"avgPrice":"36836.1876555928","avgDelta":"16.7876555928","avgDeltaBps":"4","reachPrice":"36843.2","reachDelta":"23.8","reachDeltaBps":"6","spend":"368361.876555928"},"sell":{"avgPrice":"36800.2061114187","avgDelta":"-10.1938885813","avgDeltaBps":"-3","reachPrice":"36783.5","reachDelta":"-26.9","reachDeltaBps":"-8","receive":"368002.061114187"}},"allowance":{"cost":0.015,"remaining":9.773,"upgrade":"For
+        unlimited API access, create an account at https://cryptowat.ch"}}
+
+        '
+    headers:
+      Access-Control-Allow-Headers:
+      - X-CW-Integration, X-CW-Very-Secret-Value
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 6e4ba5e11ffb9b2d-FRA
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 28 Feb 2022 18:17:08 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Referrer-Policy:
+      - origin-when-cross-origin
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=j_Z9Wv.0rJYAtEZP.QYFTZXnvOmpZ6eaRW4irrnL0ig-1646072228-0-ARdg8wSkaPTJ8OMI379aTL5Gtsat1ZZrZYaqFaShjwHsU01pCSGzx4W2iO95VtPFJyw7LrGtJX+tzDhOc789+M4=;
+        path=/; expires=Mon, 28-Feb-22 18:47:08 GMT; domain=.cryptowat.ch; HttpOnly;
+        Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      content-length:
+      - '491'
+    status:
+      code: 200
+      message: OK
+version: 1
