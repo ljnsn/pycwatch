@@ -1,0 +1,259 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://api.cryptowat.ch/markets/kraken/btceur/trades
+  response:
+    body:
+      string: '{"result":[[0,1646071303,36936.4,0.00013731],[0,1646071306,36936.4,0.01033049],[0,1646071314,36936.5,0.00012068],[0,1646071314,36936.5,0.00227932],[0,1646071314,36955.6,0.00027123],[0,1646071319,36969,0.00754989],[0,1646071320,36968.9,0.003],[0,1646071320,36966.9,0.05324573],[0,1646071323,36949,0.001],[0,1646071327,36943.5,0.04120703],[0,1646071334,36934.7,0.00266783],[0,1646071336,36929.5,0.02708027],[0,1646071341,36930.4,0.00025973],[0,1646071352,36954.4,0.002],[0,1646071353,36964.2,0.00241933],[0,1646071356,36954.5,0.0015],[0,1646071360,36948.3,0.00773564],[0,1646071360,36950.1,0.087005],[0,1646071361,36953.3,0.00270648],[0,1646071364,36948.4,0.001],[0,1646071365,36948.5,0.0003],[0,1646071367,36942.3,0.01134],[0,1646071368,36939.7,0.00073],[0,1646071369,36938.7,0.001],[0,1646071369,36938.7,0.00307452],[0,1646071372,36938.6,0.025],[0,1646071372,36938.7,0.00067309],[0,1646071374,36938.7,0.00086619],[0,1646071375,36938.6,0.00302769],[0,1646071377,36948.5,0.00154529],[0,1646071377,36964,0.0037662],[0,1646071386,36938.8,0.0048],[0,1646071388,36938.8,0.06],[0,1646071388,36938.8,0.02001689],[0,1646071391,36938.8,0.0119],[0,1646071394,36938.8,0.00200139],[0,1646071394,36938.7,0.00087759],[0,1646071394,36938.8,0.00102378],[0,1646071396,36938.7,1.35597452],[0,1646071396,36938.7,0.32368606],[0,1646071396,36938.7,0.00135359],[0,1646071397,36938.7,0.13535285],[0,1646071398,36938.8,0.00005334],[0,1646071401,36938.8,0.003],[0,1646071402,36938.7,0.00262057],[0,1646071404,36938.7,0.08126536],[0,1646071404,36929.5,0.00228],[0,1646071404,36924.7,0.05181403],[0,1646071404,36924.8,0.001],[0,1646071405,36924.7,0.00019167]],"allowance":{"cost":0.01,"remaining":9.958,"upgrade":"For
+        unlimited API access, create an account at https://cryptowat.ch"}}
+
+        '
+    headers:
+      Access-Control-Allow-Headers:
+      - X-CW-Integration, X-CW-Very-Secret-Value
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 6e4b91e9f85f92b4-FRA
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 28 Feb 2022 18:03:30 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Referrer-Policy:
+      - origin-when-cross-origin
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=V2xGM_L6Pls__vMa04jWSz1RVnM.Nv1JDjwoG5WWHns-1646071410-0-AZd76H6gkD7pUFuHe4g6WYzX4NWysCdvhiNbS4kZi/qcTJuP+I+2vdvdjs18GBsu+EQVXQGZxYoqVQWIumEUX0E=;
+        path=/; expires=Mon, 28-Feb-22 18:33:30 GMT; domain=.cryptowat.ch; HttpOnly;
+        Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      content-length:
+      - '1757'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - __cf_bm=V2xGM_L6Pls__vMa04jWSz1RVnM.Nv1JDjwoG5WWHns-1646071410-0-AZd76H6gkD7pUFuHe4g6WYzX4NWysCdvhiNbS4kZi/qcTJuP+I+2vdvdjs18GBsu+EQVXQGZxYoqVQWIumEUX0E=
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://api.cryptowat.ch/markets/binance/ethbtc/trades
+  response:
+    body:
+      string: '{"result":[[0,1646071406,0.068129,0.03],[0,1646071406,0.068129,0.7558],[0,1646071407,0.06813,0.0565],[0,1646071407,0.06813,0.7128],[0,1646071408,0.06813,0.1593],[0,1646071408,0.06813,0.7158],[0,1646071408,0.068129,0.486],[0,1646071408,0.068129,0.2904],[0,1646071408,0.068129,0.516],[0,1646071410,0.06813,0.0762],[0,1646071413,0.068128,0.05],[0,1646071413,0.068126,0.05],[0,1646071413,0.068124,0.05],[0,1646071413,0.068122,0.05],[0,1646071413,0.06812,0.1314],[0,1646071413,0.06812,2.9365],[0,1646071414,0.06812,0.0132],[0,1646071414,0.06812,8.024],[0,1646071414,0.068121,2.291],[0,1646071414,0.068124,1.2077],[0,1646071414,0.068126,2.0571],[0,1646071414,0.068127,1.0784],[0,1646071414,0.068128,1.1668],[0,1646071414,0.068129,3.7411],[0,1646071414,0.068129,3.3361],[0,1646071414,0.068129,0.5923],[0,1646071414,0.068129,3.7864],[0,1646071414,0.068129,0.2993],[0,1646071414,0.068129,1.277],[0,1646071414,0.068129,3.2163],[0,1646071415,0.068129,0.0107],[0,1646071415,0.068129,2.8277],[0,1646071415,0.068129,3.1134],[0,1646071415,0.068129,0.6571],[0,1646071415,0.068129,0.3357],[0,1646071415,0.068129,0.1755],[0,1646071415,0.068129,0.1755],[0,1646071415,0.068129,2.1549],[0,1646071416,0.068129,0.0107],[0,1646071416,0.06813,0.16],[0,1646071416,0.068129,0.1569],[0,1646071416,0.068119,1.0928],[0,1646071416,0.068118,0.8304],[0,1646071417,0.068117,1.0928],[0,1646071418,0.068118,0.0056],[0,1646071419,0.068117,0.05],[0,1646071419,0.068116,0.05],[0,1646071419,0.068114,0.05],[0,1646071425,0.068114,0.0107],[0,1646071425,0.068114,0.044]],"allowance":{"cost":0.01,"remaining":9.948,"upgrade":"For
+        unlimited API access, create an account at https://cryptowat.ch"}}
+
+        '
+    headers:
+      Access-Control-Allow-Headers:
+      - X-CW-Integration, X-CW-Very-Secret-Value
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 6e4b9256babc5be1-FRA
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 28 Feb 2022 18:03:47 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Referrer-Policy:
+      - origin-when-cross-origin
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      content-length:
+      - '1653'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - __cf_bm=V2xGM_L6Pls__vMa04jWSz1RVnM.Nv1JDjwoG5WWHns-1646071410-0-AZd76H6gkD7pUFuHe4g6WYzX4NWysCdvhiNbS4kZi/qcTJuP+I+2vdvdjs18GBsu+EQVXQGZxYoqVQWIumEUX0E=
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://api.cryptowat.ch/markets/kraken/ltcbtc/trades
+  response:
+    body:
+      string: '{"result":[[0,1646066025,0.002664,0.47895417],[0,1646066065,0.002664,0.1550289],[0,1646066230,0.002664,0.71794],[0,1646066404,0.002662,3.6],[0,1646066404,0.002662,7.89],[0,1646066599,0.002663,8.435216],[0,1646066883,0.002661,0.20538091],[0,1646066917,0.00266,2],[0,1646066922,0.002657,0.99525],[0,1646067101,0.002662,7.10742],[0,1646067393,0.002655,0.0711567],[0,1646067407,0.002655,7.27601958],[0,1646067615,0.002654,0.39562924],[0,1646067724,0.002653,0.39577837],[0,1646067724,0.002653,0.04806046],[0,1646067734,0.002653,0.0273259],[0,1646067974,0.00265,2.08],[0,1646067996,0.002651,0.49532577],[0,1646068004,0.00265,0.00160377],[0,1646068004,0.002649,0.02839623],[0,1646068018,0.002649,0.25513789],[0,1646068030,0.002649,0.01646588],[0,1646068030,0.002648,0.01353412],[0,1646068041,0.002648,0.17485085],[0,1646068051,0.002648,0.01161503],[0,1646068153,0.002645,0.2093386],[0,1646068156,0.002644,0.18070187],[0,1646068401,0.002641,0.35340952],[0,1646068404,0.002641,0.02411036],[0,1646068411,0.002639,0.65388157],[0,1646068419,0.002639,0.04611843],[0,1646068439,0.002638,0.03958879],[0,1646068451,0.002637,0.09878997],[0,1646068475,0.002637,0.0073913],[0,1646068475,0.002637,21],[0,1646068475,0.002637,27.79354617],[0,1646068475,0.002635,3.6],[0,1646068475,0.002635,5.19751963],[0,1646068475,0.002635,7.51226162],[0,1646068487,0.002638,0.03477812],[0,1646068529,0.002637,0.34435558],[0,1646068751,0.002636,4],[0,1646069520,0.002648,0.1530136],[0,1646069639,0.002647,0.03191811],[0,1646069973,0.002643,0.06596965],[0,1646070036,0.002641,0.03484666],[0,1646070571,0.002642,0.14295168],[0,1646070635,0.002643,0.04603542],[0,1646071188,0.002638,0.83952357],[0,1646071303,0.002635,0.56607851]],"allowance":{"cost":0.01,"remaining":9.938,"upgrade":"For
+        unlimited API access, create an account at https://cryptowat.ch"}}
+
+        '
+    headers:
+      Access-Control-Allow-Headers:
+      - X-CW-Integration, X-CW-Very-Secret-Value
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 6e4b9257fd275be1-FRA
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 28 Feb 2022 18:03:47 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Referrer-Policy:
+      - origin-when-cross-origin
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      content-length:
+      - '1816'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - __cf_bm=V2xGM_L6Pls__vMa04jWSz1RVnM.Nv1JDjwoG5WWHns-1646071410-0-AZd76H6gkD7pUFuHe4g6WYzX4NWysCdvhiNbS4kZi/qcTJuP+I+2vdvdjs18GBsu+EQVXQGZxYoqVQWIumEUX0E=
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://api.cryptowat.ch/markets/bittrex/neoeth/trades
+  response:
+    body:
+      string: '{"result":[[0,1646030390,0.00767221,0.19063797],[0,1646030390,0.00767268,0.181462],[0,1646030400,0.00768275,0.22757715],[0,1646030586,0.00770352,0.25445134],[0,1646030750,0.00771504,0.1926253],[0,1646030917,0.00773614,0.18909687],[0,1646030923,0.00775743,0.135086],[0,1646030924,0.00776424,0.21848573],[0,1646030956,0.00779835,0.25765498],[0,1646030993,0.00779028,26.8846296],[0,1646031031,0.00779297,33.68863436],[0,1646031083,0.0077805,35.30094445],[0,1646031731,0.00779274,0.32267263],[0,1646031862,0.00783583,36.65975493],[0,1646031862,0.00783583,21.67151461],[0,1646031883,0.00783158,50],[0,1646032599,0.00787419,36.362119],[0,1646032599,0.00787419,21.4031876],[0,1646032721,0.00787384,0.29874309],[0,1646033021,0.00787305,36.25302053],[0,1646033747,0.00786346,0.22581041],[0,1646034487,0.0079303,35.77630714],[0,1646034487,0.0079303,20.77955245],[0,1646034775,0.00797431,0.33768721],[0,1646035957,0.00795084,0.25383915],[0,1646038640,0.00792146,0.232],[0,1646041973,0.00785478,25.38369695],[0,1646045565,0.00780789,1.50249396],[0,1646045568,0.00780789,4.48443933],[0,1646046637,0.00780275,1.33947711],[0,1646047075,0.00777678,1.50626738],[0,1646047790,0.00776172,1.50567986],[0,1646048855,0.00775561,0.7331893],[0,1646050121,0.00775561,1.02055158],[0,1646054314,0.00775562,0.17412374],[0,1646054314,0.00775561,0.63139715],[0,1646055374,0.00775179,0.78875357],[0,1646056157,0.00771861,0.79055255],[0,1646058477,0.00766071,0.20625247],[0,1646059081,0.00761138,0.22048433],[0,1646059842,0.00760855,0.225856],[0,1646059996,0.00761353,36.06880267],[0,1646059996,0.00761353,21.26830103],[0,1646060822,0.00759198,0.98529647],[0,1646061396,0.00754869,0.21895187],[0,1646061417,0.00753853,0.99016089],[0,1646062681,0.00751193,35.52698046],[0,1646062681,0.00751193,20.80604324],[0,1646066933,0.00747894,0.3433429],[0,1646068373,0.00746723,3.50580479]],"allowance":{"cost":0.01,"remaining":9.928,"upgrade":"For
+        unlimited API access, create an account at https://cryptowat.ch"}}
+
+        '
+    headers:
+      Access-Control-Allow-Headers:
+      - X-CW-Integration, X-CW-Very-Secret-Value
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 6e4b92598fd35be1-FRA
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 28 Feb 2022 18:03:48 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Referrer-Policy:
+      - origin-when-cross-origin
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      content-length:
+      - '1973'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - __cf_bm=V2xGM_L6Pls__vMa04jWSz1RVnM.Nv1JDjwoG5WWHns-1646071410-0-AZd76H6gkD7pUFuHe4g6WYzX4NWysCdvhiNbS4kZi/qcTJuP+I+2vdvdjs18GBsu+EQVXQGZxYoqVQWIumEUX0E=
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://api.cryptowat.ch/markets/kraken/aaabbb/trades
+  response:
+    body:
+      string: '{"error":"Instrument not found","allowance":{"cost":0.01,"remaining":9.918,"upgrade":"For
+        unlimited API access, create an account at https://cryptowat.ch"}}
+
+        '
+    headers:
+      Access-Control-Allow-Headers:
+      - X-CW-Integration, X-CW-Very-Secret-Value
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 6e4b925b7ad05be1-FRA
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 28 Feb 2022 18:03:48 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Referrer-Policy:
+      - origin-when-cross-origin
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      content-length:
+      - '157'
+    status:
+      code: 404
+      message: Not Found
+version: 1

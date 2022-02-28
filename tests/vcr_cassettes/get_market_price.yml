@@ -11,10 +11,10 @@ interactions:
       User-Agent:
       - python-requests/2.27.1
     method: GET
-    uri: https://api.cryptowat.ch/exchanges/kraken
+    uri: https://api.cryptowat.ch/markets/kraken/btceur/price
   response:
     body:
-      string: '{"result":{"id":4,"symbol":"kraken","name":"Kraken","active":true,"routes":{"markets":"https://api.cryptowat.ch/markets/kraken"}},"allowance":{"cost":0.002,"remaining":9.988,"upgrade":"For
+      string: '{"result":{"price":36910.5},"allowance":{"cost":0.005,"remaining":9.988,"upgrade":"For
         unlimited API access, create an account at https://cryptowat.ch"}}
 
         '
@@ -24,13 +24,13 @@ interactions:
       CF-Cache-Status:
       - DYNAMIC
       CF-RAY:
-      - 6e3d59378d18697b-FRA
+      - 6e4b8c9109365c14-FRA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Sun, 27 Feb 2022 00:38:07 GMT
+      - Mon, 28 Feb 2022 17:59:51 GMT
       Expect-CT:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Referrer-Policy:
@@ -38,8 +38,8 @@ interactions:
       Server:
       - cloudflare
       Set-Cookie:
-      - __cf_bm=Z8r_oCRMsJXUkHQvkFl5FGzki0V5tAPrHx4.OQ8UjtA-1645922287-0-ATz2jleyD/IIpcLGETasNzdvVkjGsiNvXAuEmpPZpXUz/6KPzP47hZ5wDGmkwdWbyMZaRquhDqzV5Hco84+84ns=;
-        path=/; expires=Sun, 27-Feb-22 01:08:07 GMT; domain=.cryptowat.ch; HttpOnly;
+      - __cf_bm=os5yhHBfFZ8kzQRyWkVNgH.lI_lJueiJTqnjLjbrqWg-1646071191-0-AetO4RoAJAfUeIiChGnsU+h9gogh5HO8v7/oP/CKfJfwe6Kyi+I1qmt2PvyDKfFF0IfbQlGXRPUlDKLMH3Me4f4=;
+        path=/; expires=Mon, 28-Feb-22 18:29:51 GMT; domain=.cryptowat.ch; HttpOnly;
         Secure; SameSite=None
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
@@ -48,7 +48,7 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       content-length:
-      - '256'
+      - '154'
     status:
       code: 200
       message: OK
@@ -62,14 +62,14 @@ interactions:
       Connection:
       - keep-alive
       Cookie:
-      - __cf_bm=Z8r_oCRMsJXUkHQvkFl5FGzki0V5tAPrHx4.OQ8UjtA-1645922287-0-ATz2jleyD/IIpcLGETasNzdvVkjGsiNvXAuEmpPZpXUz/6KPzP47hZ5wDGmkwdWbyMZaRquhDqzV5Hco84+84ns=
+      - __cf_bm=os5yhHBfFZ8kzQRyWkVNgH.lI_lJueiJTqnjLjbrqWg-1646071191-0-AetO4RoAJAfUeIiChGnsU+h9gogh5HO8v7/oP/CKfJfwe6Kyi+I1qmt2PvyDKfFF0IfbQlGXRPUlDKLMH3Me4f4=
       User-Agent:
       - python-requests/2.27.1
     method: GET
-    uri: https://api.cryptowat.ch/exchanges/binance
+    uri: https://api.cryptowat.ch/markets/binance/ethbtc/price
   response:
     body:
-      string: '{"result":{"id":27,"symbol":"binance","name":"Binance","active":true,"routes":{"markets":"https://api.cryptowat.ch/markets/binance"}},"allowance":{"cost":0.002,"remaining":9.986,"upgrade":"For
+      string: '{"result":{"price":0.068138},"allowance":{"cost":0.005,"remaining":9.983,"upgrade":"For
         unlimited API access, create an account at https://cryptowat.ch"}}
 
         '
@@ -79,13 +79,13 @@ interactions:
       CF-Cache-Status:
       - DYNAMIC
       CF-RAY:
-      - 6e3d59391f05697b-FRA
+      - 6e4b8c929d145c14-FRA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Sun, 27 Feb 2022 00:38:07 GMT
+      - Mon, 28 Feb 2022 17:59:51 GMT
       Expect-CT:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Referrer-Policy:
@@ -99,7 +99,7 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       content-length:
-      - '260'
+      - '155'
     status:
       code: 200
       message: OK
@@ -113,14 +113,14 @@ interactions:
       Connection:
       - keep-alive
       Cookie:
-      - __cf_bm=Z8r_oCRMsJXUkHQvkFl5FGzki0V5tAPrHx4.OQ8UjtA-1645922287-0-ATz2jleyD/IIpcLGETasNzdvVkjGsiNvXAuEmpPZpXUz/6KPzP47hZ5wDGmkwdWbyMZaRquhDqzV5Hco84+84ns=
+      - __cf_bm=os5yhHBfFZ8kzQRyWkVNgH.lI_lJueiJTqnjLjbrqWg-1646071191-0-AetO4RoAJAfUeIiChGnsU+h9gogh5HO8v7/oP/CKfJfwe6Kyi+I1qmt2PvyDKfFF0IfbQlGXRPUlDKLMH3Me4f4=
       User-Agent:
       - python-requests/2.27.1
     method: GET
-    uri: https://api.cryptowat.ch/exchanges/bittrex
+    uri: https://api.cryptowat.ch/markets/kraken/ltcbtc/price
   response:
     body:
-      string: '{"result":{"id":25,"symbol":"bittrex","name":"Bittrex","active":true,"routes":{"markets":"https://api.cryptowat.ch/markets/bittrex"}},"allowance":{"cost":0.002,"remaining":9.984,"upgrade":"For
+      string: '{"result":{"price":0.002638},"allowance":{"cost":0.005,"remaining":9.978,"upgrade":"For
         unlimited API access, create an account at https://cryptowat.ch"}}
 
         '
@@ -130,13 +130,13 @@ interactions:
       CF-Cache-Status:
       - DYNAMIC
       CF-RAY:
-      - 6e3d593cfbd2697b-FRA
+      - 6e4b8c939fd95c14-FRA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Sun, 27 Feb 2022 00:38:08 GMT
+      - Mon, 28 Feb 2022 17:59:51 GMT
       Expect-CT:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Referrer-Policy:
@@ -150,7 +150,7 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       content-length:
-      - '260'
+      - '155'
     status:
       code: 200
       message: OK
@@ -164,14 +164,14 @@ interactions:
       Connection:
       - keep-alive
       Cookie:
-      - __cf_bm=Z8r_oCRMsJXUkHQvkFl5FGzki0V5tAPrHx4.OQ8UjtA-1645922287-0-ATz2jleyD/IIpcLGETasNzdvVkjGsiNvXAuEmpPZpXUz/6KPzP47hZ5wDGmkwdWbyMZaRquhDqzV5Hco84+84ns=
+      - __cf_bm=os5yhHBfFZ8kzQRyWkVNgH.lI_lJueiJTqnjLjbrqWg-1646071191-0-AetO4RoAJAfUeIiChGnsU+h9gogh5HO8v7/oP/CKfJfwe6Kyi+I1qmt2PvyDKfFF0IfbQlGXRPUlDKLMH3Me4f4=
       User-Agent:
       - python-requests/2.27.1
     method: GET
-    uri: https://api.cryptowat.ch/exchanges/aaa
+    uri: https://api.cryptowat.ch/markets/bittrex/neoeth/price
   response:
     body:
-      string: '{"error":"Exchange not found","allowance":{"cost":0.002,"remaining":9.982,"upgrade":"For
+      string: '{"result":{"price":0.00746723},"allowance":{"cost":0.005,"remaining":9.973,"upgrade":"For
         unlimited API access, create an account at https://cryptowat.ch"}}
 
         '
@@ -181,13 +181,13 @@ interactions:
       CF-Cache-Status:
       - DYNAMIC
       CF-RAY:
-      - 6e3d5aebeb5592b3-FRA
+      - 6e4b8c948a345c14-FRA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Sun, 27 Feb 2022 00:39:17 GMT
+      - Mon, 28 Feb 2022 17:59:51 GMT
       Expect-CT:
       - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
       Referrer-Policy:
@@ -201,7 +201,58 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       content-length:
-      - '156'
+      - '157'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - __cf_bm=os5yhHBfFZ8kzQRyWkVNgH.lI_lJueiJTqnjLjbrqWg-1646071191-0-AetO4RoAJAfUeIiChGnsU+h9gogh5HO8v7/oP/CKfJfwe6Kyi+I1qmt2PvyDKfFF0IfbQlGXRPUlDKLMH3Me4f4=
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://api.cryptowat.ch/markets/kraken/aaabbb/price
+  response:
+    body:
+      string: '{"error":"Instrument not found","allowance":{"cost":0.005,"remaining":9.968,"upgrade":"For
+        unlimited API access, create an account at https://cryptowat.ch"}}
+
+        '
+    headers:
+      Access-Control-Allow-Headers:
+      - X-CW-Integration, X-CW-Very-Secret-Value
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 6e4b91e7e8358fda-FRA
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 28 Feb 2022 18:03:30 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Referrer-Policy:
+      - origin-when-cross-origin
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      content-length:
+      - '158'
     status:
       code: 404
       message: Not Found

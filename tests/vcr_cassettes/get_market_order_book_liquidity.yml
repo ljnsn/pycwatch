@@ -1,0 +1,259 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://api.cryptowat.ch/markets/kraken/btceur/orderbook/liquidity
+  response:
+    body:
+      string: '{"result":{"bid":{"base":{"100":"182.78506682","150":"199.99138476","200":"221.71592489","25":"65.58280867","250":"240.63181471","300":"242.40644761","400":"248.03733246","50":"123.92045185","500":"250.43243036","75":"154.16204274"},"quote":{"100":"6702405.811883419","150":"7327900.188366337","200":"8114979.066330433","25":"2410864.069306447","250":"8796615.458832184","300":"8860129.957412307","400":"9060307.221980374","50":"4550660.402055736","500":"9144411.782469449","75":"5657128.593963555"}},"ask":{"base":{"100":"164.9467716","150":"212.93797977","200":"236.75837446","25":"63.16114132","250":"240.65678531","300":"298.70548874","400":"315.09116005","50":"100.42395646","500":"320.6195812","75":"163.00280849"},"quote":{"100":"6094809.544616093","150":"7884401.420426671","200":"8776930.738417818","25":"2327996.95431556","250":"8923730.975609472","300":"11121279.78984604","400":"11745378.763583186","50":"3704747.987910237","500":"11957922.230576301","75":"6022590.127349349"}}},"allowance":{"cost":0.005,"remaining":9.823,"upgrade":"For
+        unlimited API access, create an account at https://cryptowat.ch"}}
+
+        '
+    headers:
+      Access-Control-Allow-Headers:
+      - X-CW-Integration, X-CW-Very-Secret-Value
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 6e4b9d9dce9c911e-FRA
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 28 Feb 2022 18:11:29 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Referrer-Policy:
+      - origin-when-cross-origin
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=K03DEyrm6HJMlKSt8HIFbv4tFSZW6JSkyQHDspQnWzQ-1646071889-0-AbbM08MPGtexBnbgnfKHS7xCXlF1Xq5tb2/kzT0+vu8pSgP44hLGWKD+5donujX1DOlJgOqdiQpeIbBXzOefd0Q=;
+        path=/; expires=Mon, 28-Feb-22 18:41:29 GMT; domain=.cryptowat.ch; HttpOnly;
+        Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      content-length:
+      - '1117'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - __cf_bm=K03DEyrm6HJMlKSt8HIFbv4tFSZW6JSkyQHDspQnWzQ-1646071889-0-AbbM08MPGtexBnbgnfKHS7xCXlF1Xq5tb2/kzT0+vu8pSgP44hLGWKD+5donujX1DOlJgOqdiQpeIbBXzOefd0Q=
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://api.cryptowat.ch/markets/binance/ethbtc/orderbook/liquidity
+  response:
+    body:
+      string: '{"result":{"bid":{"base":{"100":"1873.0557","150":"2199.345","200":"2199.927","25":"886.634","250":"2199.927","300":"2200.3635","400":"2200.442","50":"1156.6751","500":"2200.442","75":"1612.2322"},"quote":{"100":"127.0915771789","150":"149.03547915","200":"149.074416114","25":"60.3041393269","250":"149.074416114","300":"149.1033595398","400":"149.1085429558","50":"78.631761986","500":"149.1085429558","75":"109.4822687108"}},"ask":{"base":{"100":"540.6203","150":"780.8356","200":"871.1434","25":"203.5775","250":"871.1434","300":"871.1434","400":"871.1434","50":"273.3185","500":"871.1434","75":"478.5668"},"quote":{"100":"36.973613313","150":"53.5449434004","200":"59.7950933162","25":"13.8805903636","250":"59.7950933162","300":"59.7950933162","400":"59.7950933162","50":"18.6472596678","500":"59.7950933162","75":"32.70872668"}}},"allowance":{"cost":0.005,"remaining":9.818,"upgrade":"For
+        unlimited API access, create an account at https://cryptowat.ch"}}
+
+        '
+    headers:
+      Access-Control-Allow-Headers:
+      - X-CW-Integration, X-CW-Very-Secret-Value
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 6e4b9d9f4a6a911e-FRA
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 28 Feb 2022 18:11:29 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Referrer-Policy:
+      - origin-when-cross-origin
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      content-length:
+      - '963'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - __cf_bm=K03DEyrm6HJMlKSt8HIFbv4tFSZW6JSkyQHDspQnWzQ-1646071889-0-AbbM08MPGtexBnbgnfKHS7xCXlF1Xq5tb2/kzT0+vu8pSgP44hLGWKD+5donujX1DOlJgOqdiQpeIbBXzOefd0Q=
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://api.cryptowat.ch/markets/kraken/ltcbtc/orderbook/liquidity
+  response:
+    body:
+      string: '{"result":{"bid":{"base":{"100":"4103.08034763","150":"5186.30407768","200":"5387.61356042","25":"773.11600918","250":"5649.81375996","300":"5655.30709806","400":"6520.20043078","50":"2382.45436288","500":"6588.91321754","75":"3501.83815655"},"quote":{"100":"10.78996669456798","150":"13.61981260611954","200":"14.14319170833198","25":"2.04098376684545","250":"14.82130587723498","300":"14.83543052182178","400":"17.04302695954335","50":"6.27767219794302","500":"17.21662447954736","75":"9.21605094067776"}},"ask":{"base":{"100":"3578.64261078","150":"4080.24596301","200":"4080.45141449","25":"1540.97482479","250":"4242.0612236","300":"4261.64299952","400":"4291.90901111","50":"2170.64751649","500":"4361.65259658","75":"2981.84257148"},"quote":{"100":"9.50418127798433","150":"10.84633622478408","200":"10.84688909471676","25":"4.08208371497716","250":"11.28316545961175","300":"11.33639314297913","400":"11.41926156196839","50":"5.7533307991914","500":"11.6122619893333","75":"7.9122797676934"}}},"allowance":{"cost":0.005,"remaining":9.813,"upgrade":"For
+        unlimited API access, create an account at https://cryptowat.ch"}}
+
+        '
+    headers:
+      Access-Control-Allow-Headers:
+      - X-CW-Integration, X-CW-Very-Secret-Value
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 6e4b9da12f28911e-FRA
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 28 Feb 2022 18:11:30 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Referrer-Policy:
+      - origin-when-cross-origin
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      content-length:
+      - '1128'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - __cf_bm=K03DEyrm6HJMlKSt8HIFbv4tFSZW6JSkyQHDspQnWzQ-1646071889-0-AbbM08MPGtexBnbgnfKHS7xCXlF1Xq5tb2/kzT0+vu8pSgP44hLGWKD+5donujX1DOlJgOqdiQpeIbBXzOefd0Q=
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://api.cryptowat.ch/markets/bittrex/neoeth/orderbook/liquidity
+  response:
+    body:
+      string: '{"result":{"bid":{"base":{"100":"301.16239992","150":"644.08711911","200":"647.35732068","25":"298.84680031","250":"647.35732068","300":"651.34481067","400":"653.13833389","50":"298.84680031","500":"660.88876449","75":"300.93748886"},"quote":{"100":"2.2585086729483824","150":"4.7942312058108045","200":"4.8183608420044047","25":"2.2412660184334536","250":"4.8183608420044047","300":"4.8475075949922429","400":"4.8604343219435897","50":"2.2412660184334536","500":"4.9158452710654461","75":"2.2568354178790746"}},"ask":{"base":{"100":"1192.36651736","150":"1192.70986026","200":"1207.68475126","25":"1136.383862","250":"1207.90370313","300":"1208.12418746","400":"1208.33043993","50":"1136.383862","500":"1208.33043993","75":"1136.383862"},"quote":{"100":"8.9735899315559008","150":"8.9762015796250378","200":"9.0908096640087978","25":"8.549015793826","250":"9.0924906516640919","300":"9.0941974715740178","400":"9.0958044670687758","50":"8.549015793826","500":"9.0958044670687758","75":"8.549015793826"}}},"allowance":{"cost":0.005,"remaining":9.808,"upgrade":"For
+        unlimited API access, create an account at https://cryptowat.ch"}}
+
+        '
+    headers:
+      Access-Control-Allow-Headers:
+      - X-CW-Integration, X-CW-Very-Secret-Value
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 6e4b9da239c9911e-FRA
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 28 Feb 2022 18:11:30 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Referrer-Policy:
+      - origin-when-cross-origin
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      content-length:
+      - '1132'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - __cf_bm=K03DEyrm6HJMlKSt8HIFbv4tFSZW6JSkyQHDspQnWzQ-1646071889-0-AbbM08MPGtexBnbgnfKHS7xCXlF1Xq5tb2/kzT0+vu8pSgP44hLGWKD+5donujX1DOlJgOqdiQpeIbBXzOefd0Q=
+      User-Agent:
+      - python-requests/2.27.1
+    method: GET
+    uri: https://api.cryptowat.ch/markets/kraken/aaabbb/orderbook/liquidity
+  response:
+    body:
+      string: '{"error":"Instrument not found","allowance":{"cost":0.005,"remaining":9.803,"upgrade":"For
+        unlimited API access, create an account at https://cryptowat.ch"}}
+
+        '
+    headers:
+      Access-Control-Allow-Headers:
+      - X-CW-Integration, X-CW-Very-Secret-Value
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 6e4b9da3cd89911e-FRA
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 28 Feb 2022 18:11:30 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Referrer-Policy:
+      - origin-when-cross-origin
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      content-length:
+      - '158'
+    status:
+      code: 404
+      message: Not Found
+version: 1
