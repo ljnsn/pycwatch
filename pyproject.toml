@@ -35,6 +35,7 @@ source = "init"
 [tool.coverage.run]
 branch = true
 source = ["pycwatch", "tests"]
+omit = ["*/vcr_cassettes/"]
 
 [tool.coverage.report]
 fail_under = 90
@@ -92,4 +93,3 @@ addopts =[
   "--cov-report=html",
   "--no-cov-on-fail",
 ]
-filterwarnings = ["ignore:A private pytest class or function was used.:_pytest.warning_types.PytestDeprecationWarning"]
