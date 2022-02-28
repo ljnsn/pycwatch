@@ -32,7 +32,13 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry-version-plugin]
 source = "init"
 
+[tool.coverage.run]
+branch = true
+source = "pycwatch"
+
 [tool.coverage.report]
+fail_under = 100
+show_missing = true
 exclude_lines = [
     "pragma: no cover",
     "@overload",
@@ -59,3 +65,31 @@ warn_return_any = true
 implicit_reexport = false
 strict_equality = true
 # --strict end
+
+[tool.pytest.ini_options]
+# pytest configuration:
+# https://docs.pytest.org/en/stable/customize.html
+python_files = ["tests.py", "test_*.py", "*_tests.py"]
+
+# Directories that are not visited by pytest collector:
+norecursedirs = [
+  "*.egg",
+  ".eggs",
+  "dist",
+  "build",
+  "docs",
+  ".tox",
+  ".git",
+  "__pycache__",
+]
+addopts =[
+  "-v",
+  "--strict-markers",
+  "--strict-config",
+  "--tb=short",
+  "--cov=apiclient_pydantic",
+  "--cov-report=term-missing:skip-covered",
+  "--cov-report=html",
+  "--no-cov-on-fail",
+]
+filterwarnings = ["ignore:A private pytest class or function was used.:_pytest.warning_types.PytestDeprecationWarning"]
