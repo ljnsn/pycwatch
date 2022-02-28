@@ -34,10 +34,10 @@ source = "init"
 
 [tool.coverage.run]
 branch = true
-source = ["pycwatch"]
+source = ["pycwatch", "tests"]
 
 [tool.coverage.report]
-fail_under = 100
+fail_under = 90
 show_missing = true
 exclude_lines = [
     "pragma: no cover",
