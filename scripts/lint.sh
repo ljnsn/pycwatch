@@ -3,7 +3,7 @@
 set -e
 set -x
 
-mypy pycwatch
+#mypy pycwatch
 flake8 pycwatch tests
 black pycwatch tests --check
 isort pycwatch tests --check-only
