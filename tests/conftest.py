@@ -7,7 +7,6 @@ import vcr
 
 from pycwatch import CryptoWatchClient
 
-
 BASE_DIR = Path(__file__).parent.absolute()
 
 api_vcr = my_vcr = vcr.VCR(

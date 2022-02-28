@@ -1,16 +1,15 @@
 """Tests for the REST API methods."""
 import json
 
-from apiclient.exceptions import ClientError
 import pytest
+from apiclient.exceptions import ClientError
 from vcr.cassette import Cassette
 
-from .conftest import api_vcr
 from pycwatch import CryptoWatchClient, models
-from pycwatch.models import PaginatedResponse, Response
-from pycwatch.errors import APIError, APIKeyError
-from pycwatch.client import NO_KEY_MESSAGE
 from pycwatch.endpoints import Endpoint
+from pycwatch.models import PaginatedResponse, Response
+
+from .conftest import api_vcr
 
 
 def with_cassette(cassette_file: str):
@@ -147,7 +146,7 @@ def test_get_market_price(cassette: Cassette, live_client: CryptoWatchClient):
         assert price == Response[models.MarketPrice](**load_response(cassette, i))
 
     with pytest.raises(ClientError, match="404 Error: Not Found"):
-        market = live_client.get_market_price(exchange="kraken", pair="aaabbb")
+        price = live_client.get_market_price(exchange="kraken", pair="aaabbb")
 
 
 @with_cassette("get_market_trades.yml")
