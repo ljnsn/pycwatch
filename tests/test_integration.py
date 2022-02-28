@@ -254,3 +254,19 @@ def test_list_exchange_markets(cassette: Cassette, live_client: CryptoWatchClien
 
     with pytest.raises(ClientError, match="404 Error: Not Found"):
         markets = live_client.list_exchange_markets(exchange="aabbbaba")
+
+
+@with_cassette("get_ohlcv.yml")
+def test_get_ohlcv(cassette: Cassette, live_client: CryptoWatchClient):
+    markets = [
+        ("kraken", "btceur"),
+        ("binance", "ethbtc"),
+        ("kraken", "ltcbtc"),
+        ("bittrex", "neoeth"),
+    ]
+    for i, m in enumerate(markets):
+        ohlcv = live_client.get_ohlcv(exchange=m[0], pair=m[1])
+        assert ohlcv == Response[models.OHLCVDict](**load_response(cassette, i))
+
+    with pytest.raises(ClientError, match="404 Error: Not Found"):
+        ohlcv = live_client.get_ohlcv(exchange="kraken", pair="aaabbb")
