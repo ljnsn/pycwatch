@@ -34,8 +34,9 @@ source = "init"
 
 [tool.coverage.run]
 branch = true
+parallel = true
 source = ["pycwatch", "tests"]
-omit = ["*/vcr_cassettes/"]
+omit = ["*/vcr_cassettes/*"]
 
 [tool.coverage.report]
 fail_under = 90
@@ -66,30 +67,3 @@ warn_return_any = true
 implicit_reexport = false
 strict_equality = true
 # --strict end
-
-[tool.pytest.ini_options]
-# pytest configuration:
-# https://docs.pytest.org/en/stable/customize.html
-python_files = ["tests.py", "test_*.py", "*_tests.py"]
-
-# Directories that are not visited by pytest collector:
-norecursedirs = [
-  "*.egg",
-  ".eggs",
-  "dist",
-  "build",
-  "docs",
-  ".tox",
-  ".git",
-  "__pycache__",
-]
-addopts =[
-  "-v",
-  "--strict-markers",
-  "--strict-config",
-  "--tb=short",
-  "--cov=pycwatch",
-  "--cov-report=term-missing:skip-covered",
-  "--cov-report=html",
-  "--no-cov-on-fail",
-]
