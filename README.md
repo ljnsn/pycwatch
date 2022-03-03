@@ -1,11 +1,13 @@
 # pycwatch
 
+<p>
 <a href="https://codecov.io/gh/ljnsn/pycwatch" target="_blank">
     <img src="https://img.shields.io/codecov/c/github/ljnsn/pycwatch?color=%2334D058" alt="Coverage">
 </a>
 <a href="https://pypi.org/project/pycwatch" target="_blank">
     <img src="https://img.shields.io/pypi/v/pycwatch?color=%2334D058&label=pypi%20package" alt="Package version">
 </a>
+</p>
 
 </br>
 
