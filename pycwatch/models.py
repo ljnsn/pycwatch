@@ -1,5 +1,5 @@
 from decimal import Decimal
-from typing import TYPE_CHECKING, Any, Generic, Optional, TypeVar
+from typing import TYPE_CHECKING, Any, Dict, Generic, List, Optional, TypeVar
 
 from pydantic import BaseModel, ConstrainedList, Extra, Field, HttpUrl, validator
 from pydantic.generics import GenericModel
@@ -74,7 +74,7 @@ class OHLCVQueryParams(Base):
     periods: Optional[str]
 
     @validator("periods", pre=True)
-    def list_to_str(cls, v: list[int]) -> Optional[str]:
+    def list_to_str(cls, v: List[int]) -> Optional[str]:
         if not v:
             return None
 
@@ -181,8 +181,8 @@ class MarketMember(ListMember, MarketBase):
 
 
 class AssetMarketList(Base):
-    base: list[MarketMember]
-    quote: list[MarketMember]
+    base: List[MarketMember]
+    quote: List[MarketMember]
 
 
 class Asset(AssetBase):
@@ -218,7 +218,7 @@ class MarketPrice(Base):
     price: Price
 
 
-AllPrices = dict[str, Price]
+AllPrices = Dict[str, Price]
 
 
 class Trade(Base):
@@ -228,7 +228,7 @@ class Trade(Base):
     amount: Decimal
 
     @classmethod
-    def validate(cls, v: list[Any]) -> "Trade":
+    def validate(cls, v: List[Any]) -> "Trade":
         return cls(
             id_=v[0],
             timestamp=v[1],
@@ -259,7 +259,7 @@ class MarketSummary(Base):
     volume_quote: Decimal = Field(alias="volumeQuote")
 
 
-AllSummaries = dict[str, MarketSummary]
+AllSummaries = Dict[str, MarketSummary]
 
 
 class OrderBookItem(Base):
@@ -267,7 +267,7 @@ class OrderBookItem(Base):
     amount: Decimal
 
     @classmethod
-    def validate(cls, v: list[Any]) -> "OrderBookItem":
+    def validate(cls, v: List[Any]) -> "OrderBookItem":
         return cls(
             price=v[0],
             amount=v[1],
@@ -285,8 +285,8 @@ class OrderBook(Base):
 
 
 class LiquidityLevel(Base):
-    base: dict[int, Decimal]
-    quote: dict[int, Decimal]
+    base: Dict[int, Decimal]
+    quote: Dict[int, Decimal]
 
 
 class OrderBookLiquidity(Base):
@@ -326,7 +326,7 @@ class OHLCV(Base):
     quote_volume: Decimal
 
     @classmethod
-    def validate(cls, v: list[Any]) -> "OHLCV":
+    def validate(cls, v: List[Any]) -> "OHLCV":
         return cls(
             close_time=v[0],
             open_price=v[1],
@@ -349,7 +349,7 @@ class OHLCV(Base):
         ]
 
 
-OHLCVDict = dict[str, list[OHLCV]]
+OHLCVDict = Dict[str, List[OHLCV]]
 
 
 class ExchangeBase(Base):
