@@ -68,7 +68,7 @@ class CryptoWatchClient(APIClient):
         )
 
     @property
-    def is_authenticated(self):
+    def is_authenticated(self) -> bool:
         return self._api_key is not None
 
     def list_assets(
