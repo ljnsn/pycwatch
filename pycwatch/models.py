@@ -337,7 +337,7 @@ class OHLCV(Base):
             quote_volume=v[6],
         )
 
-    def to_list(self) -> list[Any]:
+    def to_list(self) -> List[Any]:
         return [
             self.close_time,
             self.open_price,
