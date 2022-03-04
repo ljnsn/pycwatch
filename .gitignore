@@ -11,7 +11,9 @@ dist/
 
 # tests stuff
 .coverage
+coverage.xml
 .pytest_cache/
+htmlcov/
 
 # other stuff
 venv/
