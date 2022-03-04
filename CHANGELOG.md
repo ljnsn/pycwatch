@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.0.0][1.0.0] - 2022-03-04
+
+### Changed
+
+- All API calls now return data as `pydantic` models.
+
 ### Added
 
 - Live tests.
