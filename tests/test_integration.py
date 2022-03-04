@@ -28,12 +28,6 @@ def load_response(cassette: Cassette, response_idx: int = 0):
     return json.loads(cassette.responses[response_idx]["body"]["string"])
 
 
-def test_init_with_key(api_key):
-    api = CryptoWatchClient(api_key)
-    assert api._api_key == api_key
-    assert api.is_authenticated
-
-
 @with_cassette("list_assets.yml")
 def test_list_assets(cassette: Cassette, live_client: CryptoWatchClient):
     assets = live_client.list_assets()
