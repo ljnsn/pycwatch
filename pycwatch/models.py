@@ -337,17 +337,6 @@ class OHLCV(Base):
             quote_volume=v[6],
         )
 
-    def to_list(self) -> List[Any]:
-        return [
-            self.close_time,
-            self.open_price,
-            self.high_price,
-            self.low_price,
-            self.close_price,
-            self.volume,
-            self.quote_volume,
-        ]
-
 
 OHLCVDict = Dict[str, List[OHLCV]]
 
