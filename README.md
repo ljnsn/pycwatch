@@ -21,23 +21,21 @@ Either install from pypi or clone this repository and install locally.
 pip install pycwatch
 ```
 
-### Dependencies
-
-- `requests`
-
 ## Quick Start
 
+See the [cryptowat.ch docs](https://docs.cryptowat.ch/rest-api) for available endpoints.
+
 ```python
-import pycwatch
+from pycwatch import CryptoWatchClient
 
 # create api client
-api = pycwatch.rest
+client = CryptoWatchClient()
 
 # get list of available assets
-assets = api.list_assets()
+assets = client.list_assets()
 # get some price info
-exchange, pair = 'binance', 'btceur'
-price = api.get_market_price(exchange, pair)
+exchange, pair = "binance", "btceur"
+price = client.get_market_price(exchange, pair)
 ```
 
 If you have an account at [cryptowat.ch](https://cryptowat.ch), you can either set your key as an environment variable or in the code.
@@ -49,8 +47,8 @@ export CRYPTO_WATCH_KEY="my-awesome-key"
 or
 
 ```python
-import pycwatch
+from pycwatch import CryptoWatchClient
 
-api = pycwatch.rest
-api.api_key = 'my-awesome-key'
+api_key = "my-awesome-key"
+client = CryptoWatchClient(api_key)
 ```
