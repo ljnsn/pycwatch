@@ -19,22 +19,15 @@ test = ["pytest", "pytest-env", "pytest-cov", "vcrpy", "requests-mock"]
 
 [[package]]
 name = "api-client-pydantic"
-version = "1.2.2"
+version = "2.0.0"
 description = "API Client extension for validate and transform requests / responses using pydantic."
 category = "main"
 optional = false
-python-versions = "^3.7"
-develop = false
+python-versions = ">=3.7,<4.0"
 
 [package.dependencies]
 api-client = ">1.2.1"
-pydantic = "^1.7,<2.0"
-
-[package.source]
-type = "git"
-url = "https://github.com/ljnsn/api-client-pydantic.git"
-reference = "feat/model-specific-args"
-resolved_reference = "f5a22a1d76d39ba8bc19dc2d0cfade421b53802c"
+pydantic = ">=1.7,<2.0"
 
 [[package]]
 name = "atomicwrites"
@@ -550,13 +543,16 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "d020cf600faad943f85ba4e495cd16fbf9cb7ece6d8a1155e1d14eafebb19914"
+content-hash = "478f73bcad1a5edcc824681d94d3f7651efacf1f8f187c4191969aafc650f210"
 
 [metadata.files]
 api-client = [
     {file = "api-client-1.3.1.tar.gz", hash = "sha256:194e5c8f2b5200540464462a68ea9d06ad85d6f374f03d384f098711572ab946"},
 ]
-api-client-pydantic = []
+api-client-pydantic = [
+    {file = "api-client-pydantic-2.0.0.tar.gz", hash = "sha256:2a56e09e17af6c497bebc96e336a097b887f787e652e84bfeffb1c6b9288be54"},
+    {file = "api_client_pydantic-2.0.0-py3-none-any.whl", hash = "sha256:6ac2fb04325fc8518177581487e49b669463af5bda300012b7986162304cf9b0"},
+]
 atomicwrites = [
     {file = "atomicwrites-1.4.0-py2.py3-none-any.whl", hash = "sha256:6d1784dea7c0c8d4a5172b6c620f40b6e4cbfdf96d783691f2e1302a7b88e197"},
     {file = "atomicwrites-1.4.0.tar.gz", hash = "sha256:ae70396ad1a434f9c7046fd2dd196fc04b12f9e91ffb859164193be8b6168a7a"},
