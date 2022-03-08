@@ -2,7 +2,7 @@
 name = "pycwatch"
 version = "0"
 description = "An client library for the Cryptowatch Rest API."
-authors = ["ljnsn <lbj@goja.me>"]
+authors = ["ljnsn <82611987+ljnsn@users.noreply.github.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
