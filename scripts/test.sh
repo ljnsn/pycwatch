@@ -3,7 +3,5 @@
 set -e
 set -x
 
-coverage run -m pytest tests
-coverage combine
-coverage report --show-missing
-coverage xml
+pytest tests --cov --cov-report xml pycwatch
+
