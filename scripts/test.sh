@@ -3,5 +3,5 @@
 set -e
 set -x
 
-pytest tests --cov --cov-report xml pycwatch
+pytest tests --cov pycwatch --cov-report xml
 
