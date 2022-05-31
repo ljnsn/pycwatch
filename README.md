@@ -7,6 +7,9 @@
 <a href="https://pypi.org/project/pycwatch" target="_blank">
     <img src="https://img.shields.io/pypi/v/pycwatch?color=%2334D058&label=pypi%20package" alt="Package version">
 </a>
+<a href="https://github.com/psf/black" target="_blank">
+    <img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Black style">
+</a>
 </p>
 
 </br>
