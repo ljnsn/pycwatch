@@ -13,6 +13,7 @@ dist/
 .coverage
 coverage.xml
 .pytest_cache/
+.mypy_cache/
 htmlcov/
 
 # other stuff
