@@ -4,6 +4,23 @@ version = "0"
 description = "An client library for the Cryptowatch Rest API."
 authors = ["ljnsn <82611987+ljnsn@users.noreply.github.com>"]
 readme = "README.md"
+license = "MIT"
+repository = "https://github.com/ljnsn/pycwatch"
+homepage = "https://github.com/ljnsn/pycwatch"
+keywords = ["cryptocurrency", "crypto", "prices", "cryptowatch"]
+classifiers = [
+    'Development Status :: 5 - Production/Stable',
+    'Environment :: Web Environment',
+    'Intended Audience :: Developers',
+    'License :: OSI Approved :: MIT License',
+    'Operating System :: OS Independent',
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 3.7',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
+]
 
 [tool.poetry.dependencies]
 python = "^3.7"
@@ -31,6 +48,9 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry-version-plugin]
 source = "init"
+
+[tool.black]
+target-version = ["py37", "py38", "py39", "py310"]
 
 [tool.coverage.run]
 branch = true

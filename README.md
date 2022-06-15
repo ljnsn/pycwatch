@@ -1,18 +1,9 @@
 # pycwatch
 
-<p>
-<a href="https://codecov.io/gh/ljnsn/pycwatch" target="_blank">
-    <img src="https://img.shields.io/codecov/c/github/ljnsn/pycwatch?color=%2334D058" alt="Coverage">
-</a>
-<a href="https://pypi.org/project/pycwatch" target="_blank">
-    <img src="https://img.shields.io/pypi/v/pycwatch?color=%2334D058&label=pypi%20package" alt="Package version">
-</a>
-<a href="https://github.com/psf/black" target="_blank">
-    <img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Black style">
-</a>
-</p>
-
-</br>
+[![Coverage](https://img.shields.io/codecov/c/github/ljnsn/pycwatch?color=%2334D058)](https://codecov.io/gh/ljnsn/pycwatch)
+[![Package version](https://img.shields.io/pypi/v/pycwatch?color=%2334D058&label=pypi%20package)](https://pypi.org/project/pycwatch)
+[![Python versions](https://img.shields.io/pypi/pyversions/pycwatch.svg)](https://pypi.org/project/pycwatch)
+[![Black style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 The `pycwatch` library provides access to the [Cryptowatch API](https://docs.cryptowat.ch/rest-api/) and implements all resources of the REST API.
 
