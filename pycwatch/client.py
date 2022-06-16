@@ -8,6 +8,7 @@ from apiclient_pydantic import serialize_all_methods
 from .config import settings
 from .endpoints import Endpoint
 from .models import (
+    Allowance,
     AllPrices,
     AllSummaries,
     Asset,
@@ -71,6 +72,10 @@ class CryptoWatchClient(APIClient):
     def is_authenticated(self) -> bool:
         """Check whether an API has been provided."""
         return self._api_key is not None
+
+    def get_allowance(self) -> Allowance:
+        """Get the allowance only by querying root."""
+        return self.get(Endpoint.root)
 
     def list_assets(
         self, params: PaginationQueryParams
