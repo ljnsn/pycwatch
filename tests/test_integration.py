@@ -7,7 +7,7 @@ from vcr.cassette import Cassette
 
 from pycwatch import CryptoWatchClient, models
 from pycwatch.endpoints import Endpoint
-from pycwatch.models import PaginatedResponse, Response
+from pycwatch.models import PaginatedResponse, Response, ResponseRoot
 
 from .conftest import api_vcr
 
@@ -26,6 +26,13 @@ def with_cassette(cassette_file: str):
 
 def load_response(cassette: Cassette, response_idx: int = 0):
     return json.loads(cassette.responses[response_idx]["body"]["string"])
+
+
+@with_cassette("get_info.yml")
+def test_get_info(cassette: Cassette, live_client: CryptoWatchClient):
+    response = live_client.get_info()
+
+    assert response == ResponseRoot[models.Info](**load_response(cassette, 0))
 
 
 @with_cassette("list_assets.yml")

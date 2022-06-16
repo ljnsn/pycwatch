@@ -1,0 +1,54 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.28.0
+    method: GET
+    uri: https://api.cryptowat.ch/
+  response:
+    body:
+      string: '{"result":{"revision":"c2d65c259c844e720c0c5593e805a16cc9c7321c","uptime":"29h19m41.471239115s","documentation":"https://cryptowat.ch/docs/api","indexes":["https://api.cryptowat.ch/assets","https://api.cryptowat.ch/pairs","https://api.cryptowat.ch/exchanges","https://api.cryptowat.ch/markets"]}}
+
+        '
+    headers:
+      Access-Control-Allow-Headers:
+      - X-CW-Integration, X-CW-Very-Secret-Value
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 71c59b973f13900d-FRA
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 16 Jun 2022 18:28:53 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Referrer-Policy:
+      - origin-when-cross-origin
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cf_bm=9PGB4QUFLiut84t8KlN0brtnJ33BbA1S57kGkG7_9ks-1655404133-0-AWyjBKo2vftwqHg/BskHMk8AyywQlf1uTNi84xF+BQbNrrUJOebPn8T5tysU7bEo9RzdxHdwQxxMGMmcWTSoEZ0=;
+        path=/; expires=Thu, 16-Jun-22 18:58:53 GMT; domain=.cryptowat.ch; HttpOnly;
+        Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      Vary:
+      - Origin
+      X-Content-Type-Options:
+      - nosniff
+      content-length:
+      - '297'
+    status:
+      code: 200
+      message: OK
+version: 1
