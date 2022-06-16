@@ -269,4 +269,4 @@ def test_get_ohlcv(cassette: Cassette, live_client: CryptoWatchClient):
         assert ohlcv == Response[models.OHLCVDict](**load_response(cassette, i))
 
     with pytest.raises(ClientError, match="404 Error: Not Found"):
-        ohlcv = live_client.get_ohlcv(exchange="kraken", pair="aaabbb")
+        live_client.get_ohlcv(exchange="kraken", pair="aaabbb")
