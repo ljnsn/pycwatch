@@ -115,10 +115,21 @@ class Cursor(Base):
     has_more: bool = Field(alias="hasMore")
 
 
-class Allowance(Base):
-    cost: float
-    remaining: float
+class AllowanceBase(Base):
+    cost: int
+    remaining: int
+
+
+class AllowanceAnonymous(AllowanceBase):
     upgrade: str
+
+
+class AllowanceAuthenticated(AllowanceBase):
+    remaining_paid: float = Field(alias="remainingPaid")
+    account: str
+
+
+Allowance = AllowanceAnonymous | AllowanceAuthenticated
 
 
 class Response(GenericModel, Generic[ResultT]):
