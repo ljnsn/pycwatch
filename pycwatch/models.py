@@ -1,5 +1,5 @@
 from decimal import Decimal
-from typing import TYPE_CHECKING, Any, Dict, Generic, List, Optional, TypeVar
+from typing import TYPE_CHECKING, Any, Dict, Generic, List, Optional, TypeVar, Union
 
 from pydantic import BaseModel, ConstrainedList, Extra, Field, HttpUrl, validator
 from pydantic.generics import GenericModel
@@ -129,20 +129,30 @@ class AllowanceAuthenticated(AllowanceBase):
     account: str
 
 
-Allowance = AllowanceAnonymous | AllowanceAuthenticated
+Allowance = Union[AllowanceAnonymous, AllowanceAuthenticated]
 
 
-class Response(GenericModel, Generic[ResultT]):
+class ResponseRoot(GenericModel, Generic[ResultT]):
     result: ResultT
+
+
+class Response(ResponseRoot, Generic[ResultT]):
     allowance: Allowance
+
+
+class PaginatedResponse(Response[ResultT], Generic[ResultT]):
+    cursor: Cursor
 
 
 class Route(HttpUrl):
     pass
 
 
-class PaginatedResponse(Response[ResultT], Generic[ResultT]):
-    cursor: Cursor
+class Info(Base):
+    revision: str
+    uptime: str
+    documentation: Route
+    indexes: List[Route]
 
 
 class ListMember(Base):
