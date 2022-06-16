@@ -16,7 +16,7 @@ period_mapping = {
     "1d": 86400,
     "3d": 259200,
     "1w": 604800,
-    "1w_monday": ONE_WEEK_MONDAY
+    "1w_monday": ONE_WEEK_MONDAY,
 }
 
 
