@@ -76,6 +76,7 @@ class CryptoWatchClient(APIClient):
 
     def get_info(self) -> ResponseRoot[Info]:
         """Get the allowance and status information by requesting root."""
+        # NOTE: supposedly this returns the allowance, however, we get status info only
         return self.get(Endpoint.root)
 
     def list_assets(
