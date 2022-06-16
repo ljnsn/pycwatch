@@ -4,6 +4,8 @@ from typing import TYPE_CHECKING, Any, Dict, Generic, List, Optional, TypeVar, U
 from pydantic import BaseModel, ConstrainedList, Extra, Field, HttpUrl, validator
 from pydantic.generics import GenericModel
 
+from pycwatch import utils
+
 if TYPE_CHECKING:
     from pydantic.typing import CallableGenerator
 
@@ -74,14 +76,11 @@ class OHLCVQueryParams(Base):
     periods: Optional[str]
 
     @validator("periods", pre=True)
-    def list_to_str(cls, v: List[int]) -> Optional[str]:
+    def list_to_str(cls, v: List[Union[str, int]]) -> Optional[str]:
         if not v:
             return None
 
-        if not all(isinstance(item, int) for item in v):
-            raise TypeError("all periods must be integers")
-
-        return ",".join(map(str, v))
+        return utils.resolve_periods(v)
 
 
 # path params
