@@ -1,3 +1,4 @@
+import enum
 from decimal import Decimal
 from typing import TYPE_CHECKING, Any, Dict, Generic, List, Optional, TypeVar, Union
 
@@ -55,8 +56,13 @@ class TradeQueryParams(Base):
     limit: Optional[int]
 
 
+class MarketSummaryKey(str, enum.Enum):
+    ID = "id"
+    SYMBOLS = "symbols"
+
+
 class MarketSummariesQueryParams(PaginationQueryParams):
-    key_by: Optional[str] = Field(alias="keyBy")
+    key_by: Optional[MarketSummaryKey] = Field(alias="keyBy")
 
 
 class OrderBookQueryParams(Base):
