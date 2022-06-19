@@ -56,7 +56,7 @@ def test_list_assets(cassette: Cassette, live_client: CryptoWatchClient):
 
 @with_cassette("get_asset.yml")
 def test_get_asset(cassette: Cassette, live_client: CryptoWatchClient):
-    asset_codes = ["btc", "eur", "eth"]
+    asset_codes = ["btc", "eur", "eth", "kfee"]
     for i, asset_code in enumerate(asset_codes):
         asset = live_client.get_asset(asset_code=asset_code)
         assert asset == Response[models.Asset](**load_response(cassette, i))
