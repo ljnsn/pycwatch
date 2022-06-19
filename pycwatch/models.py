@@ -207,8 +207,8 @@ class MarketMember(ListMember, MarketBase):
 
 
 class AssetMarketList(Base):
-    base: List[MarketMember]
-    quote: List[MarketMember]
+    base: Optional[List[MarketMember]] = None
+    quote: Optional[List[MarketMember]] = None
 
 
 class Asset(AssetBase):
