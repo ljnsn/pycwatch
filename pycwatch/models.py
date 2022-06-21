@@ -169,6 +169,7 @@ class AssetBase(Base):
     symbol: str
     name: str
     fiat: bool
+    sid: Optional[str]
 
 
 class AssetMember(ListMember, AssetBase):
