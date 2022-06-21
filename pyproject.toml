@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pycwatch"
-version = "1.1.0"
+version = "1.1.1"
 description = "An client library for the Cryptowatch Rest API."
 authors = ["ljnsn <82611987+ljnsn@users.noreply.github.com>"]
 readme = "README.md"
