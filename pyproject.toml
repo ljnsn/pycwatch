@@ -44,7 +44,7 @@ vcrpy = "^4.1.1"
 bump2version = "^1.0.1"
 
 [build-system]
-requires = ["poetry-core"]
+requires = ["poetry-core", "poetry>1.2.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry-version-plugin]
