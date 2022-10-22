@@ -53,6 +53,8 @@ for more information.\
 
 @serialize_all_methods()
 class CryptoWatchClient(APIClient):
+    """The CryptoWatch client class."""
+
     def __init__(self, api_key: Optional[str] = None) -> None:
         api_key = api_key or settings.CW_API_KEY
         self._api_key = api_key
