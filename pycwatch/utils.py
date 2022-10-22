@@ -29,11 +29,11 @@ def resolve_periods(periods: List[Union[str, int]]) -> str:
 
     >>> resolve_periods([60, 180, 7200])
     '60,180,7200'
-    >>> resolve_periods([60,180,'604800_Monday'])
+    >>> resolve_periods([60, 180, '604800_Monday'])
     '60,180,604800_Monday'
     >>> resolve_periods(['1m', '30m', '1w_monday'])
     '60,1800,604800_Monday'
-    >>> resolve_periods([60,'30m'])
+    >>> resolve_periods([60, '30m'])
     '60,1800'
     >>> resolve_periods(['3m', 180])
     '180'
