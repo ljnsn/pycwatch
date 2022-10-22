@@ -75,7 +75,7 @@ class MarketSummaryKey(str, enum.Enum):
 
 
 class MarketSummariesQueryParams(PaginationQueryParams):
-    key_by: Optional[MarketSummaryKey] = Field(alias="keyBy")
+    key_by: Optional[MarketSummaryKey] = Field(None, alias="keyBy")
 
 
 class OrderBookQueryParams(Base):
