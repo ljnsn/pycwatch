@@ -3,6 +3,8 @@ from apiclient import endpoint
 
 @endpoint(base_url="https://api.cryptowat.ch")
 class Endpoint:
+    """The endpoints supported by this client."""
+
     root = "/"
     list_assets = "/assets"
     asset_detail = "/assets/{assetCode}"
