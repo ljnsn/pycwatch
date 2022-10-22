@@ -12,6 +12,15 @@ if TYPE_CHECKING:
 
 
 def gen_alias(field_name: str) -> str:
+    """
+    Generate the fieldname understood by cryptowatch.
+
+    Args:
+        field_name: The python name of the field.
+
+    Returns:
+        The cryptowatch name.
+    """
     if field_name == "id_":
         return "id"
     return "".join(
@@ -20,6 +29,8 @@ def gen_alias(field_name: str) -> str:
 
 
 class Base(BaseModel):
+    """The base class for all models."""
+
     class Config:
         allow_population_by_field_name = True
         extra = Extra.forbid
@@ -27,6 +38,8 @@ class Base(BaseModel):
 
 
 class CustomList(ConstrainedList):
+    """A custom constrained list."""
+
     item_type: Any
 
     def __init_subclass__(cls) -> None:
