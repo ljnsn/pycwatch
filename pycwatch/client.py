@@ -1,9 +1,9 @@
-from typing import Optional
+from typing import List, Optional, Union
 
 from apiclient import APIClient
 from apiclient.authentication_methods import HeaderAuthentication, NoAuthentication
 from apiclient.response_handlers import JsonResponseHandler
-from apiclient_pydantic import serialize_all_methods
+from apiclient_pydantic import serialize_response
 
 from .config import settings
 from .endpoints import Endpoint
@@ -12,15 +12,12 @@ from .models import (
     AllSummaries,
     Asset,
     AssetList,
-    AssetPathParams,
     Exchange,
     ExchangeList,
     ExchangeMarkets,
-    ExchangePathParams,
     Info,
     Market,
     MarketList,
-    MarketPathParams,
     MarketPrice,
     MarketSummariesQueryParams,
     MarketSummary,
@@ -36,7 +33,6 @@ from .models import (
     PaginationQueryParams,
     Pair,
     PairList,
-    PairPathParams,
     Response,
     ResponseRoot,
     TradeQueryParams,
@@ -51,7 +47,6 @@ for more information.\
 """
 
 
-@serialize_all_methods()
 class CryptoWatchClient(APIClient):
     """The CryptoWatch client class."""
 
@@ -76,65 +71,92 @@ class CryptoWatchClient(APIClient):
         """Check whether an API has been provided."""
         return self._api_key is not None
 
+    @serialize_response()
     def get_info(self) -> ResponseRoot[Info]:
         """Get the allowance and status information by requesting root."""
         # NOTE: supposedly this returns the allowance, however, we get status info only
         return self.get(Endpoint.root)
 
+    @serialize_response()
     def list_assets(
         self,
-        params: PaginationQueryParams,
+        cursor: Optional[str] = None,
+        limit: Optional[int] = None,
     ) -> PaginatedResponse[AssetList]:
         """List all available assets."""
-        return self.get(Endpoint.list_assets, params=params)
+        params = PaginationQueryParams(cursor=cursor, limit=limit)
+        return self.get(Endpoint.list_assets, params=params.dict())
 
-    def get_asset(self, path_params: AssetPathParams) -> Response[Asset]:
+    @serialize_response()
+    def get_asset(self, asset_code: str) -> Response[Asset]:
         """Get information about a specific asset."""
-        return self.get(Endpoint.asset_detail.format(**path_params))
+        return self.get(Endpoint.asset_detail.format(assetCode=asset_code))
 
-    def list_pairs(self, params: PaginationQueryParams) -> PaginatedResponse[PairList]:
+    @serialize_response()
+    def list_pairs(
+        self,
+        cursor: Optional[str] = None,
+        limit: Optional[int] = None,
+    ) -> PaginatedResponse[PairList]:
         """List all available pairs."""
-        return self.get(Endpoint.list_pairs, params=params)
+        params = PaginationQueryParams(cursor=cursor, limit=limit)
+        return self.get(Endpoint.list_pairs, params=params.dict())
 
-    def get_pair(self, path_params: PairPathParams) -> Response[Pair]:
+    @serialize_response()
+    def get_pair(self, pair: str) -> Response[Pair]:
         """Get information about a specific pair."""
-        return self.get(Endpoint.pair_detail.format(**path_params))
+        return self.get(Endpoint.pair_detail.format(pair=pair))
 
+    @serialize_response()
     def list_markets(
         self,
-        params: PaginationQueryParams,
+        cursor: Optional[str] = None,
+        limit: Optional[int] = None,
     ) -> PaginatedResponse[MarketList]:
         """List all markets."""
-        return self.get(Endpoint.list_markets, params=params)
+        params = PaginationQueryParams(cursor=cursor, limit=limit)
+        return self.get(Endpoint.list_markets, params=params.dict())
 
-    def get_market(self, path_params: MarketPathParams) -> Response[Market]:
+    @serialize_response()
+    def get_market(self, exchange: str, pair: str) -> Response[Market]:
         """Get information about a specific market."""
-        return self.get(Endpoint.market_detail.format(**path_params))
+        return self.get(Endpoint.market_detail.format(exchange=exchange, pair=pair))
 
-    def get_market_price(self, path_params: MarketPathParams) -> Response[MarketPrice]:
+    @serialize_response()
+    def get_market_price(self, exchange: str, pair: str) -> Response[MarketPrice]:
         """Get the last available price for a market."""
-        return self.get(Endpoint.market_price.format(**path_params))
+        return self.get(Endpoint.market_price.format(exchange=exchange, pair=pair))
 
+    @serialize_response()
     def get_all_market_prices(
         self,
-        params: PaginationQueryParams,
+        cursor: Optional[str] = None,
+        limit: Optional[int] = None,
     ) -> PaginatedResponse[AllPrices]:
         """Get all market prices."""
-        return self.get(Endpoint.all_market_prices, params=params)
+        params = PaginationQueryParams(cursor=cursor, limit=limit)
+        return self.get(Endpoint.all_market_prices, params=params.dict())
 
+    @serialize_response()
     def get_market_trades(
         self,
-        path_params: MarketPathParams,
-        params: TradeQueryParams,
+        exchange: str,
+        pair: str,
+        since: Optional[int] = None,
+        limit: Optional[int] = None,
     ) -> Response[MarketTradeList]:
         """Get recent trades for a market."""
+        params = TradeQueryParams(since=since, limit=limit)
         return self.get(
-            Endpoint.list_market_trades.format(**path_params), params=params
+            Endpoint.list_market_trades.format(exchange=exchange, pair=pair),
+            params=params.dict(),
         )
 
+    @serialize_response()
     def get_market_summary(
         self,
-        path_params: MarketPathParams,
+        exchange: str,
+        pair: str,
     ) -> Response[MarketSummary]:
         """Get a 24h summary of a specific market.
 
@@ -146,59 +168,87 @@ class CryptoWatchClient(APIClient):
         - Volume
         - Quote volume
         """
-        return self.get(Endpoint.market_summary.format(**path_params))
+        return self.get(Endpoint.market_summary.format(exchange=exchange, pair=pair))
 
+    @serialize_response()
     def get_all_market_summaries(
         self,
-        params: MarketSummariesQueryParams,
+        cursor: Optional[str] = None,
+        limit: Optional[int] = None,
+        key_by: Optional[str] = None,
     ) -> Response[AllSummaries]:
         """Get 24h summaries of all markets."""
-        return self.get(Endpoint.all_market_summaries, params=params)
+        params = MarketSummariesQueryParams(cursor=cursor, limit=limit, key_by=key_by)
+        return self.get(Endpoint.all_market_summaries, params=params.dict())
 
+    @serialize_response()
     def get_market_order_book(
         self,
-        path_params: MarketPathParams,
-        params: OrderBookQueryParams,
+        exchange: str,
+        pair: str,
+        depth: Optional[int] = None,
+        span: Optional[float] = None,
+        limit: Optional[int] = None,
     ) -> Response[OrderBook]:
         """Get the order book for a specific market."""
-        return self.get(Endpoint.market_orderbook.format(**path_params), params=params)
-
-    def get_market_order_book_liquidity(
-        self,
-        path_params: MarketPathParams,
-    ) -> Response[OrderBookLiquidity]:
-        """Get liquidity sums at several basis point levels in the order book."""
-        return self.get(Endpoint.market_orderbook_liquidity.format(**path_params))
-
-    def calculate_quote(
-        self,
-        path_params: MarketPathParams,
-        params: OrderBookCalculatorQueryParams,
-    ) -> Response[OrderBookCalculator]:
-        """Get a live quote from the order book for a given buy & sell amount."""
+        params = OrderBookQueryParams(depth=depth, span=span, limit=limit)
         return self.get(
-            Endpoint.market_orderbook_calculator.format(**path_params), params=params
+            Endpoint.market_orderbook.format(exchange=exchange, pair=pair),
+            params=params.dict(),
         )
 
+    @serialize_response()
+    def get_market_order_book_liquidity(
+        self,
+        exchange: str,
+        pair: str,
+    ) -> Response[OrderBookLiquidity]:
+        """Get liquidity sums at several basis point levels in the order book."""
+        return self.get(
+            Endpoint.market_orderbook_liquidity.format(exchange=exchange, pair=pair)
+        )
+
+    @serialize_response()
+    def calculate_quote(
+        self,
+        exchange: str,
+        pair: str,
+        amount: float,
+    ) -> Response[OrderBookCalculator]:
+        """Get a live quote from the order book for a given buy & sell amount."""
+        params = OrderBookCalculatorQueryParams(amount=amount)
+        return self.get(
+            Endpoint.market_orderbook_calculator.format(exchange=exchange, pair=pair),
+            params=params.dict(),
+        )
+
+    @serialize_response()
     def get_ohlcv(
         self,
-        path_params: MarketPathParams,
-        params: OHLCVQueryParams,
+        exchange: str,
+        pair: str,
+        before: Optional[int] = None,
+        after: Optional[int] = None,
+        periods: Optional[List[Union[str, int]]] = None,
     ) -> Response[OHLCVDict]:
         """Get a market's OHLCV candlestick data."""
-        return self.get(Endpoint.market_ohlc.format(**path_params), params=params)
+        params = OHLCVQueryParams(before=before, after=after, periods=periods)
+        return self.get(
+            Endpoint.market_ohlc.format(exchange=exchange, pair=pair),
+            params=params.dict(),
+        )
 
+    @serialize_response()
     def list_exchanges(self) -> Response[ExchangeList]:
         """List all exchanges."""
         return self.get(Endpoint.list_exchanges)
 
-    def get_exchange(self, path_params: ExchangePathParams) -> Response[Exchange]:
+    @serialize_response()
+    def get_exchange(self, exchange: str) -> Response[Exchange]:
         """Get information about a specific exchange."""
-        return self.get(Endpoint.exchange_detail.format(**path_params))
+        return self.get(Endpoint.exchange_detail.format(exchange=exchange))
 
-    def list_exchange_markets(
-        self,
-        path_params: ExchangePathParams,
-    ) -> Response[ExchangeMarkets]:
+    @serialize_response()
+    def list_exchange_markets(self, exchange: str) -> Response[ExchangeMarkets]:
         """List all markets available on a given exchange."""
-        return self.get(Endpoint.exchange_markets.format(**path_params))
+        return self.get(Endpoint.exchange_markets.format(exchange=exchange))
