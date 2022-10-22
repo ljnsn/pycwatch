@@ -80,7 +80,8 @@ class CryptoWatchClient(APIClient):
         return self.get(Endpoint.root)
 
     def list_assets(
-        self, params: PaginationQueryParams
+        self,
+        params: PaginationQueryParams,
     ) -> PaginatedResponse[AssetList]:
         """List all available assets."""
         return self.get(Endpoint.list_assets, params=params)
@@ -98,7 +99,8 @@ class CryptoWatchClient(APIClient):
         return self.get(Endpoint.pair_detail.format(**path_params))
 
     def list_markets(
-        self, params: PaginationQueryParams
+        self,
+        params: PaginationQueryParams,
     ) -> PaginatedResponse[MarketList]:
         """List all markets."""
         return self.get(Endpoint.list_markets, params=params)
@@ -112,13 +114,16 @@ class CryptoWatchClient(APIClient):
         return self.get(Endpoint.market_price.format(**path_params))
 
     def get_all_market_prices(
-        self, params: PaginationQueryParams
+        self,
+        params: PaginationQueryParams,
     ) -> PaginatedResponse[AllPrices]:
         """Get all market prices."""
         return self.get(Endpoint.all_market_prices, params=params)
 
     def get_market_trades(
-        self, path_params: MarketPathParams, params: TradeQueryParams
+        self,
+        path_params: MarketPathParams,
+        params: TradeQueryParams,
     ) -> Response[MarketTradeList]:
         """Get recent trades for a market."""
         return self.get(
@@ -126,7 +131,8 @@ class CryptoWatchClient(APIClient):
         )
 
     def get_market_summary(
-        self, path_params: MarketPathParams
+        self,
+        path_params: MarketPathParams,
     ) -> Response[MarketSummary]:
         """Get a 24h summary of a specific market.
 
@@ -141,25 +147,31 @@ class CryptoWatchClient(APIClient):
         return self.get(Endpoint.market_summary.format(**path_params))
 
     def get_all_market_summaries(
-        self, params: MarketSummariesQueryParams
+        self,
+        params: MarketSummariesQueryParams,
     ) -> Response[AllSummaries]:
         """Get 24h summaries of all markets."""
         return self.get(Endpoint.all_market_summaries, params=params)
 
     def get_market_order_book(
-        self, path_params: MarketPathParams, params: OrderBookQueryParams
+        self,
+        path_params: MarketPathParams,
+        params: OrderBookQueryParams,
     ) -> Response[OrderBook]:
         """Get the order book for a specific market."""
         return self.get(Endpoint.market_orderbook.format(**path_params), params=params)
 
     def get_market_order_book_liquidity(
-        self, path_params: MarketPathParams
+        self,
+        path_params: MarketPathParams,
     ) -> Response[OrderBookLiquidity]:
         """Get liquidity sums at several basis point levels in the order book."""
         return self.get(Endpoint.market_orderbook_liquidity.format(**path_params))
 
     def calculate_quote(
-        self, path_params: MarketPathParams, params: OrderBookCalculatorQueryParams
+        self,
+        path_params: MarketPathParams,
+        params: OrderBookCalculatorQueryParams,
     ) -> Response[OrderBookCalculator]:
         """Get a live quote from the order book for a given buy & sell amount."""
         return self.get(
@@ -167,7 +179,9 @@ class CryptoWatchClient(APIClient):
         )
 
     def get_ohlcv(
-        self, path_params: MarketPathParams, params: OHLCVQueryParams
+        self,
+        path_params: MarketPathParams,
+        params: OHLCVQueryParams,
     ) -> Response[OHLCVDict]:
         """Get a market's OHLCV candlestick data."""
         return self.get(Endpoint.market_ohlc.format(**path_params), params=params)
@@ -181,7 +195,8 @@ class CryptoWatchClient(APIClient):
         return self.get(Endpoint.exchange_detail.format(**path_params))
 
     def list_exchange_markets(
-        self, path_params: ExchangePathParams
+        self,
+        path_params: ExchangePathParams,
     ) -> Response[ExchangeMarkets]:
         """List all markets available on a given exchange."""
         return self.get(Endpoint.exchange_markets.format(**path_params))
