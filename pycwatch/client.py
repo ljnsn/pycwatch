@@ -178,7 +178,11 @@ class CryptoWatchClient(APIClient):
         key_by: Optional[str] = None,
     ) -> Response[AllSummaries]:
         """Get 24h summaries of all markets."""
-        params = MarketSummariesQueryParams(cursor=cursor, limit=limit, key_by=key_by)
+        params = MarketSummariesQueryParams(
+            cursor=cursor,
+            limit=limit,
+            key_by=key_by,  # type: ignore
+        )
         return self.get(Endpoint.all_market_summaries, params=params.dict())
 
     @serialize_response()
@@ -232,7 +236,11 @@ class CryptoWatchClient(APIClient):
         periods: Optional[List[Union[str, int]]] = None,
     ) -> Response[OHLCVDict]:
         """Get a market's OHLCV candlestick data."""
-        params = OHLCVQueryParams(before=before, after=after, periods=periods)
+        params = OHLCVQueryParams(
+            before=before,
+            after=after,
+            periods=periods,  # type: ignore
+        )
         return self.get(
             Endpoint.market_ohlc.format(exchange=exchange, pair=pair),
             params=params.dict(),
