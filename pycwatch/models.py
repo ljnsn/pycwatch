@@ -154,7 +154,7 @@ class ResponseRoot(GenericModel, Generic[ResultT]):
     result: ResultT
 
 
-class Response(ResponseRoot, Generic[ResultT]):
+class Response(ResponseRoot[ResultT], Generic[ResultT]):
     allowance: Allowance
 
 
