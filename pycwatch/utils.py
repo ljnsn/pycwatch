@@ -2,7 +2,7 @@ from typing import List, Union
 
 ONE_WEEK_MONDAY = "604800_Monday"
 
-period_mapping = {
+period_mapping: dict[str, Union[str, int]] = {
     "1m": 60,
     "3m": 180,
     "5m": 300,
