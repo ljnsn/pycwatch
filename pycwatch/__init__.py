@@ -6,8 +6,6 @@ if sys.version_info < (3, 8):
 else:
     from importlib.metadata import version
 
-from .client import CryptoWatchClient
-
 __version__ = version("pycwatch")
 
 __all__ = ("CryptoWatchClient",)
