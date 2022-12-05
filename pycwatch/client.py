@@ -1,3 +1,4 @@
+"""The module that holds the API client."""
 from typing import List, Optional, Union
 
 from apiclient import APIClient

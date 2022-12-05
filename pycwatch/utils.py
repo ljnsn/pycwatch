@@ -1,3 +1,4 @@
+"""Utility functions for the client."""
 from typing import List, Union
 
 ONE_WEEK_MONDAY = "604800_Monday"
@@ -22,8 +23,9 @@ period_mapping: dict[str, Union[str, int]] = {
 
 def resolve_periods(periods: List[Union[str, int]]) -> str:
     """
-    Resolve a list of period values or labels to a comma separated string of
-    period values accepted by Cryptowatch.
+    Resolve a list of period values or labels to a comma separated string.
+
+    Items are the period values accepted by Cryptowatch.
 
     See https://docs.cryptowat.ch/rest-api/markets/ohlc#period-values
 

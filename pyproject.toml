@@ -95,3 +95,15 @@ warn_return_any = true
 implicit_reexport = false
 strict_equality = true
 # --strict end
+
+[tool.pydocstyle]
+ignore = [
+  # missing docstring in __init__
+  "D107",
+  # 1 blank line required before class docstring
+  "D203",
+  # multi-line docstring summary should start at the first line
+  "D212",
+  # multi-line docstring summary should start at the second line
+  "D213",
+]

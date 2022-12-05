@@ -1,3 +1,4 @@
+"""All models used by the package."""
 import enum
 from decimal import Decimal
 from typing import TYPE_CHECKING, Any, Dict, Generic, List, Optional, TypeVar, Union
