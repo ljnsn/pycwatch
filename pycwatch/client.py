@@ -6,9 +6,9 @@ from apiclient.authentication_methods import HeaderAuthentication, NoAuthenticat
 from apiclient.response_handlers import JsonResponseHandler
 from apiclient_pydantic import serialize_response
 
-from .config import settings
-from .endpoints import Endpoint
-from .models import (
+from pycwatch.config import settings
+from pycwatch.endpoints import Endpoint
+from pycwatch.models import (
     AllPrices,
     AllSummaries,
     Asset,
