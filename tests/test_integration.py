@@ -1,5 +1,6 @@
 """Tests for the REST API methods."""
 import json
+from typing import Any, Callable
 
 import pytest
 from apiclient.exceptions import ClientError
@@ -12,9 +13,10 @@ from pycwatch.models import PaginatedResponse, Response, ResponseRoot
 from .conftest import api_vcr
 
 
-def with_cassette(cassette_file: str):
-    def decorator(func):
-        def wrapper(live_client, *args, **kwargs):
+# TODO: fix this ugly typing
+def with_cassette(cassette_file: str) -> Callable[..., Callable[..., Any]]:
+    def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
+        def wrapper(live_client: CryptoWatchClient, *args: Any, **kwargs: Any) -> Any:
             with api_vcr.use_cassette(cassette_file) as cassette:
                 result = func(cassette, live_client, *args, **kwargs)
             return result
@@ -24,19 +26,19 @@ def with_cassette(cassette_file: str):
     return decorator
 
 
-def load_response(cassette: Cassette, response_idx: int = 0):
+def load_response(cassette: Cassette, response_idx: int = 0) -> dict[str, Any]:
     return json.loads(cassette.responses[response_idx]["body"]["string"])
 
 
 @with_cassette("get_info.yml")
-def test_get_info(cassette: Cassette, live_client: CryptoWatchClient):
+def test_get_info(cassette: Cassette, live_client: CryptoWatchClient) -> None:
     response = live_client.get_info()
 
     assert response == ResponseRoot[models.Info](**load_response(cassette, 0))
 
 
 @with_cassette("list_assets.yml")
-def test_list_assets(cassette: Cassette, live_client: CryptoWatchClient):
+def test_list_assets(cassette: Cassette, live_client: CryptoWatchClient) -> None:
     assets = live_client.list_assets()
     assert assets == PaginatedResponse[models.AssetList](**load_response(cassette, 0))
 
@@ -55,7 +57,7 @@ def test_list_assets(cassette: Cassette, live_client: CryptoWatchClient):
 
 
 @with_cassette("get_asset.yml")
-def test_get_asset(cassette: Cassette, live_client: CryptoWatchClient):
+def test_get_asset(cassette: Cassette, live_client: CryptoWatchClient) -> None:
     asset_codes = ["btc", "eur", "eth", "kfee"]
     for i, asset_code in enumerate(asset_codes):
         asset = live_client.get_asset(asset_code=asset_code)
@@ -66,7 +68,7 @@ def test_get_asset(cassette: Cassette, live_client: CryptoWatchClient):
 
 
 @with_cassette("list_pairs.yml")
-def test_list_pairs(cassette: Cassette, live_client: CryptoWatchClient):
+def test_list_pairs(cassette: Cassette, live_client: CryptoWatchClient) -> None:
     pairs = live_client.list_pairs()
     assert pairs == PaginatedResponse[models.PairList](**load_response(cassette, 0))
 
@@ -85,7 +87,7 @@ def test_list_pairs(cassette: Cassette, live_client: CryptoWatchClient):
 
 
 @with_cassette("get_pair.yml")
-def test_get_pair(cassette: Cassette, live_client: CryptoWatchClient):
+def test_get_pair(cassette: Cassette, live_client: CryptoWatchClient) -> None:
     pairs = ["btceur", "ethbtc", "xmrbtc"]
     for i, pair_ in enumerate(pairs):
         pair = live_client.get_pair(pair=pair_)
@@ -96,13 +98,13 @@ def test_get_pair(cassette: Cassette, live_client: CryptoWatchClient):
 
 
 @with_cassette("list_exchanges.yml")
-def test_list_exchanges(cassette: Cassette, live_client: CryptoWatchClient):
+def test_list_exchanges(cassette: Cassette, live_client: CryptoWatchClient) -> None:
     exchanges = live_client.list_exchanges()
     assert exchanges == Response[models.ExchangeList](**load_response(cassette, 0))
 
 
 @with_cassette("get_exchange.yml")
-def test_get_exchange(cassette: Cassette, live_client: CryptoWatchClient):
+def test_get_exchange(cassette: Cassette, live_client: CryptoWatchClient) -> None:
     exchanges = ["kraken", "binance", "bittrex"]
     for i, ex in enumerate(exchanges):
         exchange = live_client.get_exchange(exchange=ex)
@@ -113,13 +115,13 @@ def test_get_exchange(cassette: Cassette, live_client: CryptoWatchClient):
 
 
 @with_cassette("list_markets.yml")
-def test_list_markets(cassette: Cassette, live_client: CryptoWatchClient):
+def test_list_markets(cassette: Cassette, live_client: CryptoWatchClient) -> None:
     markets = live_client.list_markets()
     assert markets == PaginatedResponse[models.MarketList](**load_response(cassette, 0))
 
 
 @with_cassette("get_market.yml")
-def test_get_market(cassette: Cassette, live_client: CryptoWatchClient):
+def test_get_market(cassette: Cassette, live_client: CryptoWatchClient) -> None:
     markets = [
         ("kraken", "btceur"),
         ("binance", "ethbtc"),
@@ -135,7 +137,7 @@ def test_get_market(cassette: Cassette, live_client: CryptoWatchClient):
 
 
 @with_cassette("get_market_price.yml")
-def test_get_market_price(cassette: Cassette, live_client: CryptoWatchClient):
+def test_get_market_price(cassette: Cassette, live_client: CryptoWatchClient) -> None:
     markets = [
         ("kraken", "btceur"),
         ("binance", "ethbtc"),
@@ -151,7 +153,7 @@ def test_get_market_price(cassette: Cassette, live_client: CryptoWatchClient):
 
 
 @with_cassette("get_market_trades.yml")
-def test_get_market_trades(cassette: Cassette, live_client: CryptoWatchClient):
+def test_get_market_trades(cassette: Cassette, live_client: CryptoWatchClient) -> None:
     markets = [
         ("kraken", "btceur"),
         ("binance", "ethbtc"),
@@ -167,7 +169,7 @@ def test_get_market_trades(cassette: Cassette, live_client: CryptoWatchClient):
 
 
 @with_cassette("get_market_summary.yml")
-def test_get_market_summary(cassette: Cassette, live_client: CryptoWatchClient):
+def test_get_market_summary(cassette: Cassette, live_client: CryptoWatchClient) -> None:
     markets = [
         ("kraken", "btceur"),
         ("binance", "ethbtc"),
@@ -183,7 +185,10 @@ def test_get_market_summary(cassette: Cassette, live_client: CryptoWatchClient):
 
 
 @with_cassette("get_market_order_book.yml")
-def test_get_market_order_book(cassette: Cassette, live_client: CryptoWatchClient):
+def test_get_market_order_book(
+    cassette: Cassette,
+    live_client: CryptoWatchClient,
+) -> None:
     markets = [
         ("kraken", "btceur"),
         ("binance", "ethbtc"),
@@ -200,8 +205,9 @@ def test_get_market_order_book(cassette: Cassette, live_client: CryptoWatchClien
 
 @with_cassette("get_market_order_book_liquidity.yml")
 def test_get_market_order_book_liquidity(
-    cassette: Cassette, live_client: CryptoWatchClient
-):
+    cassette: Cassette,
+    live_client: CryptoWatchClient,
+) -> None:
     markets = [
         ("kraken", "btceur"),
         ("binance", "ethbtc"),
@@ -223,25 +229,34 @@ def test_get_market_order_book_liquidity(
 
 
 @with_cassette("get_all_market_prices.yml")
-def test_get_all_market_prices(cassette: Cassette, live_client: CryptoWatchClient):
+def test_get_all_market_prices(
+    cassette: Cassette,
+    live_client: CryptoWatchClient,
+) -> None:
     prices = live_client.get_all_market_prices()
     assert prices == PaginatedResponse[models.AllPrices](**load_response(cassette, 0))
 
 
 @with_cassette("get_all_market_summaries.yml")
-def test_get_all_market_summaries(cassette: Cassette, live_client: CryptoWatchClient):
+def test_get_all_market_summaries(
+    cassette: Cassette,
+    live_client: CryptoWatchClient,
+) -> None:
     summaries = live_client.get_all_market_summaries()
     assert summaries == Response[models.AllSummaries](**load_response(cassette))
 
 
 @with_cassette("calculate_quote.yml")
-def test_calculate_quote(cassette: Cassette, live_client: CryptoWatchClient):
+def test_calculate_quote(cassette: Cassette, live_client: CryptoWatchClient) -> None:
     quote = live_client.calculate_quote(exchange="kraken", pair="btceur", amount=10)
     assert quote == Response[models.OrderBookCalculator](**load_response(cassette, 0))
 
 
 @with_cassette("list_exchange_markets.yml")
-def test_list_exchange_markets(cassette: Cassette, live_client: CryptoWatchClient):
+def test_list_exchange_markets(
+    cassette: Cassette,
+    live_client: CryptoWatchClient,
+) -> None:
     exchanges = [
         "kraken",
         "binance",
@@ -257,7 +272,7 @@ def test_list_exchange_markets(cassette: Cassette, live_client: CryptoWatchClien
 
 
 @with_cassette("get_ohlcv.yml")
-def test_get_ohlcv(cassette: Cassette, live_client: CryptoWatchClient):
+def test_get_ohlcv(cassette: Cassette, live_client: CryptoWatchClient) -> None:
     markets = [
         ("kraken", "btceur"),
         ("binance", "ethbtc"),

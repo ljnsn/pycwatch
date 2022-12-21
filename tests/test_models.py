@@ -16,7 +16,10 @@ from pycwatch.models import OHLCVQueryParams
         (["3m", 180], "180"),
     ],
 )
-def test_ohlcv_query_params(periods: List[Union[str, int]], expected: Optional[str]):
+def test_ohlcv_query_params(
+    periods: List[Union[str, int]],
+    expected: Optional[str],
+) -> None:
     params = OHLCVQueryParams(periods=periods)
 
     assert params.periods == expected
