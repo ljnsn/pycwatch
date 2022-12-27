@@ -1,0 +1,10 @@
+repos:
+- hooks:
+  - id: commitizen
+    additional_dependencies: [ cz-conventional-gitmoji ]
+  repo: https://github.com/commitizen-tools/commitizen
+  rev: v2.38.0
+- repo: https://github.com/ljnsn/cz-conventional-gitmoji
+  rev: v0.1.2
+  hooks:
+    - id: conventional-gitmoji

@@ -22,6 +22,10 @@ classifiers = [
     'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
 ]
 
+[build-system]
+requires = ["poetry-core", "poetry>=1.2.0"]
+build-backend = "poetry.core.masonry.api"
+
 [tool.poetry.dependencies]
 python = "^3.7"
 requests = "^2.27.1"
@@ -41,11 +45,14 @@ coverage = {version = "^6.3.2", extras = ["toml"]}
 isort = "^5.10.1"
 types-requests = "^2.27.11"
 vcrpy = "^4.1.1"
-bump2version = "^1.0.1"
+commitizen = "^2.38.0"
+cz-conventional-gitmoji = "^0.1.2"
 
-[build-system]
-requires = ["poetry-core", "poetry>=1.2.0"]
-build-backend = "poetry.core.masonry.api"
+[tool.commitizen]
+name = "cz_gitmoji"
+version = "1.1.1"
+version_files = ["pyproject.toml:^version"]
+update_changelog_on_bump = true
 
 [tool.black]
 target-version = ["py37", "py38", "py39", "py310"]
