@@ -2,7 +2,39 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## v1.1.2 (2022-12-27)
+
+### 🐛🚑️ Fixes
+
+- use importlib.metadata to get version
+
+### 💚👷 CI & Build
+
+- **publish**: add publish workflow
+- **package**: add bump-version job
+- **package**: fix python package workflow
+- add commitizen and cz-conventional-gitmoji, remove bumpversion
+
+### 📌➕⬇️ ➖⬆️  Dependencies
+
+- add importlib-metadata for python<3.8
+
+### 📝💡 Documentation
+
+- **changelog**: fix date in changelog
+- **changelog**: fix changelog format so that commitizen recognizes tags
+
+### 🔥⚰️  Clean up
+
+- remove bumpversion config
+
+### 🔧🔨📦️ Configuration, Scripts, Packages
+
+- add publish script and make all scripts executable
+- remove python restriction from black dependency
+- **commitizen**: add bump message template
+- **commitizen**: add tag format
+- **coverage**: fix source to not include tests
 
 ## v1.1.1 (2022-06-22)
 
