@@ -4,14 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
-## 1.1.1 - 2022-06-22
+## v1.1.1 (2022-06-22)
 
 ### Fixed
 
 - Remove poetry-version-plugin until supported again.
 - New property on pairs -> add AssetMember.sid
 
-## [1.1.0][1.1.0] - 2022-06-16
+## [v1.1.0][1.1.0] - 2022-06-16
 
 ### Fixed
 
@@ -22,13 +22,13 @@ All notable changes to this project will be documented in this file.
 - Add `get_info` method that queries the root endpoint to get status information.
 - Add back ability to pass periods as mixed list of `int` and `str` that was removed in 1.0.0.
 
-## [1.0.1][1.0.1] - 2022-06-16
+## [v1.0.1][1.0.1] - 2022-06-16
 
 ### Changed
 
 - Minor update mostly to improve coverage and bump dependencies.
 
-## [1.0.0][1.0.0] - 2022-03-04
+## [v1.0.0][1.0.0] - 2022-03-04
 
 ### Changed
 
@@ -38,13 +38,13 @@ All notable changes to this project will be documented in this file.
 
 - Live tests.
 
-## [0.2.1][0.2.1] - 2021-04-29
+## [v0.2.1][0.2.1] - 2021-04-29
 
 ### Added
 
 - First version published to pypi. Mostly done some polishing. It is now possible to specify you periods as a mixed list of `str` and `int` in the `get_market_ohlc` method, if you so wish.
 
-## [0.2.0][0.2.0] - 2021-04-16
+## [v0.2.0][0.2.0] - 2021-04-16
 
 ### Added
 
@@ -54,7 +54,7 @@ All notable changes to this project will be documented in this file.
 
 - Made `pycwatch.rest.RestAPI.update_allowance` and `pycwatch.rest.RestAPI.perform_request` private methods.
 
-## [0.1.1][0.1.1] - 2020-12-19
+## [v0.1.1][0.1.1] - 2020-12-19
 
 ### Added
 
@@ -66,13 +66,13 @@ All notable changes to this project will be documented in this file.
 
 - `rest.perform_request` does not raise an `APIError` anymore when no key is set, but puts a debug message into log.
 
-## [0.1.0][0.1.0] - 2020-09-24
+## [v0.1.0][0.1.0] - 2020-09-24
 
 ### Added
 
 - Tests for the HTTP client, resources, and basic ones for API client.
 
-## [0.0.1][0.0.1] - 2020-09-15
+## [v0.0.1][0.0.1] - 2020-09-15
 
 ### Added
 
