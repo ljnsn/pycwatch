@@ -3,7 +3,6 @@ from pathlib import Path
 
 import pytest
 import vcr
-
 from pycwatch import CryptoWatchClient
 
 BASE_DIR = Path(__file__).parent.absolute()
@@ -22,6 +21,6 @@ def live_client():
     return CryptoWatchClient()
 
 
-@pytest.fixture
+@pytest.fixture()
 def api_key():
     return "abcdefghijklmnopqrstuvwxyz"

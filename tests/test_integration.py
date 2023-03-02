@@ -4,13 +4,12 @@ from typing import Any, Callable
 
 import pytest
 from apiclient.exceptions import ClientError
-from vcr.cassette import Cassette
-
 from pycwatch import CryptoWatchClient, models
 from pycwatch.endpoints import Endpoint
 from pycwatch.models import PaginatedResponse, Response, ResponseRoot
+from vcr.cassette import Cassette
 
-from .conftest import api_vcr
+from tests.conftest import api_vcr
 
 
 # TODO: fix this ugly typing

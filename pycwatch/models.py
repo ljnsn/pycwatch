@@ -48,8 +48,7 @@ class CustomList(ConstrainedList):
 
     @classmethod
     def __get_validators__(cls) -> "CallableGenerator":
-        for cls_validator in super().__get_validators__():
-            yield cls_validator
+        yield from super().__get_validators__()
         yield cls.validate
 
     @classmethod

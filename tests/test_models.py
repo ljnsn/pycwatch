@@ -1,12 +1,11 @@
 from typing import List, Optional, Union
 
 import pytest
-
 from pycwatch.models import OHLCVQueryParams
 
 
 @pytest.mark.parametrize(
-    ["periods", "expected"],
+    ("periods", "expected"),
     [
         ([], None),
         ([60, 180, 300], "60,180,300"),
