@@ -42,7 +42,7 @@ requests-mock = "^1.9.3"
 mypy = "^0.931"
 flake8 = "^4.0.1"
 black = ">=22.1,<24.0"
-coverage = {version = "^6.3.2", extras = ["toml"]}
+coverage = {version = ">=6.3.2,<8.0.0", extras = ["toml"]}
 isort = "^5.10.1"
 types-requests = "^2.27.11"
 vcrpy = "^4.1.1"
