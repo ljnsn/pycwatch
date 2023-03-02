@@ -48,6 +48,7 @@ types-requests = "^2.27.11"
 vcrpy = "^4.1.1"
 commitizen = "^2.38.0"
 cz-conventional-gitmoji = "^0.1.2"
+ruff = "^0.0.253"
 
 [tool.commitizen]
 name = "cz_gitmoji"
