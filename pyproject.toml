@@ -115,9 +115,6 @@ exclude_lines = [
     "if TYPE_CHECKING:",
 ]
 
-[tool.isort]
-profile = "black"
-
 [tool.mypy]
 # --strict
 disallow_any_generics = true
