@@ -58,22 +58,25 @@ test = ["coverage", "flake8", "pexpect", "wheel"]
 
 [[package]]
 name = "attrs"
-version = "22.2.0"
+version = "23.1.0"
 description = "Classes Without Boilerplate"
 category = "dev"
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.7"
 files = [
-    {file = "attrs-22.2.0-py3-none-any.whl", hash = "sha256:29e95c7f6778868dbd49170f98f8818f78f3dc5e0e37c0b1f474e3561b240836"},
-    {file = "attrs-22.2.0.tar.gz", hash = "sha256:c9227bfc2f01993c03f68db37d1d15c9690188323c067c641f1a35ca58185f99"},
+    {file = "attrs-23.1.0-py3-none-any.whl", hash = "sha256:1f28b4522cdc2fb4256ac1a020c78acf9cba2c6b461ccd2c126f3aa8e8335d04"},
+    {file = "attrs-23.1.0.tar.gz", hash = "sha256:6279836d581513a26f1bf235f9acd333bc9115683f14f7e8fae46c98fc50e015"},
 ]
 
+[package.dependencies]
+importlib-metadata = {version = "*", markers = "python_version < \"3.8\""}
+
 [package.extras]
-cov = ["attrs[tests]", "coverage-enable-subprocess", "coverage[toml] (>=5.3)"]
-dev = ["attrs[docs,tests]"]
-docs = ["furo", "myst-parser", "sphinx", "sphinx-notfound-page", "sphinxcontrib-towncrier", "towncrier", "zope.interface"]
-tests = ["attrs[tests-no-zope]", "zope.interface"]
-tests-no-zope = ["cloudpickle", "cloudpickle", "hypothesis", "hypothesis", "mypy (>=0.971,<0.990)", "mypy (>=0.971,<0.990)", "pympler", "pympler", "pytest (>=4.3.0)", "pytest (>=4.3.0)", "pytest-mypy-plugins", "pytest-mypy-plugins", "pytest-xdist[psutil]", "pytest-xdist[psutil]"]
+cov = ["attrs[tests]", "coverage[toml] (>=5.3)"]
+dev = ["attrs[docs,tests]", "pre-commit"]
+docs = ["furo", "myst-parser", "sphinx", "sphinx-notfound-page", "sphinxcontrib-towncrier", "towncrier", "zope-interface"]
+tests = ["attrs[tests-no-zope]", "zope-interface"]
+tests-no-zope = ["cloudpickle", "hypothesis", "mypy (>=1.1.1)", "pympler", "pytest (>=4.3.0)", "pytest-mypy-plugins", "pytest-xdist[psutil]"]
 
 [[package]]
 name = "black"
@@ -275,19 +278,19 @@ toml = ["tomli"]
 
 [[package]]
 name = "cz-conventional-gitmoji"
-version = "0.1.2"
+version = "0.1.3"
 description = "A commitizen plugin that combines gitmoji and conventional."
 category = "dev"
 optional = false
 python-versions = ">=3.7,<4.0"
 files = [
-    {file = "cz_conventional_gitmoji-0.1.2-py3-none-any.whl", hash = "sha256:35b73118c853abec9493f8fd83dc1b1d30728d5a4c50fec36ba3ac7fd27e71e6"},
-    {file = "cz_conventional_gitmoji-0.1.2.tar.gz", hash = "sha256:b82c1f07add9dcc3403a7c2bb151a0b864f1920ca1b862bd8c1142f16fbe9998"},
+    {file = "cz_conventional_gitmoji-0.1.3-py3-none-any.whl", hash = "sha256:d13f6d8e78cb9e1465db863126eb9241f53025ddb7dd6699e5b3cd2e65934ba0"},
+    {file = "cz_conventional_gitmoji-0.1.3.tar.gz", hash = "sha256:48f9ca86fcbfe7228254894c8261ac1411654114b647677bd3f006969f5c081e"},
 ]
 
 [package.dependencies]
-attrs = ">=22.2.0,<23.0.0"
-commitizen = ">=2.38.0,<3.0.0"
+attrs = ">=23.1.0,<24.0.0"
+commitizen = ">=2.42.0,<3.0.0"
 
 [[package]]
 name = "decli"
