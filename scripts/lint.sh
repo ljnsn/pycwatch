@@ -3,6 +3,6 @@
 set -e
 set -x
 
-#mypy pycwatch
-ruff src tests
 black pycwatch tests --check
+ruff pycwatch tests
+mypy pycwatch tests
