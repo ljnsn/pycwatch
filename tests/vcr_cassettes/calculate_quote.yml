@@ -9,46 +9,44 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - python-requests/2.27.1
+      - python-requests/2.31.0
     method: GET
-    uri: https://api.cryptowat.ch/markets/kraken/btceur/orderbook/calculator?amount=10.0
+    uri: https://api.cryptowat.ch/markets/kraken/btceur/orderbook/calculator?amount=10
   response:
     body:
-      string: '{"result":{"buy":{"avgPrice":"36836.1876555928","avgDelta":"16.7876555928","avgDeltaBps":"4","reachPrice":"36843.2","reachDelta":"23.8","reachDeltaBps":"6","spend":"368361.876555928"},"sell":{"avgPrice":"36800.2061114187","avgDelta":"-10.1938885813","avgDeltaBps":"-3","reachPrice":"36783.5","reachDelta":"-26.9","reachDeltaBps":"-8","receive":"368002.061114187"}},"allowance":{"cost":0.015,"remaining":9.773,"upgrade":"For
+      string: '{"result":{"buy":{"avgPrice":"24087.6648375795","avgDelta":"8.8648375795","avgDeltaBps":"3","reachPrice":"24098.3","reachDelta":"19.5","reachDeltaBps":"8","spend":"240876.648375795"},"sell":{"avgPrice":"24072.3227048457","avgDelta":"-5.8772951543","avgDeltaBps":"-3","reachPrice":"24069.3","reachDelta":"-8.9","reachDeltaBps":"-4","receive":"240723.227048457"}},"allowance":{"cost":0.015,"remaining":9.68,"upgrade":"For
         unlimited API access, create an account at https://cryptowat.ch"}}
 
         '
     headers:
       Access-Control-Allow-Headers:
-      - X-CW-Integration, X-CW-Very-Secret-Value
+      - X-CW-Integration, X-CW-Very-Secret-Value, sentry-trace, baggage
       CF-Cache-Status:
       - DYNAMIC
       CF-RAY:
-      - 6e4ba5e11ffb9b2d-FRA
+      - 7f94b3d439244c68-MXP
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Mon, 28 Feb 2022 18:17:08 GMT
-      Expect-CT:
-      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      - Sat, 19 Aug 2023 19:11:27 GMT
       Referrer-Policy:
       - origin-when-cross-origin
       Server:
       - cloudflare
       Set-Cookie:
-      - __cf_bm=j_Z9Wv.0rJYAtEZP.QYFTZXnvOmpZ6eaRW4irrnL0ig-1646072228-0-ARdg8wSkaPTJ8OMI379aTL5Gtsat1ZZrZYaqFaShjwHsU01pCSGzx4W2iO95VtPFJyw7LrGtJX+tzDhOc789+M4=;
-        path=/; expires=Mon, 28-Feb-22 18:47:08 GMT; domain=.cryptowat.ch; HttpOnly;
+      - __cf_bm=sExf8kZoMm83hZuD0lm4CPyK2sHG874PXcRZlkBJFg8-1692472287-0-AVTJn6D7rfVXXb9Si0EcsJGCyhtda6UjH2w/+l7Au6rH+RTq9PKfEBOJjReIkVisMt7ns+PfjxfvnAL4WnoC5Go=;
+        path=/; expires=Sat, 19-Aug-23 19:41:27 GMT; domain=.cryptowat.ch; HttpOnly;
         Secure; SameSite=None
       Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains
+      - max-age=31536000; includeSubDomains; preload
       Vary:
       - Origin
       X-Content-Type-Options:
       - nosniff
       content-length:
-      - '491'
+      - '487'
     status:
       code: 200
       message: OK

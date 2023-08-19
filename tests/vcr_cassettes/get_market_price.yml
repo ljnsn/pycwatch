@@ -9,40 +9,38 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - python-requests/2.27.1
+      - python-requests/2.31.0
     method: GET
     uri: https://api.cryptowat.ch/markets/kraken/btceur/price
   response:
     body:
-      string: '{"result":{"price":36910.5},"allowance":{"cost":0.005,"remaining":9.988,"upgrade":"For
+      string: '{"result":{"price":24063.4},"allowance":{"cost":0.005,"remaining":9.895,"upgrade":"For
         unlimited API access, create an account at https://cryptowat.ch"}}
 
         '
     headers:
       Access-Control-Allow-Headers:
-      - X-CW-Integration, X-CW-Very-Secret-Value
+      - X-CW-Integration, X-CW-Very-Secret-Value, sentry-trace, baggage
       CF-Cache-Status:
       - DYNAMIC
       CF-RAY:
-      - 6e4b8c9109365c14-FRA
+      - 7f9480f3aa524c5c-MXP
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Mon, 28 Feb 2022 17:59:51 GMT
-      Expect-CT:
-      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      - Sat, 19 Aug 2023 18:36:43 GMT
       Referrer-Policy:
       - origin-when-cross-origin
       Server:
       - cloudflare
       Set-Cookie:
-      - __cf_bm=os5yhHBfFZ8kzQRyWkVNgH.lI_lJueiJTqnjLjbrqWg-1646071191-0-AetO4RoAJAfUeIiChGnsU+h9gogh5HO8v7/oP/CKfJfwe6Kyi+I1qmt2PvyDKfFF0IfbQlGXRPUlDKLMH3Me4f4=;
-        path=/; expires=Mon, 28-Feb-22 18:29:51 GMT; domain=.cryptowat.ch; HttpOnly;
+      - __cf_bm=37bcHvtFJwOFfneWkQtWUKcJlNBVEjUV6QwQhldgnh0-1692470203-0-Ad2lKpFAGu/csYcaFSuX2bg1ZCTmrS3Z0Sn548kcEPa3NFVu8DFqS4nS0KUJw2K08e+jh0U/cyv6i2cNcn3lXVM=;
+        path=/; expires=Sat, 19-Aug-23 19:06:43 GMT; domain=.cryptowat.ch; HttpOnly;
         Secure; SameSite=None
       Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains
+      - max-age=31536000; includeSubDomains; preload
       Vary:
       - Origin
       X-Content-Type-Options:
@@ -62,44 +60,42 @@ interactions:
       Connection:
       - keep-alive
       Cookie:
-      - __cf_bm=os5yhHBfFZ8kzQRyWkVNgH.lI_lJueiJTqnjLjbrqWg-1646071191-0-AetO4RoAJAfUeIiChGnsU+h9gogh5HO8v7/oP/CKfJfwe6Kyi+I1qmt2PvyDKfFF0IfbQlGXRPUlDKLMH3Me4f4=
+      - __cf_bm=37bcHvtFJwOFfneWkQtWUKcJlNBVEjUV6QwQhldgnh0-1692470203-0-Ad2lKpFAGu/csYcaFSuX2bg1ZCTmrS3Z0Sn548kcEPa3NFVu8DFqS4nS0KUJw2K08e+jh0U/cyv6i2cNcn3lXVM=
       User-Agent:
-      - python-requests/2.27.1
+      - python-requests/2.31.0
     method: GET
     uri: https://api.cryptowat.ch/markets/binance/ethbtc/price
   response:
     body:
-      string: '{"result":{"price":0.068138},"allowance":{"cost":0.005,"remaining":9.983,"upgrade":"For
+      string: '{"result":{"price":0.0643},"allowance":{"cost":0.005,"remaining":9.89,"upgrade":"For
         unlimited API access, create an account at https://cryptowat.ch"}}
 
         '
     headers:
       Access-Control-Allow-Headers:
-      - X-CW-Integration, X-CW-Very-Secret-Value
+      - X-CW-Integration, X-CW-Very-Secret-Value, sentry-trace, baggage
       CF-Cache-Status:
       - DYNAMIC
       CF-RAY:
-      - 6e4b8c929d145c14-FRA
+      - 7f9484366da25260-MXP
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Mon, 28 Feb 2022 17:59:51 GMT
-      Expect-CT:
-      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      - Sat, 19 Aug 2023 18:38:57 GMT
       Referrer-Policy:
       - origin-when-cross-origin
       Server:
       - cloudflare
       Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains
+      - max-age=31536000; includeSubDomains; preload
       Vary:
       - Origin
       X-Content-Type-Options:
       - nosniff
       content-length:
-      - '155'
+      - '152'
     status:
       code: 200
       message: OK
@@ -113,38 +109,36 @@ interactions:
       Connection:
       - keep-alive
       Cookie:
-      - __cf_bm=os5yhHBfFZ8kzQRyWkVNgH.lI_lJueiJTqnjLjbrqWg-1646071191-0-AetO4RoAJAfUeIiChGnsU+h9gogh5HO8v7/oP/CKfJfwe6Kyi+I1qmt2PvyDKfFF0IfbQlGXRPUlDKLMH3Me4f4=
+      - __cf_bm=37bcHvtFJwOFfneWkQtWUKcJlNBVEjUV6QwQhldgnh0-1692470203-0-Ad2lKpFAGu/csYcaFSuX2bg1ZCTmrS3Z0Sn548kcEPa3NFVu8DFqS4nS0KUJw2K08e+jh0U/cyv6i2cNcn3lXVM=
       User-Agent:
-      - python-requests/2.27.1
+      - python-requests/2.31.0
     method: GET
     uri: https://api.cryptowat.ch/markets/kraken/ltcbtc/price
   response:
     body:
-      string: '{"result":{"price":0.002638},"allowance":{"cost":0.005,"remaining":9.978,"upgrade":"For
+      string: '{"result":{"price":0.002463},"allowance":{"cost":0.005,"remaining":9.885,"upgrade":"For
         unlimited API access, create an account at https://cryptowat.ch"}}
 
         '
     headers:
       Access-Control-Allow-Headers:
-      - X-CW-Integration, X-CW-Very-Secret-Value
+      - X-CW-Integration, X-CW-Very-Secret-Value, sentry-trace, baggage
       CF-Cache-Status:
       - DYNAMIC
       CF-RAY:
-      - 6e4b8c939fd95c14-FRA
+      - 7f9484381f405260-MXP
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Mon, 28 Feb 2022 17:59:51 GMT
-      Expect-CT:
-      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      - Sat, 19 Aug 2023 18:38:57 GMT
       Referrer-Policy:
       - origin-when-cross-origin
       Server:
       - cloudflare
       Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains
+      - max-age=31536000; includeSubDomains; preload
       Vary:
       - Origin
       X-Content-Type-Options:
@@ -164,44 +158,42 @@ interactions:
       Connection:
       - keep-alive
       Cookie:
-      - __cf_bm=os5yhHBfFZ8kzQRyWkVNgH.lI_lJueiJTqnjLjbrqWg-1646071191-0-AetO4RoAJAfUeIiChGnsU+h9gogh5HO8v7/oP/CKfJfwe6Kyi+I1qmt2PvyDKfFF0IfbQlGXRPUlDKLMH3Me4f4=
+      - __cf_bm=37bcHvtFJwOFfneWkQtWUKcJlNBVEjUV6QwQhldgnh0-1692470203-0-Ad2lKpFAGu/csYcaFSuX2bg1ZCTmrS3Z0Sn548kcEPa3NFVu8DFqS4nS0KUJw2K08e+jh0U/cyv6i2cNcn3lXVM=
       User-Agent:
-      - python-requests/2.27.1
+      - python-requests/2.31.0
     method: GET
     uri: https://api.cryptowat.ch/markets/bittrex/neoeth/price
   response:
     body:
-      string: '{"result":{"price":0.00746723},"allowance":{"cost":0.005,"remaining":9.973,"upgrade":"For
+      string: '{"result":{"price":0.00419342},"allowance":{"cost":0.005,"remaining":9.88,"upgrade":"For
         unlimited API access, create an account at https://cryptowat.ch"}}
 
         '
     headers:
       Access-Control-Allow-Headers:
-      - X-CW-Integration, X-CW-Very-Secret-Value
+      - X-CW-Integration, X-CW-Very-Secret-Value, sentry-trace, baggage
       CF-Cache-Status:
       - DYNAMIC
       CF-RAY:
-      - 6e4b8c948a345c14-FRA
+      - 7f948439086f5260-MXP
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Mon, 28 Feb 2022 17:59:51 GMT
-      Expect-CT:
-      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      - Sat, 19 Aug 2023 18:38:57 GMT
       Referrer-Policy:
       - origin-when-cross-origin
       Server:
       - cloudflare
       Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains
+      - max-age=31536000; includeSubDomains; preload
       Vary:
       - Origin
       X-Content-Type-Options:
       - nosniff
       content-length:
-      - '157'
+      - '156'
     status:
       code: 200
       message: OK
@@ -215,38 +207,36 @@ interactions:
       Connection:
       - keep-alive
       Cookie:
-      - __cf_bm=os5yhHBfFZ8kzQRyWkVNgH.lI_lJueiJTqnjLjbrqWg-1646071191-0-AetO4RoAJAfUeIiChGnsU+h9gogh5HO8v7/oP/CKfJfwe6Kyi+I1qmt2PvyDKfFF0IfbQlGXRPUlDKLMH3Me4f4=
+      - __cf_bm=37bcHvtFJwOFfneWkQtWUKcJlNBVEjUV6QwQhldgnh0-1692470203-0-Ad2lKpFAGu/csYcaFSuX2bg1ZCTmrS3Z0Sn548kcEPa3NFVu8DFqS4nS0KUJw2K08e+jh0U/cyv6i2cNcn3lXVM=
       User-Agent:
-      - python-requests/2.27.1
+      - python-requests/2.31.0
     method: GET
     uri: https://api.cryptowat.ch/markets/kraken/aaabbb/price
   response:
     body:
-      string: '{"error":"Instrument not found","allowance":{"cost":0.005,"remaining":9.968,"upgrade":"For
+      string: '{"error":"Instrument not found","allowance":{"cost":0.005,"remaining":9.875,"upgrade":"For
         unlimited API access, create an account at https://cryptowat.ch"}}
 
         '
     headers:
       Access-Control-Allow-Headers:
-      - X-CW-Integration, X-CW-Very-Secret-Value
+      - X-CW-Integration, X-CW-Very-Secret-Value, sentry-trace, baggage
       CF-Cache-Status:
       - DYNAMIC
       CF-RAY:
-      - 6e4b91e7e8358fda-FRA
+      - 7f94843aaa465260-MXP
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Mon, 28 Feb 2022 18:03:30 GMT
-      Expect-CT:
-      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      - Sat, 19 Aug 2023 18:38:57 GMT
       Referrer-Policy:
       - origin-when-cross-origin
       Server:
       - cloudflare
       Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains
+      - max-age=31536000; includeSubDomains; preload
       Vary:
       - Origin
       X-Content-Type-Options:

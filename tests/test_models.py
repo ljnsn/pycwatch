@@ -19,6 +19,7 @@ def test_ohlcv_query_params(
     periods: List[Union[str, int]],
     expected: Optional[str],
 ) -> None:
+    """Verify OHLCVQueryParams resolves period values and labels correctly."""
     params = OHLCVQueryParams(periods=periods)
 
     assert params.periods == expected

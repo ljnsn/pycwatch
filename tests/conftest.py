@@ -17,10 +17,12 @@ api_vcr = my_vcr = vcr.VCR(
 
 
 @pytest.fixture()
-def live_client():
+def live_client() -> CryptoWatchClient:
+    """Provide the live client."""
     return CryptoWatchClient()
 
 
 @pytest.fixture()
-def api_key():
+def api_key() -> str:
+    """Provide the API key."""
     return "abcdefghijklmnopqrstuvwxyz"
