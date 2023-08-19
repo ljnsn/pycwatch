@@ -114,7 +114,7 @@ class OrderBookCalculatorQueryParams:
 
 
 @attrs.define(field_transformer=add_aliases)
-class OHLCVQueryParams:
+class OHLCVQueryParams:  # type: ignore[no-untyped-def]
     """Query parameters for OHLCV calls."""
 
     before: Optional[int] = attrs.field(
