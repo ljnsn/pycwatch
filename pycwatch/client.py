@@ -2,7 +2,7 @@
 
 from collections.abc import Callable, Mapping
 from decimal import Decimal
-from typing import Any, List, Optional, Protocol, Type, TypeVar, Union
+from typing import Any, Dict, List, Optional, Protocol, Type, TypeVar, Union
 
 import attrs
 import cattrs
@@ -61,7 +61,7 @@ ResponseCls = TypeVar("ResponseCls", bound=ResponseRoot[Any])
 converter = cattrs.Converter(detailed_validation=False)
 
 
-def _to_alias_unstructure(cls: Type[Any]) -> Callable[[Any], dict[str, Any]]:
+def _to_alias_unstructure(cls: Type[Any]) -> Callable[[Any], Dict[str, Any]]:
     """Unstructure hook using alias."""
     return make_dict_unstructure_fn(
         cls,
@@ -276,7 +276,7 @@ class CryptoWatchClient(APIClient):
         params = MarketSummariesQueryParams(  # type: ignore[call-arg]
             cursor=cursor,
             limit=limit,
-            keyBy=key_by,  # type: ignore[arg-type]
+            keyBy=key_by,
         )
         return self._make_request(
             Endpoint.all_market_summaries,
