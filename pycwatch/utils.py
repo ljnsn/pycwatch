@@ -45,12 +45,13 @@ def resolve_periods(periods: List[Union[str, int]]) -> str:
         if period == ONE_WEEK_MONDAY:
             period_values.add(period)
         elif isinstance(period, int):
-            assert period in list(period_mapping.values())
+            assert period in list(period_mapping.values())  # noqa: S101
             period_values.add(period)
         else:
             value = period_mapping.get(period)
             if value is None:
-                raise ValueError(f"Invalid period label: {period}")
+                msg = f"Invalid period label: {period}"
+                raise ValueError(msg)
             period_values.add(value)
 
     return ",".join(sorted(map(str, period_values), key=lambda p: len(p)))
