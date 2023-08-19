@@ -8,6 +8,6 @@ else:
 
 from pycwatch.client import CryptoWatchClient
 
-__version__ = version("pycwatch")
+__version__ = version("pycwatch")  # type: ignore[no-untyped-call]
 
 __all__ = ("CryptoWatchClient",)

@@ -1,8 +1,8 @@
 """The module that holds the API client."""
 
-from collections.abc import Callable, Mapping
+from collections.abc import Mapping
 from decimal import Decimal
-from typing import Any, Dict, List, Optional, Protocol, Type, TypeVar, Union
+from typing import Any, Callable, Dict, List, Optional, Protocol, Type, TypeVar, Union
 
 import attrs
 import cattrs
