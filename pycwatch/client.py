@@ -1,9 +1,8 @@
 """The module that holds the API client."""
 
 import sys
-from collections.abc import Mapping
 from decimal import Decimal
-from typing import Any, Callable, Dict, List, Optional, Type, TypeVar, Union
+from typing import Any, Callable, Dict, List, Mapping, Optional, Type, TypeVar, Union
 
 if sys.version_info < (3, 8):
     from typing_extensions import Protocol
