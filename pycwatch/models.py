@@ -125,7 +125,7 @@ class OHLCVQueryParams:
         default=None,
         validator=attrs.validators.optional(attrs.validators.instance_of(int)),
     )
-    periods: Optional[str] = attrs.field(  # type: ignore[no-untyped-def]
+    periods: Optional[str] = attrs.field(  # type: ignore[var-annotated]
         default=None,
         converter=attrs.converters.optional(
             lambda value: None if not value else utils.resolve_periods(value)
