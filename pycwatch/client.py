@@ -1,13 +1,22 @@
 """The module that holds the API client."""
-from typing import List, Optional, Union
 
+from collections.abc import Callable, Mapping
+from typing import Any, List, Optional, Type, TypeVar, Union
+
+import attrs
+import cattrs
+import ujson
 from apiclient import APIClient
 from apiclient.authentication_methods import HeaderAuthentication, NoAuthentication
-from apiclient.response_handlers import JsonResponseHandler
-from apiclient_pydantic import serialize_response
+from apiclient.exceptions import ResponseParseError
+from apiclient.response import Response as APIClientResponse
+from apiclient.response_handlers import BaseResponseHandler
+from apiclient.utils.typing import JsonType
+from cattrs.gen import make_dict_structure_fn, make_dict_unstructure_fn
 
 from pycwatch.config import settings
 from pycwatch.endpoints import Endpoint
+from pycwatch.exceptions import ResponseStructureError
 from pycwatch.models import (
     AllPrices,
     AllSummaries,
@@ -47,6 +56,50 @@ See https://docs.cryptowat.ch/rest-api/rate-limit#api-request-pricing-structure
 for more information.\
 """
 
+ResponseCls = TypeVar("ResponseCls", bound=ResponseRoot[Any])
+converter = cattrs.Converter(detailed_validation=False)
+
+
+def _to_alias_unstructure(cls: type[Any]) -> Callable[[Any], dict[str, Any]]:
+    """Unstructure hook using alias."""
+    return make_dict_unstructure_fn(
+        cls,
+        converter,
+        _cattrs_use_alias=True,
+    )
+
+
+def _to_alias_structure(
+    cls: type[Any],
+) -> Callable[[Mapping[str, Any], Any], Callable[[Any, Any], Any]]:
+    """Structure hook using alias."""
+    return make_dict_structure_fn(
+        cls,
+        converter,
+        _cattrs_use_alias=True,
+    )
+
+
+converter.register_unstructure_hook_factory(attrs.has, _to_alias_unstructure)
+converter.register_structure_hook_factory(attrs.has, _to_alias_structure)
+
+
+class UJSONResponseHandler(BaseResponseHandler):
+    """JSON response handler that uses ujson."""
+
+    @staticmethod
+    def get_request_data(response: APIClientResponse) -> Optional[JsonType]:
+        """Attempt to decode the response data."""
+        raw_data = response.get_raw_data()
+        if raw_data == "":
+            return None
+        try:
+            response_json = ujson.loads(raw_data)
+        except ujson.JSONDecodeError as exc:
+            msg = f"Unable to decode response data to json. data='{raw_data}'"
+            raise ResponseParseError(msg) from exc
+        return response_json
+
 
 class CryptoWatchClient(APIClient):
     """The CryptoWatch client class."""
@@ -55,7 +108,6 @@ class CryptoWatchClient(APIClient):
         api_key = api_key or settings.CW_API_KEY
         self._api_key = api_key
         if not api_key:
-            print(NO_KEY_MESSAGE)
             authentication_method = NoAuthentication()
         else:
             authentication_method = HeaderAuthentication(
@@ -63,7 +115,7 @@ class CryptoWatchClient(APIClient):
             )
 
         super().__init__(
-            response_handler=JsonResponseHandler,
+            response_handler=UJSONResponseHandler,
             authentication_method=authentication_method,
         )
 
@@ -72,13 +124,11 @@ class CryptoWatchClient(APIClient):
         """Check whether an API has been provided."""
         return self._api_key is not None
 
-    @serialize_response()
     def get_info(self) -> ResponseRoot[Info]:
         """Get the allowance and status information by requesting root."""
         # NOTE: supposedly this returns the allowance, however, we get status info only
-        return self.get(Endpoint.root)
+        return self._make_request(Endpoint.root, ResponseRoot[Info])
 
-    @serialize_response()
     def list_assets(
         self,
         cursor: Optional[str] = None,
@@ -86,14 +136,19 @@ class CryptoWatchClient(APIClient):
     ) -> PaginatedResponse[AssetList]:
         """List all available assets."""
         params = PaginationQueryParams(cursor=cursor, limit=limit)
-        return self.get(Endpoint.list_assets, params=params.dict())
+        return self._make_request(
+            Endpoint.list_assets,
+            PaginatedResponse[AssetList],
+            params=params,
+        )
 
-    @serialize_response()
     def get_asset(self, asset_code: str) -> Response[Asset]:
         """Get information about a specific asset."""
-        return self.get(Endpoint.asset_detail.format(assetCode=asset_code))
+        return self._make_request(
+            Endpoint.asset_detail.format(assetCode=asset_code),
+            Response[Asset],
+        )
 
-    @serialize_response()
     def list_pairs(
         self,
         cursor: Optional[str] = None,
@@ -101,14 +156,19 @@ class CryptoWatchClient(APIClient):
     ) -> PaginatedResponse[PairList]:
         """List all available pairs."""
         params = PaginationQueryParams(cursor=cursor, limit=limit)
-        return self.get(Endpoint.list_pairs, params=params.dict())
+        return self._make_request(
+            Endpoint.list_pairs,
+            PaginatedResponse[PairList],
+            params=params,
+        )
 
-    @serialize_response()
     def get_pair(self, pair: str) -> Response[Pair]:
         """Get information about a specific pair."""
-        return self.get(Endpoint.pair_detail.format(pair=pair))
+        return self._make_request(
+            Endpoint.pair_detail.format(pair=pair),
+            Response[Pair],
+        )
 
-    @serialize_response()
     def list_markets(
         self,
         cursor: Optional[str] = None,
@@ -116,19 +176,26 @@ class CryptoWatchClient(APIClient):
     ) -> PaginatedResponse[MarketList]:
         """List all markets."""
         params = PaginationQueryParams(cursor=cursor, limit=limit)
-        return self.get(Endpoint.list_markets, params=params.dict())
+        return self._make_request(
+            Endpoint.list_markets,
+            PaginatedResponse[MarketList],
+            params=params,
+        )
 
-    @serialize_response()
     def get_market(self, exchange: str, pair: str) -> Response[Market]:
         """Get information about a specific market."""
-        return self.get(Endpoint.market_detail.format(exchange=exchange, pair=pair))
+        return self._make_request(
+            Endpoint.market_detail.format(exchange=exchange, pair=pair),
+            Response[Market],
+        )
 
-    @serialize_response()
     def get_market_price(self, exchange: str, pair: str) -> Response[MarketPrice]:
         """Get the last available price for a market."""
-        return self.get(Endpoint.market_price.format(exchange=exchange, pair=pair))
+        return self._make_request(
+            Endpoint.market_price.format(exchange=exchange, pair=pair),
+            Response[MarketPrice],
+        )
 
-    @serialize_response()
     def get_all_market_prices(
         self,
         cursor: Optional[str] = None,
@@ -136,9 +203,12 @@ class CryptoWatchClient(APIClient):
     ) -> PaginatedResponse[AllPrices]:
         """Get all market prices."""
         params = PaginationQueryParams(cursor=cursor, limit=limit)
-        return self.get(Endpoint.all_market_prices, params=params.dict())
+        return self._make_request(
+            Endpoint.all_market_prices,
+            PaginatedResponse[AllPrices],
+            params=params,
+        )
 
-    @serialize_response()
     def get_market_trades(
         self,
         exchange: str,
@@ -148,12 +218,12 @@ class CryptoWatchClient(APIClient):
     ) -> Response[MarketTradeList]:
         """Get recent trades for a market."""
         params = TradeQueryParams(since=since, limit=limit)
-        return self.get(
+        return self._make_request(
             Endpoint.list_market_trades.format(exchange=exchange, pair=pair),
-            params=params.dict(),
+            Response[MarketTradeList],
+            params=params,
         )
 
-    @serialize_response()
     def get_market_summary(
         self,
         exchange: str,
@@ -161,7 +231,8 @@ class CryptoWatchClient(APIClient):
     ) -> Response[MarketSummary]:
         """Get a 24h summary of a specific market.
 
-        Returns a market's last price as well as other stats based on a 24-hour sliding window.
+        Returns a market's last price as well as other stats based on a
+        24-hour sliding window.
         - High price
         - Low price
         - % change
@@ -169,9 +240,11 @@ class CryptoWatchClient(APIClient):
         - Volume
         - Quote volume
         """
-        return self.get(Endpoint.market_summary.format(exchange=exchange, pair=pair))
+        return self._make_request(
+            Endpoint.market_summary.format(exchange=exchange, pair=pair),
+            Response[MarketSummary],
+        )
 
-    @serialize_response()
     def get_all_market_summaries(
         self,
         cursor: Optional[str] = None,
@@ -182,12 +255,15 @@ class CryptoWatchClient(APIClient):
         params = MarketSummariesQueryParams(
             cursor=cursor,
             limit=limit,
-            key_by=key_by,  # type: ignore
+            key_by=key_by,  # type: ignore[arg-type]
         )
-        return self.get(Endpoint.all_market_summaries, params=params.dict())
+        return self._make_request(
+            Endpoint.all_market_summaries,
+            Response[AllSummaries],
+            params=params,
+        )
 
-    @serialize_response()
-    def get_market_order_book(
+    def get_market_order_book(  # noqa: PLR0913
         self,
         exchange: str,
         pair: str,
@@ -197,23 +273,23 @@ class CryptoWatchClient(APIClient):
     ) -> Response[OrderBook]:
         """Get the order book for a specific market."""
         params = OrderBookQueryParams(depth=depth, span=span, limit=limit)
-        return self.get(
+        return self._make_request(
             Endpoint.market_orderbook.format(exchange=exchange, pair=pair),
-            params=params.dict(),
+            Response[OrderBook],
+            params=params,
         )
 
-    @serialize_response()
     def get_market_order_book_liquidity(
         self,
         exchange: str,
         pair: str,
     ) -> Response[OrderBookLiquidity]:
         """Get liquidity sums at several basis point levels in the order book."""
-        return self.get(
-            Endpoint.market_orderbook_liquidity.format(exchange=exchange, pair=pair)
+        return self._make_request(
+            Endpoint.market_orderbook_liquidity.format(exchange=exchange, pair=pair),
+            Response[OrderBookLiquidity],
         )
 
-    @serialize_response()
     def calculate_quote(
         self,
         exchange: str,
@@ -222,13 +298,13 @@ class CryptoWatchClient(APIClient):
     ) -> Response[OrderBookCalculator]:
         """Get a live quote from the order book for a given buy & sell amount."""
         params = OrderBookCalculatorQueryParams(amount=amount)
-        return self.get(
+        return self._make_request(
             Endpoint.market_orderbook_calculator.format(exchange=exchange, pair=pair),
-            params=params.dict(),
+            Response[OrderBookCalculator],
+            params=params,
         )
 
-    @serialize_response()
-    def get_ohlcv(
+    def get_ohlcv(  # noqa: PLR0913
         self,
         exchange: str,
         pair: str,
@@ -240,24 +316,53 @@ class CryptoWatchClient(APIClient):
         params = OHLCVQueryParams(
             before=before,
             after=after,
-            periods=periods,  # type: ignore
+            periods=periods,
         )
-        return self.get(
+        return self._make_request(
             Endpoint.market_ohlc.format(exchange=exchange, pair=pair),
-            params=params.dict(),
+            Response[OHLCVDict],
+            params=params,
         )
 
-    @serialize_response()
     def list_exchanges(self) -> Response[ExchangeList]:
         """List all exchanges."""
-        return self.get(Endpoint.list_exchanges)
+        return self._make_request(Endpoint.list_exchanges, Response[ExchangeList])
 
-    @serialize_response()
     def get_exchange(self, exchange: str) -> Response[Exchange]:
         """Get information about a specific exchange."""
-        return self.get(Endpoint.exchange_detail.format(exchange=exchange))
+        return self._make_request(
+            Endpoint.exchange_detail.format(exchange=exchange),
+            Response[Exchange],
+        )
 
-    @serialize_response()
     def list_exchange_markets(self, exchange: str) -> Response[ExchangeMarkets]:
         """List all markets available on a given exchange."""
-        return self.get(Endpoint.exchange_markets.format(exchange=exchange))
+        return self._make_request(
+            Endpoint.exchange_markets.format(exchange=exchange),
+            Response[ExchangeMarkets],
+        )
+
+    def _make_request(
+        self,
+        endpoint: str,
+        response_cls: Type[ResponseCls],
+        params: Optional[attrs.AttrsInstance] = None,
+    ) -> ResponseCls:
+        """Make a request to the API."""
+        params_dict = converter.unstructure(params) if params else None
+        return self._structure_response(
+            self.get(endpoint, params=params_dict),
+            response_cls,
+        )
+
+    def _structure_response(
+        self,
+        response: JsonType,
+        response_cls: Type[ResponseCls],
+    ) -> ResponseCls:
+        """Structure the response."""
+        try:
+            return converter.structure(response, response_cls)
+        except cattrs.errors.ClassValidationError as exc:
+            msg = f"Failed to structure response: '{response}'"
+            raise ResponseStructureError(msg) from exc
