@@ -18,4 +18,4 @@ htmlcov/
 
 # other stuff
 venv/
-scratch.*
+scratch*
