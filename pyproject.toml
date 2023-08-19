@@ -126,7 +126,12 @@ src = ["pycwatch", "tests"]
 
 [tool.ruff.per-file-ignores]
 # ignore usage of `assert` in tests
-"tests/*" = ["S101"]
+"tests/*" = [
+  # Magic value used in comparison
+  "PLR2004",
+  # Use `assert` in tests
+  "S101",
+]
 
 [tool.ruff.pydocstyle]
 convention = "google"
