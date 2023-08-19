@@ -118,12 +118,15 @@ class OHLCVQueryParams:
     """Query parameters for OHLCV calls."""
 
     before: Optional[int] = attrs.field(
-        validator=attrs.validators.optional(attrs.validators.instance_of(int))
+        default=None,
+        validator=attrs.validators.optional(attrs.validators.instance_of(int)),
     )
     after: Optional[int] = attrs.field(
-        validator=attrs.validators.optional(attrs.validators.instance_of(int))
+        default=None,
+        validator=attrs.validators.optional(attrs.validators.instance_of(int)),
     )
     periods: Optional[str] = attrs.field(
+        default=None,
         converter=attrs.converters.optional(utils.resolve_periods),
         validator=attrs.validators.optional(attrs.validators.instance_of(str)),
     )
