@@ -34,7 +34,8 @@ pydantic = ">=1.9.0,<2.0.0"
 api-client-pydantic = ">=2.0.0"
 importlib-metadata = { version = "<4.3", python = "<3.8" }
 attrs = ">=23.1.0"
-cattrs = ">=23.1.2"
+cattrs = {git = "https://github.com/python-attrs/cattrs"}
+ujson = ">=5.7.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = ">=7.0.1"
@@ -50,6 +51,7 @@ commitizen = ">=2.38.0"
 cz-conventional-gitmoji = ">=0.1.2"
 ruff = ">=0.0.253"
 pre-commit = "<3.0"
+types-ujson = "^5.8.0.1"
 
 [tool.commitizen]
 name = "cz_gitmoji"
