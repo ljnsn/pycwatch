@@ -1,7 +1,8 @@
 """The module that holds the API client."""
 
 from collections.abc import Callable, Mapping
-from typing import Any, List, Optional, Type, TypeVar, Union
+from decimal import Decimal
+from typing import Any, List, Optional, Protocol, Type, TypeVar, Union
 
 import attrs
 import cattrs
@@ -60,7 +61,7 @@ ResponseCls = TypeVar("ResponseCls", bound=ResponseRoot[Any])
 converter = cattrs.Converter(detailed_validation=False)
 
 
-def _to_alias_unstructure(cls: type[Any]) -> Callable[[Any], dict[str, Any]]:
+def _to_alias_unstructure(cls: Type[Any]) -> Callable[[Any], dict[str, Any]]:
     """Unstructure hook using alias."""
     return make_dict_unstructure_fn(
         cls,
@@ -70,7 +71,7 @@ def _to_alias_unstructure(cls: type[Any]) -> Callable[[Any], dict[str, Any]]:
 
 
 def _to_alias_structure(
-    cls: type[Any],
+    cls: Type[Any],
 ) -> Callable[[Mapping[str, Any], Any], Callable[[Any, Any], Any]]:
     """Structure hook using alias."""
     return make_dict_structure_fn(
@@ -80,8 +81,27 @@ def _to_alias_structure(
     )
 
 
+class IsList(Protocol):
+    """Protocol for checking whether a value is a list."""
+
+    @classmethod
+    def from_list(cls, v: List[Any]) -> "IsList":
+        """Create an instance from a list."""
+
+
+def _structure_from_list(value: Any, type_: Type[IsList]) -> IsList:
+    """Structure hook using from_list."""
+    return type_.from_list(value)
+
+
 converter.register_unstructure_hook_factory(attrs.has, _to_alias_unstructure)
 converter.register_structure_hook_factory(attrs.has, _to_alias_structure)
+converter.register_unstructure_hook(Decimal, lambda v: str(v))
+converter.register_structure_hook(Decimal, lambda v, _: Decimal(str(v)))
+converter.register_structure_hook_func(
+    lambda t: hasattr(t, "from_list"),
+    _structure_from_list,
+)
 
 
 class UJSONResponseHandler(BaseResponseHandler):
@@ -252,10 +272,11 @@ class CryptoWatchClient(APIClient):
         key_by: Optional[str] = None,
     ) -> Response[AllSummaries]:
         """Get 24h summaries of all markets."""
-        params = MarketSummariesQueryParams(
+        # TODO: use alias in unstructuring for params and in structuring for responses
+        params = MarketSummariesQueryParams(  # type: ignore[call-arg]
             cursor=cursor,
             limit=limit,
-            key_by=key_by,  # type: ignore[arg-type]
+            keyBy=key_by,  # type: ignore[arg-type]
         )
         return self._make_request(
             Endpoint.all_market_summaries,

@@ -108,7 +108,9 @@ class OrderBookCalculatorQueryParams:
     """Query parameters for order book calculator calls."""
 
     # NOTE: this is float, not Decimal, because it will be sent
-    amount: float = attrs.field(validator=attrs.validators.instance_of(float))
+    amount: Union[float, int] = attrs.field(
+        validator=attrs.validators.instance_of((float, int))
+    )
 
 
 @attrs.define(field_transformer=add_aliases)
@@ -368,8 +370,8 @@ class Trade:
     @classmethod
     def from_list(cls, v: List[Any]) -> "Trade":
         """Create a Trade from a list."""
-        return cls(
-            id_=v[0],
+        return cls(  # type: ignore[call-arg]
+            id=v[0],
             timestamp=v[1],
             price=v[2],
             amount=v[3],
@@ -502,14 +504,14 @@ class OHLCV:
     @classmethod
     def from_list(cls, v: List[Any]) -> "OHLCV":
         """Create an OHLCV from a list."""
-        return cls(
-            close_time=v[0],
-            open_price=v[1],
-            high_price=v[2],
-            low_price=v[3],
-            close_price=v[4],
+        return cls(  # type: ignore[call-arg]
+            closeTime=v[0],
+            openPrice=v[1],
+            highPrice=v[2],
+            lowPrice=v[3],
+            closePrice=v[4],
             volume=v[5],
-            quote_volume=v[6],
+            quoteVolume=v[6],
         )
 
 
