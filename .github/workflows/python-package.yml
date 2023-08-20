@@ -76,7 +76,7 @@ jobs:
       - name: Upload coverage
         uses: codecov/codecov-action@v3
         with:
-          files: reports/.coverage
+          files: reports/coverage.xml
 
   bump-version:
     runs-on: ubuntu-latest
