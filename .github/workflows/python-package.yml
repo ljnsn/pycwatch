@@ -54,9 +54,8 @@ jobs:
         run: make test-isolated-${{ matrix.package }}
       - name: Archive code coverage results
         uses: actions/upload-artifact@v3
-        if: ${{ matrix.python-version }} == "3.11"
         with:
-          name: coverage-${{ matrix.package }}
+          name: coverage-${{ matrix.package }}-${{ matrix.python-version }}
           path: reports/.coverage
 
   upload-coverage:
