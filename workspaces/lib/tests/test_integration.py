@@ -11,12 +11,12 @@ else:
 import pytest
 import ujson
 from apiclient.exceptions import ClientError
+from vcr.cassette import Cassette
+
 from pycwatch import CryptoWatchClient, models
 from pycwatch.conversion import converter
 from pycwatch.endpoints import Endpoint
 from pycwatch.models import PaginatedResponse, Response, ResponseRoot
-from vcr.cassette import Cassette
-
 from tests.conftest import api_vcr
 
 P = ParamSpec("P")
