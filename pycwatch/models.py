@@ -2,45 +2,16 @@
 
 import enum
 from decimal import Decimal
-from typing import Any, Dict, Generic, List, Optional, Type, TypeVar, Union
+from typing import Any, Dict, Generic, List, Optional, TypeVar, Union
 
 import attrs
 
 from pycwatch import utils
 
-
-def gen_alias(field_name: str) -> str:
-    """
-    Generate the fieldname understood by cryptowatch.
-
-    Args:
-        field_name: The python name of the field.
-
-    Returns:
-        The cryptowatch name.
-    """
-    if field_name == "id_":
-        return "id"
-    return "".join(
-        [w if i == 0 else w.capitalize() for i, w in enumerate(field_name.split("_"))]
-    )
-
-
-def add_aliases(
-    _cls: Type[Any],
-    fields: List[attrs.Attribute],  # type: ignore[type-arg]
-) -> List[attrs.Attribute]:  # type: ignore[type-arg]
-    """Add aliases to the fields."""
-    return [
-        field.evolve(alias=gen_alias(field.name)) if not field.alias else field
-        for field in fields
-    ]
-
-
 # query params
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class PaginationQueryParams:
     """Query parameters used for paginated calls."""
 
@@ -56,7 +27,7 @@ class PaginationQueryParams:
     )
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class TradeQueryParams:
     """Query parameters for trades."""
 
@@ -75,7 +46,7 @@ class MarketSummaryKey(str, enum.Enum):
     SYMBOLS = "symbols"
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class MarketSummariesQueryParams(PaginationQueryParams):
     """Query parameters for market summary calls."""
 
@@ -84,11 +55,10 @@ class MarketSummariesQueryParams(PaginationQueryParams):
         validator=attrs.validators.optional(
             attrs.validators.instance_of(MarketSummaryKey)
         ),
-        alias="keyBy",
     )
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class OrderBookQueryParams:
     """Query parameters for order book calls."""
 
@@ -103,7 +73,7 @@ class OrderBookQueryParams:
     )
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class OrderBookCalculatorQueryParams:
     """Query parameters for order book calculator calls."""
 
@@ -113,7 +83,7 @@ class OrderBookCalculatorQueryParams:
     )
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class OHLCVQueryParams:  # type: ignore[no-untyped-def]
     """Query parameters for OHLCV calls."""
 
@@ -137,21 +107,21 @@ class OHLCVQueryParams:  # type: ignore[no-untyped-def]
 # path params
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class AssetPathParams:
     """Path parameters for asset calls."""
 
     asset_code: str = attrs.field(validator=attrs.validators.instance_of(str))
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class PairPathParams:
     """Path parameters for pair calls."""
 
     pair: str = attrs.field(validator=attrs.validators.instance_of(str))
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class MarketPathParams:
     """Path parameters for market calls."""
 
@@ -159,7 +129,7 @@ class MarketPathParams:
     pair: str = attrs.field(validator=attrs.validators.instance_of(str))
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class ExchangePathParams:
     """Path parameters for exchange calls."""
 
@@ -172,15 +142,15 @@ class ExchangePathParams:
 ResultT = TypeVar("ResultT")
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class Cursor:
     """A cursor used for pagination."""
 
     last: str
-    has_more: bool = attrs.field(alias="hasMore")
+    has_more: bool
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class AllowanceBase:
     """Base class for allowance models."""
 
@@ -188,39 +158,39 @@ class AllowanceBase:
     remaining: int
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class AllowanceAnonymous(AllowanceBase):
     """Allowance model for anonymous calls."""
 
     upgrade: str
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class AllowanceAuthenticated(AllowanceBase):
     """Allowance model for authenticated calls."""
 
-    remaining_paid: float = attrs.field(alias="remainingPaid")
+    remaining_paid: float
     account: str
 
 
 Allowance = Union[AllowanceAnonymous, AllowanceAuthenticated]
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class ResponseRoot(Generic[ResultT]):
     """Root response class."""
 
     result: ResultT
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class Response(ResponseRoot[ResultT], Generic[ResultT]):
     """Response class."""
 
     allowance: Allowance
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class PaginatedResponse(Response[ResultT], Generic[ResultT]):
     """Paginated response class."""
 
@@ -230,7 +200,7 @@ class PaginatedResponse(Response[ResultT], Generic[ResultT]):
 Route = str
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class Info:
     """Info model."""
 
@@ -240,14 +210,14 @@ class Info:
     indexes: List[Route]
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class ListMember:
     """Base class for list members."""
 
     route: Route
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class AssetBase:
     """Base class for asset models."""
 
@@ -258,7 +228,7 @@ class AssetBase:
     sid: Optional[str]
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class AssetMember(AssetBase):
     """A member of an asset list."""
 
@@ -268,7 +238,7 @@ class AssetMember(AssetBase):
 AssetList = List[AssetMember]
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class MarketBase:
     """Base class for market models."""
 
@@ -278,7 +248,7 @@ class MarketBase:
     active: bool
 
 
-@attrs.define(field_transformer=add_aliases, kw_only=True)
+@attrs.define(kw_only=True)
 class PairBase:
     """Base class for pair models."""
 
@@ -289,7 +259,7 @@ class PairBase:
     futures_contract_period: Optional[str] = None
 
 
-@attrs.define(field_transformer=add_aliases, kw_only=True)
+@attrs.define(kw_only=True)
 class PairMember(PairBase):
     """A member of a pair list."""
 
@@ -299,7 +269,7 @@ class PairMember(PairBase):
 PairList = List[PairMember]
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class MarketMember(MarketBase):
     """A member of a market list."""
 
@@ -309,7 +279,7 @@ class MarketMember(MarketBase):
 MarketList = List[MarketMember]
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class AssetMarketList:
     """A list of markets for an asset."""
 
@@ -317,14 +287,14 @@ class AssetMarketList:
     quote: Optional[MarketList] = None
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class Asset(AssetBase):
     """Asset model."""
 
     markets: AssetMarketList
 
 
-@attrs.define(field_transformer=add_aliases, kw_only=True)
+@attrs.define(kw_only=True)
 class Pair(PairBase):
     """Pair model."""
 
@@ -332,7 +302,7 @@ class Pair(PairBase):
     markets: MarketList
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class MarketRoutes:
     """Routes for a market."""
 
@@ -343,7 +313,7 @@ class MarketRoutes:
     ohlc: Route
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class Market(MarketBase):
     """Market model."""
 
@@ -353,7 +323,7 @@ class Market(MarketBase):
 Price = Decimal
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class MarketPrice:
     """Market price model."""
 
@@ -363,7 +333,7 @@ class MarketPrice:
 AllPrices = Dict[str, Price]
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class Trade:
     """Trade model."""
 
@@ -375,8 +345,8 @@ class Trade:
     @classmethod
     def from_list(cls, v: List[Any]) -> "Trade":
         """Create a Trade from a list."""
-        return cls(  # type: ignore[call-arg]
-            id=v[0],
+        return cls(
+            id_=v[0],
             timestamp=v[1],
             price=v[2],
             amount=v[3],
@@ -386,7 +356,7 @@ class Trade:
 MarketTradeList = List[Trade]
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class PriceChange:
     """Price change model."""
 
@@ -394,7 +364,7 @@ class PriceChange:
     absolute: Decimal
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class PriceSummary:
     """Price summary model."""
 
@@ -404,19 +374,19 @@ class PriceSummary:
     change: PriceChange
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class MarketSummary:
     """Market summary model."""
 
     price: PriceSummary
     volume: Decimal
-    volume_quote: Decimal = attrs.field(alias="volumeQuote")
+    volume_quote: Decimal
 
 
 AllSummaries = Dict[str, MarketSummary]
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class OrderBookItem:
     """Order book item model."""
 
@@ -435,16 +405,16 @@ class OrderBookItem:
 OrderBookArray = List[OrderBookItem]
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class OrderBook:
     """Order book model."""
 
     asks: OrderBookArray
     bids: OrderBookArray
-    seq_num: int = attrs.field(alias="seqNum")
+    seq_num: int
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class LiquidityLevel:
     """Liquidity level model."""
 
@@ -452,7 +422,7 @@ class LiquidityLevel:
     quote: Dict[int, Decimal]
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class OrderBookLiquidity:
     """Order book liquidity model."""
 
@@ -460,7 +430,7 @@ class OrderBookLiquidity:
     ask: LiquidityLevel
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class QuoteBase:
     """Base class for quote models."""
 
@@ -472,21 +442,21 @@ class QuoteBase:
     reach_delta_bps: Decimal
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class QuoteBuy(QuoteBase):
     """Buy quote model."""
 
     spend: Decimal
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class QuoteSell(QuoteBase):
     """Sell quote model."""
 
     receive: Decimal
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class OrderBookCalculator:
     """Order book calculator model."""
 
@@ -494,7 +464,7 @@ class OrderBookCalculator:
     sell: QuoteSell
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class OHLCV:
     """OHLCV model."""
 
@@ -509,21 +479,21 @@ class OHLCV:
     @classmethod
     def from_list(cls, v: List[Any]) -> "OHLCV":
         """Create an OHLCV from a list."""
-        return cls(  # type: ignore[call-arg]
-            closeTime=v[0],
-            openPrice=v[1],
-            highPrice=v[2],
-            lowPrice=v[3],
-            closePrice=v[4],
+        return cls(
+            close_time=v[0],
+            open_price=v[1],
+            high_price=v[2],
+            low_price=v[3],
+            close_price=v[4],
             volume=v[5],
-            quoteVolume=v[6],
+            quote_volume=v[6],
         )
 
 
 OHLCVDict = Dict[str, List[OHLCV]]
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class ExchangeBase:
     """Base class for exchange models."""
 
@@ -533,7 +503,7 @@ class ExchangeBase:
     active: bool
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class ExchangeMember(ExchangeBase):
     """A member of an exchange list."""
 
@@ -543,14 +513,14 @@ class ExchangeMember(ExchangeBase):
 ExchangeList = List[ExchangeMember]
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class ExchangeRoutes:
     """Routes for an exchange."""
 
     markets: Route
 
 
-@attrs.define(field_transformer=add_aliases)
+@attrs.define()
 class Exchange(ExchangeBase):
     """Exchange model."""
 

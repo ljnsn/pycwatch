@@ -11,9 +11,26 @@ else:
 
 import attrs
 import cattrs
-from cattrs.gen import make_dict_structure_fn, make_dict_unstructure_fn
+from cattrs.gen import make_dict_structure_fn, make_dict_unstructure_fn, override
 
 converter = cattrs.Converter()
+
+
+def to_cwatch_key(field_name: str) -> str:
+    """
+    Generate the fieldname understood by cryptowatch.
+
+    Args:
+        field_name: The python name of the field.
+
+    Returns:
+        The cryptowatch name.
+    """
+    if field_name == "id_":
+        return "id"
+    return "".join(
+        [w if i == 0 else w.capitalize() for i, w in enumerate(field_name.split("_"))]
+    )
 
 
 def _to_alias_unstructure(cls: Type[Any]) -> Callable[[Any], Dict[str, Any]]:
@@ -21,7 +38,7 @@ def _to_alias_unstructure(cls: Type[Any]) -> Callable[[Any], Dict[str, Any]]:
     return make_dict_unstructure_fn(
         cls,
         converter,
-        _cattrs_use_alias=True,
+        **{a.name: override(rename=to_cwatch_key(a.name)) for a in attrs.fields(cls)},
     )
 
 
@@ -32,7 +49,7 @@ def _to_alias_structure(
     return make_dict_structure_fn(
         cls,
         converter,
-        _cattrs_use_alias=True,
+        **{a.name: override(rename=to_cwatch_key(a.name)) for a in attrs.fields(cls)},
     )
 
 
