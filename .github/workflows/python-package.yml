@@ -72,7 +72,6 @@ jobs:
       - name: Combine reports
         run: |
           coverage combine $(ls **/.coverage)
-          coverage report
           coverage xml
       - name: Upload coverage
         uses: codecov/codecov-action@v3
