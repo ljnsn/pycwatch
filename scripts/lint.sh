@@ -5,4 +5,4 @@ set -x
 
 black workspaces --check
 ruff workspaces
-mypy workspaces
+mypy workspaces --explicit-package-bases

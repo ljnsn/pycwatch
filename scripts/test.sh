@@ -3,7 +3,7 @@
 set -e
 set -x
 
-coverage run
-coverage combine
+coverage run --source "workspaces/$1" --module pytest "workspaces/$1"
+coverage combine -a
 coverage report
 coverage xml
