@@ -25,7 +25,7 @@ classifiers = [
 packages = [{ include = "pycwatch", from = "src" }]
 
 [tool.poetry.scripts]
-pycw = "pycwatch.cli:main"
+pycw = "pycwatch.cli.main:main"
 
 [build-system]
 requires = ["poetry-core", "poetry>=1.2.0"]
