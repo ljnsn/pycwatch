@@ -6,7 +6,7 @@ from typing import Any, Dict, Generic, List, Optional, TypeVar, Union
 
 import attrs
 
-from pycwatch import utils
+from pycwatch.lib import utils
 
 # query params
 

@@ -3,7 +3,7 @@ from typing import Any, Dict
 import attrs
 import pytest
 
-from pycwatch.conversion import converter
+from pycwatch.lib.conversion import converter
 
 
 @attrs.define()

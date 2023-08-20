@@ -3,10 +3,10 @@ import pytest
 from apiclient.exceptions import ResponseParseError
 from apiclient.response import Response
 
-from pycwatch import CryptoWatchClient
-from pycwatch.client import UJSONResponseHandler
-from pycwatch.exceptions import ResponseStructureError
-from pycwatch.models import ResponseRoot
+from pycwatch.lib import CryptoWatchClient
+from pycwatch.lib.client import UJSONResponseHandler
+from pycwatch.lib.exceptions import ResponseStructureError
+from pycwatch.lib.models import ResponseRoot
 
 
 def test_init_with_key(api_key: str) -> None:
