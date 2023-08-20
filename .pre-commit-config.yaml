@@ -1,12 +1,15 @@
 default_language_version:
   python: python3
+default_install_hook_types: [commit-msg, pre-commit]
 default_stages: [commit, manual]
 fail_fast: true
 minimum_pre_commit_version: "1.4.3"
+
 repos:
   - repo: meta
     hooks:
       - id: check-useless-excludes
+
   - repo: https://github.com/pre-commit/pygrep-hooks
     rev: v1.10.0
     hooks:
@@ -16,6 +19,7 @@ repos:
       - id: python-no-eval
       - id: python-no-log-warn
       - id: text-unicode-replacement-char
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
     hooks:
@@ -44,17 +48,52 @@ repos:
         args: [--pytest-test-first]
       - id: trailing-whitespace
         types: [python]
-  - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: 'v0.0.285'
-    hooks:
-      - id: ruff
-        args: [--config, pyproject.toml, --exit-non-zero-on-fix]
+
   - repo: https://github.com/commitizen-tools/commitizen
     rev: 3.6.0
     hooks:
-      - id: commitizen
-        additional_dependencies: [ cz-conventional-gitmoji ]
+    - id: commitizen
+      additional_dependencies: [cz-conventional-gitmoji]
+
   - repo: https://github.com/ljnsn/cz-conventional-gitmoji
     rev: v0.2.0
     hooks:
-      - id: conventional-gitmoji
+    - id: conventional-gitmoji
+
+  - repo: local
+    hooks:
+    - id: ruff
+      name: Fix with ruff
+      entry: ruff
+      args: ["--extend-fixable=ERA001,F401,F841"]
+      require_serial: true
+      language: system
+      types: [python]
+
+    - id: black
+      name: Format with Black
+      entry: black
+      require_serial: true
+      language: system
+      types: [python]
+
+    - id: poetry-check
+      name: poetry check
+      entry: poetry check
+      language: system
+      files: pyproject.toml
+      pass_filenames: false
+
+    - id: poetry-lock-check
+      name: poetry lock check
+      entry: poetry lock
+      args: [--check]
+      language: system
+      pass_filenames: false
+
+    - id: mypy
+      name: Validate types with MyPy
+      entry: mypy
+      language: system
+      require_serial: true
+      types: [python]
