@@ -70,9 +70,9 @@ jobs:
         uses: actions/download-artifact@v3
       - name: Combine reports
         run: |
-          poetry run coverage combine $(ls **/.coverage)
-          poetry run coverage report
-          poetry run coverage xml
+          coverage combine $(ls **/.coverage)
+          coverage report
+          coverage xml
       - name: Upload coverage
         uses: codecov/codecov-action@v3
         with:
