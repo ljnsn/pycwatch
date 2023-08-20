@@ -2,6 +2,46 @@
 
 All notable changes to this project will be documented in this file.
 
+## v1.1.4 (2023-08-20)
+
+### 🐛🚑️ Fixes
+
+- **conversion**: add and use new (un)structuring method
+- use cattrs latest instead of master
+- **config**: make settings attrs class
+
+### ♻️  Refactorings
+
+- **conversion**: move converter to separate module
+
+### ✅🤡🧪 Tests
+
+- **conversion**: add tests for (un)structuring
+- **config**: add test for settings
+
+### 💚👷 CI & Build
+
+- **pre-commit**: add local hooks
+
+### 📌➕⬇️ ➖⬆️  Dependencies
+
+- pydantic
+- api-client-pydantic
+
+### 📝💡 Documentation
+
+- **readme**: add note about anonymous usage
+- fix links in changelog
+
+### 🔥⚰️  Clean up
+
+- **client**: remove no key message
+- remove flake8 config
+
+### 🔧🔨📦️ Configuration, Scripts, Packages
+
+- **ruff**: remove ignore for EM101
+
 ## [v1.1.3][1.1.3] (2023-08-20)
 
 ### ♻️  Refactorings
