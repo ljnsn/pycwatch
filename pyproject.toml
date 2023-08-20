@@ -108,12 +108,15 @@ target-version = ["py37", "py38", "py39", "py310", "py311"]
 [tool.coverage.run]
 branch = true
 parallel = true
-source = ["pycwatch"]
-omit = ["*/vcr_cassettes/*"]
+command_line = "--module pytest"
+data_file = "reports/.coverage"
+source = ["workspaces"]
+omit = ["*/vcr_cassettes/*", "scratchpads/*"]
 
 [tool.coverage.report]
 fail_under = 90
 show_missing = true
+skip_covered = true
 exclude_lines = [
   "pragma: no cover",
   "@overload",
@@ -121,7 +124,16 @@ exclude_lines = [
   "if TYPE_CHECKING:",
 ]
 
+[tool.coverage.xml] # https://coverage.readthedocs.io/en/latest/config.html#xml
+output = "reports/coverage.xml"
+
+[tool.pytest.ini_options] # https://docs.pytest.org/en/latest/reference/reference.html#ini-options-ref
+addopts = """--color=yes --doctest-modules --exitfirst --failed-first \
+  --strict-config --strict-markers --verbosity=2 \
+  --junitxml=reports/pytest.xml --ignore=scratchpads"""
+
 [tool.mypy]
+junit_xml = "reports/mypy.xml"
 # --strict
 disallow_any_generics = true
 disallow_subclassing_any = false
