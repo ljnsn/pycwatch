@@ -14,7 +14,9 @@ dist/
 coverage.xml
 .pytest_cache/
 .mypy_cache/
+.ruff_cache/
 htmlcov/
+reports/
 
 # other stuff
 venv/
