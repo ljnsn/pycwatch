@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## v1.1.3 (2023-08-20)
+
+### ♻️  Refactorings
+
+- switch to attrs and add typing
+
+### 💚👷 CI & Build
+
+- remove run on separate pull request
+- add python 3.11 to matrix
+- add bump commit message
+- **pre-commit**: add more hooks
+- rename job deploy -> publish
+
 ## v1.1.2 (2022-12-27)
 
 ### 🐛🚑️ Fixes
