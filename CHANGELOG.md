@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## v1.1.3 (2023-08-20)
+## [v1.1.3][1.1.3] (2023-08-20)
 
 ### ♻️  Refactorings
 
@@ -16,7 +16,7 @@ All notable changes to this project will be documented in this file.
 - **pre-commit**: add more hooks
 - rename job deploy -> publish
 
-## v1.1.2 (2022-12-27)
+## [v1.1.2][1.1.2] (2022-12-27)
 
 ### 🐛🚑️ Fixes
 
@@ -50,7 +50,7 @@ All notable changes to this project will be documented in this file.
 - **commitizen**: add tag format
 - **coverage**: fix source to not include tests
 
-## v1.1.1 (2022-06-22)
+## [v1.1.1][1.1.1] (2022-06-22)
 
 ### Fixed
 
@@ -126,7 +126,9 @@ All notable changes to this project will be documented in this file.
 
 The format of this file is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-[unreleased]: https://github.com/iuvbio/pycwatch/compare/v1.0.0...HEAD
+[unreleased]: https://github.com/iuvbio/pycwatch/compare/v1.1.3...HEAD
+[1.1.3]: https://github.com/iuvbio/pycwatch/compare/v1.1.2...1.1.3
+[1.1.2]: https://github.com/iuvbio/pycwatch/compare/v1.1.1...1.1.2
 [1.1.1]: https://github.com/iuvbio/pycwatch/compare/v1.1.0...1.1.1
 [1.1.0]: https://github.com/iuvbio/pycwatch/compare/v1.0.1...1.1.0
 [1.0.1]: https://github.com/iuvbio/pycwatch/compare/v0.2.1...1.0.1
