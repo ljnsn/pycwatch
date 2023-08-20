@@ -113,6 +113,7 @@ target-version = ["py37", "py38", "py39", "py310", "py311"]
 
 [tool.coverage.run]
 branch = true
+parallel = true
 command_line = "--module pytest"
 data_file = "reports/.coverage"
 source = ["workspaces"]
