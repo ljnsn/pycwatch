@@ -20,8 +20,8 @@ python = "^3.7"
 [tool.poetry.group.lib.dependencies]
 pycwatch-lib = { path = "workspaces/lib", develop = true }
 
-[tool.poetry.group.lib-dev.dependencies]
-pycwatch-lib = { path = "workspaces/lib", develop = true, extras = ["dev"] }
+[tool.poetry.group.lib-test.dependencies]
+pycwatch-lib = { path = "workspaces/lib", develop = true, extras = ["test"] }
 
 [tool.commitizen]
 name = "cz_gitmoji"

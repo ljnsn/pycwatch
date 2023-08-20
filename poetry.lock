@@ -742,7 +742,7 @@ wcwidth = "*"
 
 [[package]]
 name = "pycwatch-lib"
-version = "0.0.0"
+version = "1.1.4"
 description = "A client library for the Cryptowatch Rest API."
 optional = false
 python-versions = "^3.7"
@@ -773,7 +773,7 @@ ujson = ">=5.7.0"
 vcrpy = {version = ">=4.1.1", optional = true}
 
 [package.extras]
-dev = ["black (>=22.1,<24.0)", "commitizen (>=2.38.0)", "coverage[toml] (>=6.3.2,<8.0.0)", "cz-conventional-gitmoji (>=0.1.2)", "mypy (>=0.931,<1.3)", "pre-commit (<3.0)", "pytest (>=7.0.1)", "pytest-cov (>=3,<5)", "pytest-mock (>=3.7.0)", "requests-mock (>=1.9.3)", "ruff (>=0.0.253)", "types-requests (>=2.27.11)", "types-ujson (>=5.8.0.1)", "vcrpy (>=4.1.1)"]
+test = ["black (>=22.1,<24.0)", "commitizen (>=2.38.0)", "coverage[toml] (>=6.3.2,<8.0.0)", "cz-conventional-gitmoji (>=0.1.2)", "mypy (>=0.931,<1.3)", "pre-commit (<3.0)", "pytest (>=7.0.1)", "pytest-cov (>=3,<5)", "pytest-mock (>=3.7.0)", "requests-mock (>=1.9.3)", "ruff (>=0.0.253)", "types-requests (>=2.27.11)", "types-ujson (>=5.8.0.1)", "vcrpy (>=4.1.1)"]
 
 [package.source]
 type = "directory"
@@ -1473,4 +1473,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.7"
-content-hash = "4152846c7484d39ff3c28dce65444189a1005daa5c495fd1e70d45f6191eb2aa"
+content-hash = "87480d5262da6c080b6fbb7d363ea66e0327af204b1dc7589e054f5b97f91011"
