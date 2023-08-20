@@ -93,7 +93,8 @@ repos:
 
     - id: mypy
       name: Validate types with MyPy
-      entry: mypy
+      entry: mypy -p pycwatch.lib -p pycwatch.cli
       language: system
       require_serial: true
+      pass_filenames: false
       types: [python]
