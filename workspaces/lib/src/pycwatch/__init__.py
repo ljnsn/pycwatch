@@ -8,6 +8,5 @@ else:
 
 from pycwatch.client import CryptoWatchClient
 
-__version__ = version("pycwatch")
-
+__version__ = version("pycwatch-lib")
 __all__ = ("CryptoWatchClient",)
