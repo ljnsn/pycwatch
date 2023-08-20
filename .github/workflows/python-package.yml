@@ -30,7 +30,7 @@ jobs:
       - name: Lint
         run: python -m poetry run bash scripts/lint.sh
 
-  python-test-lib:
+  python-test:
 
     strategy:
       matrix:
