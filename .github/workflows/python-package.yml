@@ -38,7 +38,11 @@ jobs:
         platform: [ubuntu-latest]
         package: ["lib", "cli"]
         exclude:
-          - python-version: ["3.7", "3.8", "3.9"]
+          - python-version: "3.7"
+            package: cli
+          - python-version: "3.8"
+            package: cli
+          - python-version: "3.9"
             package: cli
       fail-fast: false
     runs-on: ${{ matrix.platform }}
