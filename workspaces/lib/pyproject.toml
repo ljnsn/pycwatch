@@ -22,6 +22,7 @@ classifiers = [
   'Programming Language :: Python :: 3.11',
   'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
 ]
+packages = [{ include = "pycwatch", from = "src" }]
 
 [build-system]
 requires = ["poetry-core", "poetry>=1.2.0"]
