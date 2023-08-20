@@ -21,18 +21,11 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-      - uses: actions/cache@v3
-        id: cache
-        with:
-          path: ${{ env.pythonLocation }}
-          key: ${{ runner.os }}-python-${{ env.pythonLocation }}-${{ hashFiles('pyproject.toml') }}-root
       - name: Install poetry
-        if: steps.cache.outputs.cache-hit != 'true'
         run: |
           python -m pip install --upgrade pip
           python -m pip install poetry>=1.2.0
       - name: Install Dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
         run: python -m poetry install
       - name: Lint
         run: python -m poetry run bash scripts/lint.sh
