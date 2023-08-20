@@ -1,6 +1,7 @@
 from typing import Optional
 
 import pytest
+
 from pycwatch.config import Settings
 
 

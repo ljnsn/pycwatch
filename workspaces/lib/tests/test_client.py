@@ -2,6 +2,7 @@ import attrs
 import pytest
 from apiclient.exceptions import ResponseParseError
 from apiclient.response import Response
+
 from pycwatch import CryptoWatchClient
 from pycwatch.client import UJSONResponseHandler
 from pycwatch.exceptions import ResponseStructureError

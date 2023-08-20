@@ -1,6 +1,7 @@
 from typing import List, Optional, Union
 
 import pytest
+
 from pycwatch.models import OHLCVQueryParams
 
 
