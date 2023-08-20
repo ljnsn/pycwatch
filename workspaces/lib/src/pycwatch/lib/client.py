@@ -224,7 +224,7 @@ class CryptoWatchClient(APIClient):
         params = MarketSummariesQueryParams(
             cursor=cursor,
             limit=limit,
-            key_by=key_by,
+            key_by=key_by,  # type: ignore[arg-type]
         )
         return self._make_request(
             Endpoint.all_market_summaries,
@@ -331,7 +331,7 @@ class CryptoWatchClient(APIClient):
     ) -> ResponseCls:
         """Structure the response."""
         try:
-            return converter.structure(  # type: ignore[no-any-return]
+            return converter.structure(
                 response,
                 response_cls,
             )
