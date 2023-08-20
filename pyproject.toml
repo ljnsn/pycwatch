@@ -154,5 +154,6 @@ show_error_codes = true
 warn_unreachable = true
 # TODO: remove this and make stubs
 ignore_missing_imports = true
-exclude = "pycwatch/__init__.py"
+# TODO: remove once we drop support for 3.7
+exclude = "workspaces/lib/src/pycwatch/lib/__init__.py"
 # --strict end
