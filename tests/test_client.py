@@ -1,8 +1,11 @@
+import attrs
 import pytest
 from apiclient.exceptions import ResponseParseError
 from apiclient.response import Response
 from pycwatch import CryptoWatchClient
 from pycwatch.client import UJSONResponseHandler
+from pycwatch.exceptions import ResponseStructureError
+from pycwatch.models import ResponseRoot
 
 
 def test_init_with_key(api_key: str) -> None:
@@ -43,3 +46,15 @@ def test_ujson_response_handler_bad_data() -> None:
 
     with pytest.raises(ResponseParseError):
         UJSONResponseHandler.get_request_data(response)
+
+
+def test_structuring_bad_response(live_client: CryptoWatchClient) -> None:
+    """Verify attempting to structure a malformed response raises an error."""
+    response = FakeResponse('{ "foo": "bar" }')
+
+    @attrs.define()
+    class ReponseCls:
+        bar: str
+
+    with pytest.raises(ResponseStructureError):
+        live_client._structure_response(response, ResponseRoot[ReponseCls])

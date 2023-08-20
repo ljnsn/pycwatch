@@ -63,7 +63,7 @@ for more information.\
 """
 
 ResponseCls = TypeVar("ResponseCls", bound=ResponseRoot[Any])
-converter = cattrs.Converter(detailed_validation=False)
+converter = cattrs.Converter()
 
 
 def _to_alias_unstructure(cls: Type[Any]) -> Callable[[Any], Dict[str, Any]]:
