@@ -56,7 +56,7 @@ jobs:
         uses: actions/upload-artifact@v3
         if: ${{ matrix.python-version }} == "3.11"
         with:
-          name: .coverage.${{ matrix.package }}
+          name: coverage-${{ matrix.package }}
           path: reports/.coverage
 
   upload-coverage:
@@ -71,7 +71,7 @@ jobs:
           python -m pip install coverage
       - name: Combine reports
         run: |
-          coverage combine
+          coverage combine $(ls **/.coverage)
           coverage report
           coverage xml
       - name: Upload coverage
