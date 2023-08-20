@@ -1,0 +1,1 @@
+"""Pycwatch CLI test suite."""

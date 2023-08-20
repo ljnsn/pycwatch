@@ -1,0 +1,105 @@
+[tool.poetry]
+name = "pycwatch-cli"
+version = "0.0.0"
+description = "A CLI application for the Cryptowatch Rest API."
+authors = ["ljnsn <82611987+ljnsn@users.noreply.github.com>"]
+readme = "README.md"
+license = "MIT"
+repository = "https://github.com/ljnsn/pycwatch"
+homepage = "https://github.com/ljnsn/pycwatch"
+keywords = ["cryptocurrency", "crypto", "prices", "cryptowatch"]
+classifiers = [
+  'Development Status :: 5 - Production/Stable',
+  'Environment :: Web Environment',
+  'Intended Audience :: Developers',
+  'License :: OSI Approved :: MIT License',
+  'Operating System :: OS Independent',
+  'Programming Language :: Python',
+  'Programming Language :: Python :: 3.7',
+  'Programming Language :: Python :: 3.8',
+  'Programming Language :: Python :: 3.9',
+  'Programming Language :: Python :: 3.10',
+  'Programming Language :: Python :: 3.11',
+  'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
+]
+packages = [{ include = "pycwatch", from = "src" }]
+
+[build-system]
+requires = ["poetry-core", "poetry>=1.2.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+pycwatch-lib = { path = "../lib" }
+
+# test dependencies
+black = { version = ">=22.1,<24.0", optional = true }
+coverage = { version = ">=6.3.2,<8.0.0", extras = ["toml"], optional = true }
+mypy = { version = ">=0.931,<1.3", optional = true }
+pre-commit = { version = "<3.0", optional = true }
+pytest = { version = ">=7.0.1", optional = true }
+pytest-cov = { version = ">=3,<5", optional = true }
+ruff = { version = ">=0.0.253", optional = true }
+rich = "^13.5.2"
+typer = "^0.9.0"
+
+[tool.poetry.extras]
+test = [
+  "black",
+  "coverage",
+  "mypy",
+  "pre-commit",
+  "pytest",
+  "pytest-cov",
+  "ruff",
+]
+
+[tool.ruff]
+extend = "../../pyproject.toml"
+src = ["src", "tests"]
+
+[tool.ruff.per-file-ignores]
+# ignore usage of `assert` in tests
+"tests/*" = [
+  # Magic value used in comparison
+  "PLR2004",
+  # Use `assert` in tests
+  "S101",
+]
+
+[tool.coverage.run]
+branch = true
+parallel = true
+source = ["src"]
+omit = ["*/vcr_cassettes/*"]
+
+[tool.coverage.report]
+fail_under = 90
+show_missing = true
+exclude_lines = [
+  "pragma: no cover",
+  "@overload",
+  'if __name__ == "__main__":',
+  "if TYPE_CHECKING:",
+]
+
+[tool.mypy]
+# --strict
+disallow_any_generics = true
+disallow_subclassing_any = false
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = false
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_return_any = true
+implicit_reexport = false
+strict_equality = true
+pretty = true
+show_column_numbers = true
+show_error_codes = true
+warn_unreachable = true
+# --strict end
