@@ -24,10 +24,14 @@ pycwatch-lib = { path = "workspaces/lib", develop = true }
 pycwatch-lib = { path = "workspaces/lib", develop = true, extras = ["test"] }
 
 [tool.poetry.group.cli.dependencies]
-pycwatch-cli = { path = "workspaces/cli", develop = true }
+pycwatch-cli = { path = "workspaces/cli", develop = true, python = ">=3.10" }
 
 [tool.poetry.group.cli-test.dependencies]
-pycwatch-cli = { path = "workspaces/cli", develop = true, extras = ["test"] }
+[tool.poetry.group.cli-test.dependencies.pycwatch-cli]
+path = "workspaces/cli"
+develop = true
+extras = ["test"]
+python = ">=3.10"
 
 [tool.commitizen]
 name = "cz_gitmoji"
@@ -158,8 +162,6 @@ pretty = true
 show_column_numbers = true
 show_error_codes = true
 warn_unreachable = true
-# TODO: remove this and make stubs
-ignore_missing_imports = true
 # TODO: remove once we drop support for 3.7
 exclude = "workspaces/lib/src/pycwatch/lib/__init__.py"
 # --strict end
