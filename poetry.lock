@@ -22,21 +22,6 @@ lint = ["black", "flake8", "flake8-docstrings", "isort"]
 test = ["pytest", "pytest-cov", "pytest-env", "requests-mock", "vcrpy"]
 
 [[package]]
-name = "api-client-pydantic"
-version = "2.2.1"
-description = "API Client extension for validate and transform requests / responses using pydantic."
-optional = false
-python-versions = ">=3.7,<4.0"
-files = [
-    {file = "api_client_pydantic-2.2.1-py3-none-any.whl", hash = "sha256:1e59fea3680a1c066f3ab03f7786f6d3f410e1e8fe579975a64fb37cb222a06d"},
-    {file = "api_client_pydantic-2.2.1.tar.gz", hash = "sha256:de23a556dca4d37a250330f868286def5348313f7461bddba7015626fe1a355a"},
-]
-
-[package.dependencies]
-api-client = ">1.2.1"
-pydantic = ">=1.7,<2.0"
-
-[[package]]
 name = "appdirs"
 version = "1.4.4"
 description = "A small Python module for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
@@ -1528,4 +1513,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.7"
-content-hash = "6b0a6a994bfaeda586ca9e37161c2433a944c53d67da604ad07f5d4a7b73e0ce"
+content-hash = "d303c136e91b79f43f059ecacdc2105e914f225f43a4894f8197f058ff1838fc"
