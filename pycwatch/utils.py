@@ -1,8 +1,9 @@
-from typing import List, Union
+"""Utility functions for the client."""
+from typing import Dict, List, Union
 
 ONE_WEEK_MONDAY = "604800_Monday"
 
-period_mapping = {
+period_mapping: Dict[str, Union[str, int]] = {
     "1m": 60,
     "3m": 180,
     "5m": 300,
@@ -22,18 +23,19 @@ period_mapping = {
 
 def resolve_periods(periods: List[Union[str, int]]) -> str:
     """
-    Resolve a list of period values or labels to a comma separated string of
-    period values accepted by Cryptowatch.
+    Resolve a list of period values or labels to a comma separated string.
+
+    Items are the period values accepted by Cryptowatch.
 
     See https://docs.cryptowat.ch/rest-api/markets/ohlc#period-values
 
     >>> resolve_periods([60, 180, 7200])
     '60,180,7200'
-    >>> resolve_periods([60,180,'604800_Monday'])
+    >>> resolve_periods([60, 180, '604800_Monday'])
     '60,180,604800_Monday'
     >>> resolve_periods(['1m', '30m', '1w_monday'])
     '60,1800,604800_Monday'
-    >>> resolve_periods([60,'30m'])
+    >>> resolve_periods([60, '30m'])
     '60,1800'
     >>> resolve_periods(['3m', 180])
     '180'
@@ -43,12 +45,13 @@ def resolve_periods(periods: List[Union[str, int]]) -> str:
         if period == ONE_WEEK_MONDAY:
             period_values.add(period)
         elif isinstance(period, int):
-            assert period in list(period_mapping.values())
+            assert period in list(period_mapping.values())  # noqa: S101
             period_values.add(period)
         else:
             value = period_mapping.get(period)
             if value is None:
-                raise ValueError(f"Invalid period label: {period}")
+                msg = f"Invalid period label: {period}"
+                raise ValueError(msg)
             period_values.add(value)
 
     return ",".join(sorted(map(str, period_values), key=lambda p: len(p)))

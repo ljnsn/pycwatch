@@ -1,3 +1,4 @@
+"""Main package."""
 import sys
 
 if sys.version_info < (3, 8):
@@ -5,7 +6,7 @@ if sys.version_info < (3, 8):
 else:
     from importlib.metadata import version
 
-from .client import CryptoWatchClient
+from pycwatch.client import CryptoWatchClient
 
 __version__ = version("pycwatch")
 

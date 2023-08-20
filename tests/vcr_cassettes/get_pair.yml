@@ -9,46 +9,44 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - python-requests/2.27.1
+      - python-requests/2.31.0
     method: GET
     uri: https://api.cryptowat.ch/pairs/btceur
   response:
     body:
-      string: '{"result":{"id":232,"symbol":"btceur","base":{"id":60,"symbol":"btc","name":"Bitcoin","fiat":false,"route":"https://api.cryptowat.ch/assets/btc"},"quote":{"id":108,"symbol":"eur","name":"euro","fiat":true,"route":"https://api.cryptowat.ch/assets/eur"},"route":"https://api.cryptowat.ch/pairs/btceur","markets":[{"id":670,"exchange":"zonda","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/zonda/btceur"},{"id":138101,"exchange":"ftx-us","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/ftx-us/btceur"},{"id":186,"exchange":"quoine","pair":"btceur","active":false,"route":"https://api.cryptowat.ch/markets/quoine/btceur"},{"id":136196,"exchange":"luno","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/luno/btceur"},{"id":139213,"exchange":"gemini","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/gemini/btceur"},{"id":534,"exchange":"bitflyer","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/bitflyer/btceur"},{"id":86,"exchange":"kraken","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/kraken/btceur"},{"id":137620,"exchange":"ftx","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/ftx/btceur"},{"id":75,"exchange":"bitstamp","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/bitstamp/btceur"},{"id":175,"exchange":"cexio","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/cexio/btceur"},{"id":5804,"exchange":"liquid","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/liquid/btceur"},{"id":62082,"exchange":"okcoin","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/okcoin/btceur"},{"id":367,"exchange":"bisq","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/bisq/btceur"},{"id":61599,"exchange":"binance","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/binance/btceur"},{"id":415,"exchange":"bitfinex","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/bitfinex/btceur"},{"id":66,"exchange":"coinbase-pro","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/coinbase-pro/btceur"},{"id":149,"exchange":"wex","pair":"btceur","active":false,"route":"https://api.cryptowat.ch/markets/wex/btceur"},{"id":167,"exchange":"cryptsy","pair":"btceur","active":false,"route":"https://api.cryptowat.ch/markets/cryptsy/btceur"},{"id":62458,"exchange":"bittrex","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/bittrex/btceur"}]},"allowance":{"cost":0.002,"remaining":9.998,"upgrade":"For
+      string: '{"result":{"id":232,"symbol":"btceur","base":{"id":60,"sid":"bitcoin","symbol":"btc","name":"Bitcoin","fiat":false,"route":"https://api.cryptowat.ch/assets/btc"},"quote":{"id":108,"sid":"euro","symbol":"eur","name":"Euro","fiat":true,"route":"https://api.cryptowat.ch/assets/eur"},"route":"https://api.cryptowat.ch/pairs/btceur","markets":[{"id":66,"exchange":"coinbase","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/coinbase/btceur"},{"id":75,"exchange":"bitstamp","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/bitstamp/btceur"},{"id":86,"exchange":"kraken","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/kraken/btceur"},{"id":149,"exchange":"wex","pair":"btceur","active":false,"route":"https://api.cryptowat.ch/markets/wex/btceur"},{"id":167,"exchange":"cryptsy","pair":"btceur","active":false,"route":"https://api.cryptowat.ch/markets/cryptsy/btceur"},{"id":175,"exchange":"cexio","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/cexio/btceur"},{"id":186,"exchange":"quoine","pair":"btceur","active":false,"route":"https://api.cryptowat.ch/markets/quoine/btceur"},{"id":367,"exchange":"bisq","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/bisq/btceur"},{"id":415,"exchange":"bitfinex","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/bitfinex/btceur"},{"id":534,"exchange":"bitflyer","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/bitflyer/btceur"},{"id":670,"exchange":"zonda","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/zonda/btceur"},{"id":5804,"exchange":"liquid","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/liquid/btceur"},{"id":61599,"exchange":"binance","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/binance/btceur"},{"id":62082,"exchange":"okcoin","pair":"btceur","active":false,"route":"https://api.cryptowat.ch/markets/okcoin/btceur"},{"id":62458,"exchange":"bittrex","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/bittrex/btceur"},{"id":136196,"exchange":"luno","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/luno/btceur"},{"id":137620,"exchange":"ftx","pair":"btceur","active":false,"route":"https://api.cryptowat.ch/markets/ftx/btceur"},{"id":138101,"exchange":"ftx-us","pair":"btceur","active":false,"route":"https://api.cryptowat.ch/markets/ftx-us/btceur"},{"id":139213,"exchange":"gemini","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/gemini/btceur"},{"id":2975874,"exchange":"huobi","pair":"btceur","active":false,"route":"https://api.cryptowat.ch/markets/huobi/btceur"},{"id":3035436,"exchange":"kucoin","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/kucoin/btceur"},{"id":4094209,"exchange":"crypto-com","pair":"btceur","active":true,"route":"https://api.cryptowat.ch/markets/crypto-com/btceur"}]},"allowance":{"cost":0.002,"remaining":9.929,"upgrade":"For
         unlimited API access, create an account at https://cryptowat.ch"}}
 
         '
     headers:
       Access-Control-Allow-Headers:
-      - X-CW-Integration, X-CW-Very-Secret-Value
+      - X-CW-Integration, X-CW-Very-Secret-Value, sentry-trace, baggage
       CF-Cache-Status:
       - DYNAMIC
       CF-RAY:
-      - 6e3d4cc36cf96967-FRA
+      - 7f947ecedd2e23c7-ZRH
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Sun, 27 Feb 2022 00:29:37 GMT
-      Expect-CT:
-      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      - Sat, 19 Aug 2023 18:35:15 GMT
       Referrer-Policy:
       - origin-when-cross-origin
       Server:
       - cloudflare
       Set-Cookie:
-      - __cf_bm=vuevr17qmSxTzLK7YZzae_f7O_b9mUJfXmc2Fmh7z_I-1645921777-0-AaBENsNba9lv++TJgxOYiMsQ68kSBG3DfkYLOg/A6xCF4j79IiXEF9aKNV2LicmNnTwkGDVtBXUZt79qi3DLzu0=;
-        path=/; expires=Sun, 27-Feb-22 00:59:37 GMT; domain=.cryptowat.ch; HttpOnly;
+      - __cf_bm=mAs.MrdzMKAMdfTlBuCZjt4JZEuCojxp8xrPeoYQP_U-1692470115-0-AbatQEeOMyif8qT+7HNP+tNc5iKB2faltFlwQStQDcs/yPnN2fdyon5AcPiem/WpyBDaemZKHvZ1a893h44A9Og=;
+        path=/; expires=Sat, 19-Aug-23 19:05:15 GMT; domain=.cryptowat.ch; HttpOnly;
         Secure; SameSite=None
       Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains
+      - max-age=31536000; includeSubDomains; preload
       Vary:
       - Origin
       X-Content-Type-Options:
       - nosniff
       content-length:
-      - '2706'
+      - '3103'
     status:
       code: 200
       message: OK
@@ -62,44 +60,42 @@ interactions:
       Connection:
       - keep-alive
       Cookie:
-      - __cf_bm=vuevr17qmSxTzLK7YZzae_f7O_b9mUJfXmc2Fmh7z_I-1645921777-0-AaBENsNba9lv++TJgxOYiMsQ68kSBG3DfkYLOg/A6xCF4j79IiXEF9aKNV2LicmNnTwkGDVtBXUZt79qi3DLzu0=
+      - __cf_bm=mAs.MrdzMKAMdfTlBuCZjt4JZEuCojxp8xrPeoYQP_U-1692470115-0-AbatQEeOMyif8qT+7HNP+tNc5iKB2faltFlwQStQDcs/yPnN2fdyon5AcPiem/WpyBDaemZKHvZ1a893h44A9Og=
       User-Agent:
-      - python-requests/2.27.1
+      - python-requests/2.31.0
     method: GET
     uri: https://api.cryptowat.ch/pairs/ethbtc
   response:
     body:
-      string: '{"result":{"id":21,"symbol":"ethbtc","base":{"id":77,"symbol":"eth","name":"Ethereum","fiat":false,"route":"https://api.cryptowat.ch/assets/eth"},"quote":{"id":60,"symbol":"btc","name":"Bitcoin","fiat":false,"route":"https://api.cryptowat.ch/assets/btc"},"route":"https://api.cryptowat.ch/pairs/ethbtc","markets":[{"id":85,"exchange":"bitstamp","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/bitstamp/ethbtc"},{"id":261,"exchange":"poloniex","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/poloniex/ethbtc"},{"id":370,"exchange":"bisq","pair":"ethbtc","active":false,"route":"https://api.cryptowat.ch/markets/bisq/ethbtc"},{"id":62951,"exchange":"ftx","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/ftx/ethbtc"},{"id":5,"exchange":"bitfinex","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/bitfinex/ethbtc"},{"id":463,"exchange":"luno","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/luno/ethbtc"},{"id":137859,"exchange":"ftx-us","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/ftx-us/ethbtc"},{"id":173,"exchange":"cryptsy","pair":"ethbtc","active":false,"route":"https://api.cryptowat.ch/markets/cryptsy/ethbtc"},{"id":28456,"exchange":"huobi","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/huobi/ethbtc"},{"id":382,"exchange":"bittrex","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/bittrex/ethbtc"},{"id":182,"exchange":"gemini","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/gemini/ethbtc"},{"id":211,"exchange":"liquid","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/liquid/ethbtc"},{"id":204,"exchange":"quoine","pair":"ethbtc","active":false,"route":"https://api.cryptowat.ch/markets/quoine/ethbtc"},{"id":216,"exchange":"bitflyer","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/bitflyer/ethbtc"},{"id":11519,"exchange":"bitz","pair":"ethbtc","active":false,"route":"https://api.cryptowat.ch/markets/bitz/ethbtc"},{"id":59235,"exchange":"gateio","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/gateio/ethbtc"},{"id":95,"exchange":"kraken","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/kraken/ethbtc"},{"id":1305,"exchange":"hitbtc","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/hitbtc/ethbtc"},{"id":179,"exchange":"cexio","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/cexio/ethbtc"},{"id":197991,"exchange":"okcoin","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/okcoin/ethbtc"},{"id":580,"exchange":"binance","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/binance/ethbtc"},{"id":977,"exchange":"zonda","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/zonda/ethbtc"},{"id":1002,"exchange":"okx","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/okx/ethbtc"},{"id":69,"exchange":"coinbase-pro","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/coinbase-pro/ethbtc"},{"id":155,"exchange":"wex","pair":"ethbtc","active":false,"route":"https://api.cryptowat.ch/markets/wex/ethbtc"},{"id":61170,"exchange":"binance-us","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/binance-us/ethbtc"}]},"allowance":{"cost":0.002,"remaining":9.996,"upgrade":"For
+      string: '{"result":{"id":21,"symbol":"ethbtc","base":{"id":77,"sid":"ethereum","symbol":"eth","name":"Ethereum","fiat":false,"route":"https://api.cryptowat.ch/assets/eth"},"quote":{"id":60,"sid":"bitcoin","symbol":"btc","name":"Bitcoin","fiat":false,"route":"https://api.cryptowat.ch/assets/btc"},"route":"https://api.cryptowat.ch/pairs/ethbtc","markets":[{"id":5,"exchange":"bitfinex","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/bitfinex/ethbtc"},{"id":69,"exchange":"coinbase","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/coinbase/ethbtc"},{"id":85,"exchange":"bitstamp","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/bitstamp/ethbtc"},{"id":95,"exchange":"kraken","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/kraken/ethbtc"},{"id":155,"exchange":"wex","pair":"ethbtc","active":false,"route":"https://api.cryptowat.ch/markets/wex/ethbtc"},{"id":173,"exchange":"cryptsy","pair":"ethbtc","active":false,"route":"https://api.cryptowat.ch/markets/cryptsy/ethbtc"},{"id":179,"exchange":"cexio","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/cexio/ethbtc"},{"id":182,"exchange":"gemini","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/gemini/ethbtc"},{"id":204,"exchange":"quoine","pair":"ethbtc","active":false,"route":"https://api.cryptowat.ch/markets/quoine/ethbtc"},{"id":211,"exchange":"liquid","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/liquid/ethbtc"},{"id":216,"exchange":"bitflyer","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/bitflyer/ethbtc"},{"id":261,"exchange":"poloniex","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/poloniex/ethbtc"},{"id":370,"exchange":"bisq","pair":"ethbtc","active":false,"route":"https://api.cryptowat.ch/markets/bisq/ethbtc"},{"id":382,"exchange":"bittrex","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/bittrex/ethbtc"},{"id":463,"exchange":"luno","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/luno/ethbtc"},{"id":580,"exchange":"binance","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/binance/ethbtc"},{"id":977,"exchange":"zonda","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/zonda/ethbtc"},{"id":1002,"exchange":"okx","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/okx/ethbtc"},{"id":1305,"exchange":"hitbtc","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/hitbtc/ethbtc"},{"id":11519,"exchange":"bitz","pair":"ethbtc","active":false,"route":"https://api.cryptowat.ch/markets/bitz/ethbtc"},{"id":28456,"exchange":"huobi","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/huobi/ethbtc"},{"id":59235,"exchange":"gateio","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/gateio/ethbtc"},{"id":61170,"exchange":"binance-us","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/binance-us/ethbtc"},{"id":62951,"exchange":"ftx","pair":"ethbtc","active":false,"route":"https://api.cryptowat.ch/markets/ftx/ethbtc"},{"id":137859,"exchange":"ftx-us","pair":"ethbtc","active":false,"route":"https://api.cryptowat.ch/markets/ftx-us/ethbtc"},{"id":197991,"exchange":"okcoin","pair":"ethbtc","active":false,"route":"https://api.cryptowat.ch/markets/okcoin/ethbtc"},{"id":2893060,"exchange":"kucoin","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/kucoin/ethbtc"},{"id":3031165,"exchange":"bybit","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/bybit/ethbtc"},{"id":3230228,"exchange":"crypto-com","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/crypto-com/ethbtc"},{"id":3321927,"exchange":"bitmex","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/bitmex/ethbtc"},{"id":3528542,"exchange":"bithumb","pair":"ethbtc","active":true,"route":"https://api.cryptowat.ch/markets/bithumb/ethbtc"}]},"allowance":{"cost":0.002,"remaining":9.927,"upgrade":"For
         unlimited API access, create an account at https://cryptowat.ch"}}
 
         '
     headers:
       Access-Control-Allow-Headers:
-      - X-CW-Integration, X-CW-Very-Secret-Value
+      - X-CW-Integration, X-CW-Very-Secret-Value, sentry-trace, baggage
       CF-Cache-Status:
       - DYNAMIC
       CF-RAY:
-      - 6e3d4cc49e896967-FRA
+      - 7f947ed06ee023c7-ZRH
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Sun, 27 Feb 2022 00:29:37 GMT
-      Expect-CT:
-      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      - Sat, 19 Aug 2023 18:35:16 GMT
       Referrer-Policy:
       - origin-when-cross-origin
       Server:
       - cloudflare
       Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains
+      - max-age=31536000; includeSubDomains; preload
       Vary:
       - Origin
       X-Content-Type-Options:
       - nosniff
       content-length:
-      - '3534'
+      - '4180'
     status:
       code: 200
       message: OK
@@ -113,44 +109,42 @@ interactions:
       Connection:
       - keep-alive
       Cookie:
-      - __cf_bm=vuevr17qmSxTzLK7YZzae_f7O_b9mUJfXmc2Fmh7z_I-1645921777-0-AaBENsNba9lv++TJgxOYiMsQ68kSBG3DfkYLOg/A6xCF4j79IiXEF9aKNV2LicmNnTwkGDVtBXUZt79qi3DLzu0=
+      - __cf_bm=mAs.MrdzMKAMdfTlBuCZjt4JZEuCojxp8xrPeoYQP_U-1692470115-0-AbatQEeOMyif8qT+7HNP+tNc5iKB2faltFlwQStQDcs/yPnN2fdyon5AcPiem/WpyBDaemZKHvZ1a893h44A9Og=
       User-Agent:
-      - python-requests/2.27.1
+      - python-requests/2.31.0
     method: GET
     uri: https://api.cryptowat.ch/pairs/xmrbtc
   response:
     body:
-      string: '{"result":{"id":148,"symbol":"xmrbtc","base":{"id":76,"symbol":"xmr","name":"Monero","fiat":false,"route":"https://api.cryptowat.ch/assets/xmr"},"quote":{"id":60,"symbol":"btc","name":"Bitcoin","fiat":false,"route":"https://api.cryptowat.ch/assets/btc"},"route":"https://api.cryptowat.ch/pairs/xmrbtc","markets":[{"id":59247,"exchange":"gateio","pair":"xmrbtc","active":true,"route":"https://api.cryptowat.ch/markets/gateio/xmrbtc"},{"id":293,"exchange":"poloniex","pair":"xmrbtc","active":true,"route":"https://api.cryptowat.ch/markets/poloniex/xmrbtc"},{"id":2668726,"exchange":"bisq","pair":"xmrbtc","active":true,"route":"https://api.cryptowat.ch/markets/bisq/xmrbtc"},{"id":26,"exchange":"bitfinex","pair":"xmrbtc","active":true,"route":"https://api.cryptowat.ch/markets/bitfinex/xmrbtc"},{"id":62167,"exchange":"okx","pair":"xmrbtc","active":true,"route":"https://api.cryptowat.ch/markets/okx/xmrbtc"},{"id":511,"exchange":"bittrex","pair":"xmrbtc","active":false,"route":"https://api.cryptowat.ch/markets/bittrex/xmrbtc"},{"id":4722,"exchange":"zonda","pair":"xmrbtc","active":false,"route":"https://api.cryptowat.ch/markets/zonda/xmrbtc"},{"id":129,"exchange":"kraken","pair":"xmrbtc","active":true,"route":"https://api.cryptowat.ch/markets/kraken/xmrbtc"},{"id":28454,"exchange":"huobi","pair":"xmrbtc","active":true,"route":"https://api.cryptowat.ch/markets/huobi/xmrbtc"},{"id":210,"exchange":"liquid","pair":"xmrbtc","active":false,"route":"https://api.cryptowat.ch/markets/liquid/xmrbtc"},{"id":619,"exchange":"binance","pair":"xmrbtc","active":true,"route":"https://api.cryptowat.ch/markets/binance/xmrbtc"},{"id":1314,"exchange":"hitbtc","pair":"xmrbtc","active":true,"route":"https://api.cryptowat.ch/markets/hitbtc/xmrbtc"},{"id":5048,"exchange":"wex","pair":"xmrbtc","active":false,"route":"https://api.cryptowat.ch/markets/wex/xmrbtc"}]},"allowance":{"cost":0.002,"remaining":9.994,"upgrade":"For
+      string: '{"result":{"id":148,"symbol":"xmrbtc","base":{"id":76,"sid":"monero","symbol":"xmr","name":"Monero","fiat":false,"route":"https://api.cryptowat.ch/assets/xmr"},"quote":{"id":60,"sid":"bitcoin","symbol":"btc","name":"Bitcoin","fiat":false,"route":"https://api.cryptowat.ch/assets/btc"},"route":"https://api.cryptowat.ch/pairs/xmrbtc","markets":[{"id":26,"exchange":"bitfinex","pair":"xmrbtc","active":true,"route":"https://api.cryptowat.ch/markets/bitfinex/xmrbtc"},{"id":129,"exchange":"kraken","pair":"xmrbtc","active":true,"route":"https://api.cryptowat.ch/markets/kraken/xmrbtc"},{"id":210,"exchange":"liquid","pair":"xmrbtc","active":false,"route":"https://api.cryptowat.ch/markets/liquid/xmrbtc"},{"id":293,"exchange":"poloniex","pair":"xmrbtc","active":true,"route":"https://api.cryptowat.ch/markets/poloniex/xmrbtc"},{"id":511,"exchange":"bittrex","pair":"xmrbtc","active":false,"route":"https://api.cryptowat.ch/markets/bittrex/xmrbtc"},{"id":619,"exchange":"binance","pair":"xmrbtc","active":true,"route":"https://api.cryptowat.ch/markets/binance/xmrbtc"},{"id":1314,"exchange":"hitbtc","pair":"xmrbtc","active":true,"route":"https://api.cryptowat.ch/markets/hitbtc/xmrbtc"},{"id":4722,"exchange":"zonda","pair":"xmrbtc","active":false,"route":"https://api.cryptowat.ch/markets/zonda/xmrbtc"},{"id":5048,"exchange":"wex","pair":"xmrbtc","active":false,"route":"https://api.cryptowat.ch/markets/wex/xmrbtc"},{"id":28454,"exchange":"huobi","pair":"xmrbtc","active":false,"route":"https://api.cryptowat.ch/markets/huobi/xmrbtc"},{"id":59247,"exchange":"gateio","pair":"xmrbtc","active":true,"route":"https://api.cryptowat.ch/markets/gateio/xmrbtc"},{"id":62167,"exchange":"okx","pair":"xmrbtc","active":true,"route":"https://api.cryptowat.ch/markets/okx/xmrbtc"},{"id":2668726,"exchange":"bisq","pair":"xmrbtc","active":true,"route":"https://api.cryptowat.ch/markets/bisq/xmrbtc"},{"id":2893072,"exchange":"kucoin","pair":"xmrbtc","active":true,"route":"https://api.cryptowat.ch/markets/kucoin/xmrbtc"}]},"allowance":{"cost":0.002,"remaining":9.925,"upgrade":"For
         unlimited API access, create an account at https://cryptowat.ch"}}
 
         '
     headers:
       Access-Control-Allow-Headers:
-      - X-CW-Integration, X-CW-Very-Secret-Value
+      - X-CW-Integration, X-CW-Very-Secret-Value, sentry-trace, baggage
       CF-Cache-Status:
       - DYNAMIC
       CF-RAY:
-      - 6e3d4cc7ba596967-FRA
+      - 7f947ed1a86623c7-ZRH
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Sun, 27 Feb 2022 00:29:38 GMT
-      Expect-CT:
-      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      - Sat, 19 Aug 2023 18:35:16 GMT
       Referrer-Policy:
       - origin-when-cross-origin
       Server:
       - cloudflare
       Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains
+      - max-age=31536000; includeSubDomains; preload
       Vary:
       - Origin
       X-Content-Type-Options:
       - nosniff
       content-length:
-      - '1983'
+      - '2137'
     status:
       code: 200
       message: OK
@@ -164,38 +158,36 @@ interactions:
       Connection:
       - keep-alive
       Cookie:
-      - __cf_bm=vuevr17qmSxTzLK7YZzae_f7O_b9mUJfXmc2Fmh7z_I-1645921777-0-AaBENsNba9lv++TJgxOYiMsQ68kSBG3DfkYLOg/A6xCF4j79IiXEF9aKNV2LicmNnTwkGDVtBXUZt79qi3DLzu0=
+      - __cf_bm=mAs.MrdzMKAMdfTlBuCZjt4JZEuCojxp8xrPeoYQP_U-1692470115-0-AbatQEeOMyif8qT+7HNP+tNc5iKB2faltFlwQStQDcs/yPnN2fdyon5AcPiem/WpyBDaemZKHvZ1a893h44A9Og=
       User-Agent:
-      - python-requests/2.27.1
+      - python-requests/2.31.0
     method: GET
-    uri: https://api.cryptowat.ch/pairs/aaa
+    uri: https://api.cryptowat.ch/pairs/does-not-exist
   response:
     body:
-      string: '{"error":"Pair not found","allowance":{"cost":0.002,"remaining":9.992,"upgrade":"For
+      string: '{"error":"Pair not found","allowance":{"cost":0.002,"remaining":9.923,"upgrade":"For
         unlimited API access, create an account at https://cryptowat.ch"}}
 
         '
     headers:
       Access-Control-Allow-Headers:
-      - X-CW-Integration, X-CW-Very-Secret-Value
+      - X-CW-Integration, X-CW-Very-Secret-Value, sentry-trace, baggage
       CF-Cache-Status:
       - DYNAMIC
       CF-RAY:
-      - 6e3d4cc90c226967-FRA
+      - 7f947ed2e9e423c7-ZRH
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Sun, 27 Feb 2022 00:29:38 GMT
-      Expect-CT:
-      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      - Sat, 19 Aug 2023 18:35:16 GMT
       Referrer-Policy:
       - origin-when-cross-origin
       Server:
       - cloudflare
       Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains
+      - max-age=31536000; includeSubDomains; preload
       Vary:
       - Origin
       X-Content-Type-Options:

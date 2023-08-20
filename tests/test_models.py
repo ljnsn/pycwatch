@@ -1,12 +1,11 @@
 from typing import List, Optional, Union
 
 import pytest
-
 from pycwatch.models import OHLCVQueryParams
 
 
 @pytest.mark.parametrize(
-    ["periods", "expected"],
+    ("periods", "expected"),
     [
         ([], None),
         ([60, 180, 300], "60,180,300"),
@@ -16,7 +15,11 @@ from pycwatch.models import OHLCVQueryParams
         (["3m", 180], "180"),
     ],
 )
-def test_ohlcv_query_params(periods: List[Union[str, int]], expected: Optional[str]):
+def test_ohlcv_query_params(
+    periods: List[Union[str, int]],
+    expected: Optional[str],
+) -> None:
+    """Verify OHLCVQueryParams resolves period values and labels correctly."""
     params = OHLCVQueryParams(periods=periods)
 
     assert params.periods == expected

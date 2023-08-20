@@ -1,26 +1,39 @@
-from typing import Optional
+"""The module that holds the API client."""
 
+import sys
+from decimal import Decimal
+from typing import Any, Callable, Dict, List, Mapping, Optional, Type, TypeVar, Union
+
+if sys.version_info < (3, 8):
+    from typing_extensions import Protocol
+else:
+    from typing import Protocol
+
+import attrs
+import cattrs
+import ujson
 from apiclient import APIClient
 from apiclient.authentication_methods import HeaderAuthentication, NoAuthentication
-from apiclient.response_handlers import JsonResponseHandler
-from apiclient_pydantic import serialize_all_methods
+from apiclient.exceptions import ResponseParseError
+from apiclient.response import Response as APIClientResponse
+from apiclient.response_handlers import BaseResponseHandler
+from apiclient.utils.typing import JsonType
+from cattrs.gen import make_dict_structure_fn, make_dict_unstructure_fn
 
-from .config import settings
-from .endpoints import Endpoint
-from .models import (
+from pycwatch.config import settings
+from pycwatch.endpoints import Endpoint
+from pycwatch.exceptions import ResponseStructureError
+from pycwatch.models import (
     AllPrices,
     AllSummaries,
     Asset,
     AssetList,
-    AssetPathParams,
     Exchange,
     ExchangeList,
     ExchangeMarkets,
-    ExchangePathParams,
     Info,
     Market,
     MarketList,
-    MarketPathParams,
     MarketPrice,
     MarketSummariesQueryParams,
     MarketSummary,
@@ -36,7 +49,6 @@ from .models import (
     PaginationQueryParams,
     Pair,
     PairList,
-    PairPathParams,
     Response,
     ResponseRoot,
     TradeQueryParams,
@@ -50,14 +62,76 @@ See https://docs.cryptowat.ch/rest-api/rate-limit#api-request-pricing-structure
 for more information.\
 """
 
+ResponseCls = TypeVar("ResponseCls", bound=ResponseRoot[Any])
+converter = cattrs.Converter()
 
-@serialize_all_methods()
+
+def _to_alias_unstructure(cls: Type[Any]) -> Callable[[Any], Dict[str, Any]]:
+    """Unstructure hook using alias."""
+    return make_dict_unstructure_fn(
+        cls,
+        converter,
+        _cattrs_use_alias=True,
+    )
+
+
+def _to_alias_structure(
+    cls: Type[Any],
+) -> Callable[[Mapping[str, Any], Any], Callable[[Any, Any], Any]]:
+    """Structure hook using alias."""
+    return make_dict_structure_fn(
+        cls,
+        converter,
+        _cattrs_use_alias=True,
+    )
+
+
+class IsList(Protocol):
+    """Protocol for checking whether a value is a list."""
+
+    @classmethod
+    def from_list(cls, v: List[Any]) -> "IsList":
+        """Create an instance from a list."""
+
+
+def _structure_from_list(value: Any, type_: Type[IsList]) -> IsList:
+    """Structure hook using from_list."""
+    return type_.from_list(value)
+
+
+converter.register_unstructure_hook_factory(attrs.has, _to_alias_unstructure)
+converter.register_structure_hook_factory(attrs.has, _to_alias_structure)
+converter.register_structure_hook(Decimal, lambda v, _: Decimal(str(v)))
+converter.register_structure_hook_func(
+    lambda t: hasattr(t, "from_list"),
+    _structure_from_list,
+)
+
+
+class UJSONResponseHandler(BaseResponseHandler):
+    """JSON response handler that uses ujson."""
+
+    @staticmethod
+    def get_request_data(response: APIClientResponse) -> Optional[JsonType]:
+        """Attempt to decode the response data."""
+        raw_data = response.get_raw_data()
+        if raw_data == "":
+            return None
+        try:
+            response_json = ujson.loads(raw_data)
+        except ujson.JSONDecodeError as exc:
+            msg = f"Unable to decode response data to json. data='{raw_data}'"
+            raise ResponseParseError(msg) from exc
+        return response_json
+
+
 class CryptoWatchClient(APIClient):
+    """The CryptoWatch client class."""
+
     def __init__(self, api_key: Optional[str] = None) -> None:
         api_key = api_key or settings.CW_API_KEY
         self._api_key = api_key
         if not api_key:
-            print(NO_KEY_MESSAGE)
             authentication_method = NoAuthentication()
         else:
             authentication_method = HeaderAuthentication(
@@ -65,7 +139,7 @@ class CryptoWatchClient(APIClient):
             )
 
         super().__init__(
-            response_handler=JsonResponseHandler,
+            response_handler=UJSONResponseHandler,
             authentication_method=authentication_method,
         )
 
@@ -77,60 +151,112 @@ class CryptoWatchClient(APIClient):
     def get_info(self) -> ResponseRoot[Info]:
         """Get the allowance and status information by requesting root."""
         # NOTE: supposedly this returns the allowance, however, we get status info only
-        return self.get(Endpoint.root)
+        return self._make_request(Endpoint.root, ResponseRoot[Info])
 
     def list_assets(
-        self, params: PaginationQueryParams
+        self,
+        cursor: Optional[str] = None,
+        limit: Optional[int] = None,
     ) -> PaginatedResponse[AssetList]:
         """List all available assets."""
-        return self.get(Endpoint.list_assets, params=params)
+        params = PaginationQueryParams(cursor=cursor, limit=limit)
+        return self._make_request(
+            Endpoint.list_assets,
+            PaginatedResponse[AssetList],
+            params=params,
+        )
 
-    def get_asset(self, path_params: AssetPathParams) -> Response[Asset]:
+    def get_asset(self, asset_code: str) -> Response[Asset]:
         """Get information about a specific asset."""
-        return self.get(Endpoint.asset_detail.format(**path_params))
+        return self._make_request(
+            Endpoint.asset_detail.format(assetCode=asset_code),
+            Response[Asset],
+        )
 
-    def list_pairs(self, params: PaginationQueryParams) -> PaginatedResponse[PairList]:
+    def list_pairs(
+        self,
+        cursor: Optional[str] = None,
+        limit: Optional[int] = None,
+    ) -> PaginatedResponse[PairList]:
         """List all available pairs."""
-        return self.get(Endpoint.list_pairs, params=params)
+        params = PaginationQueryParams(cursor=cursor, limit=limit)
+        return self._make_request(
+            Endpoint.list_pairs,
+            PaginatedResponse[PairList],
+            params=params,
+        )
 
-    def get_pair(self, path_params: PairPathParams) -> Response[Pair]:
+    def get_pair(self, pair: str) -> Response[Pair]:
         """Get information about a specific pair."""
-        return self.get(Endpoint.pair_detail.format(**path_params))
+        return self._make_request(
+            Endpoint.pair_detail.format(pair=pair),
+            Response[Pair],
+        )
 
     def list_markets(
-        self, params: PaginationQueryParams
+        self,
+        cursor: Optional[str] = None,
+        limit: Optional[int] = None,
     ) -> PaginatedResponse[MarketList]:
         """List all markets."""
-        return self.get(Endpoint.list_markets, params=params)
+        params = PaginationQueryParams(cursor=cursor, limit=limit)
+        return self._make_request(
+            Endpoint.list_markets,
+            PaginatedResponse[MarketList],
+            params=params,
+        )
 
-    def get_market(self, path_params: MarketPathParams) -> Response[Market]:
+    def get_market(self, exchange: str, pair: str) -> Response[Market]:
         """Get information about a specific market."""
-        return self.get(Endpoint.market_detail.format(**path_params))
+        return self._make_request(
+            Endpoint.market_detail.format(exchange=exchange, pair=pair),
+            Response[Market],
+        )
 
-    def get_market_price(self, path_params: MarketPathParams) -> Response[MarketPrice]:
+    def get_market_price(self, exchange: str, pair: str) -> Response[MarketPrice]:
         """Get the last available price for a market."""
-        return self.get(Endpoint.market_price.format(**path_params))
+        return self._make_request(
+            Endpoint.market_price.format(exchange=exchange, pair=pair),
+            Response[MarketPrice],
+        )
 
     def get_all_market_prices(
-        self, params: PaginationQueryParams
+        self,
+        cursor: Optional[str] = None,
+        limit: Optional[int] = None,
     ) -> PaginatedResponse[AllPrices]:
         """Get all market prices."""
-        return self.get(Endpoint.all_market_prices, params=params)
+        params = PaginationQueryParams(cursor=cursor, limit=limit)
+        return self._make_request(
+            Endpoint.all_market_prices,
+            PaginatedResponse[AllPrices],
+            params=params,
+        )
 
     def get_market_trades(
-        self, path_params: MarketPathParams, params: TradeQueryParams
+        self,
+        exchange: str,
+        pair: str,
+        since: Optional[int] = None,
+        limit: Optional[int] = None,
     ) -> Response[MarketTradeList]:
         """Get recent trades for a market."""
-        return self.get(
-            Endpoint.list_market_trades.format(**path_params), params=params
+        params = TradeQueryParams(since=since, limit=limit)
+        return self._make_request(
+            Endpoint.list_market_trades.format(exchange=exchange, pair=pair),
+            Response[MarketTradeList],
+            params=params,
         )
 
     def get_market_summary(
-        self, path_params: MarketPathParams
+        self,
+        exchange: str,
+        pair: str,
     ) -> Response[MarketSummary]:
         """Get a 24h summary of a specific market.
 
-        Returns a market's last price as well as other stats based on a 24-hour sliding window.
+        Returns a market's last price as well as other stats based on a
+        24-hour sliding window.
         - High price
         - Low price
         - % change
@@ -138,50 +264,130 @@ class CryptoWatchClient(APIClient):
         - Volume
         - Quote volume
         """
-        return self.get(Endpoint.market_summary.format(**path_params))
-
-    def get_all_market_summaries(
-        self, params: MarketSummariesQueryParams
-    ) -> Response[AllSummaries]:
-        """Get 24h summaries of all markets."""
-        return self.get(Endpoint.all_market_summaries, params=params)
-
-    def get_market_order_book(
-        self, path_params: MarketPathParams, params: OrderBookQueryParams
-    ) -> Response[OrderBook]:
-        """Get the order book for a specific market."""
-        return self.get(Endpoint.market_orderbook.format(**path_params), params=params)
-
-    def get_market_order_book_liquidity(
-        self, path_params: MarketPathParams
-    ) -> Response[OrderBookLiquidity]:
-        """Get liquidity sums at several basis point levels in the order book."""
-        return self.get(Endpoint.market_orderbook_liquidity.format(**path_params))
-
-    def calculate_quote(
-        self, path_params: MarketPathParams, params: OrderBookCalculatorQueryParams
-    ) -> Response[OrderBookCalculator]:
-        """Get a live quote from the order book for a given buy & sell amount."""
-        return self.get(
-            Endpoint.market_orderbook_calculator.format(**path_params), params=params
+        return self._make_request(
+            Endpoint.market_summary.format(exchange=exchange, pair=pair),
+            Response[MarketSummary],
         )
 
-    def get_ohlcv(
-        self, path_params: MarketPathParams, params: OHLCVQueryParams
+    def get_all_market_summaries(
+        self,
+        cursor: Optional[str] = None,
+        limit: Optional[int] = None,
+        key_by: Optional[str] = None,
+    ) -> Response[AllSummaries]:
+        """Get 24h summaries of all markets."""
+        # TODO: use alias in unstructuring for params and in structuring for responses
+        params = MarketSummariesQueryParams(  # type: ignore[call-arg]
+            cursor=cursor,
+            limit=limit,
+            keyBy=key_by,
+        )
+        return self._make_request(
+            Endpoint.all_market_summaries,
+            Response[AllSummaries],
+            params=params,
+        )
+
+    def get_market_order_book(  # noqa: PLR0913
+        self,
+        exchange: str,
+        pair: str,
+        depth: Optional[int] = None,
+        span: Optional[float] = None,
+        limit: Optional[int] = None,
+    ) -> Response[OrderBook]:
+        """Get the order book for a specific market."""
+        params = OrderBookQueryParams(depth=depth, span=span, limit=limit)
+        return self._make_request(
+            Endpoint.market_orderbook.format(exchange=exchange, pair=pair),
+            Response[OrderBook],
+            params=params,
+        )
+
+    def get_market_order_book_liquidity(
+        self,
+        exchange: str,
+        pair: str,
+    ) -> Response[OrderBookLiquidity]:
+        """Get liquidity sums at several basis point levels in the order book."""
+        return self._make_request(
+            Endpoint.market_orderbook_liquidity.format(exchange=exchange, pair=pair),
+            Response[OrderBookLiquidity],
+        )
+
+    def calculate_quote(
+        self,
+        exchange: str,
+        pair: str,
+        amount: float,
+    ) -> Response[OrderBookCalculator]:
+        """Get a live quote from the order book for a given buy & sell amount."""
+        params = OrderBookCalculatorQueryParams(amount=amount)
+        return self._make_request(
+            Endpoint.market_orderbook_calculator.format(exchange=exchange, pair=pair),
+            Response[OrderBookCalculator],
+            params=params,
+        )
+
+    def get_ohlcv(  # noqa: PLR0913
+        self,
+        exchange: str,
+        pair: str,
+        before: Optional[int] = None,
+        after: Optional[int] = None,
+        periods: Optional[List[Union[str, int]]] = None,
     ) -> Response[OHLCVDict]:
         """Get a market's OHLCV candlestick data."""
-        return self.get(Endpoint.market_ohlc.format(**path_params), params=params)
+        params = OHLCVQueryParams(
+            before=before,
+            after=after,
+            periods=periods,
+        )
+        return self._make_request(
+            Endpoint.market_ohlc.format(exchange=exchange, pair=pair),
+            Response[OHLCVDict],
+            params=params,
+        )
 
     def list_exchanges(self) -> Response[ExchangeList]:
         """List all exchanges."""
-        return self.get(Endpoint.list_exchanges)
+        return self._make_request(Endpoint.list_exchanges, Response[ExchangeList])
 
-    def get_exchange(self, path_params: ExchangePathParams) -> Response[Exchange]:
+    def get_exchange(self, exchange: str) -> Response[Exchange]:
         """Get information about a specific exchange."""
-        return self.get(Endpoint.exchange_detail.format(**path_params))
+        return self._make_request(
+            Endpoint.exchange_detail.format(exchange=exchange),
+            Response[Exchange],
+        )
 
-    def list_exchange_markets(
-        self, path_params: ExchangePathParams
-    ) -> Response[ExchangeMarkets]:
+    def list_exchange_markets(self, exchange: str) -> Response[ExchangeMarkets]:
         """List all markets available on a given exchange."""
-        return self.get(Endpoint.exchange_markets.format(**path_params))
+        return self._make_request(
+            Endpoint.exchange_markets.format(exchange=exchange),
+            Response[ExchangeMarkets],
+        )
+
+    def _make_request(
+        self,
+        endpoint: str,
+        response_cls: Type[ResponseCls],
+        params: Optional[attrs.AttrsInstance] = None,
+    ) -> ResponseCls:
+        """Make a request to the API."""
+        params_dict = converter.unstructure(params) if params else None
+        return self._structure_response(
+            self.get(endpoint, params=params_dict),
+            response_cls,
+        )
+
+    def _structure_response(
+        self,
+        response: JsonType,
+        response_cls: Type[ResponseCls],
+    ) -> ResponseCls:
+        """Structure the response."""
+        try:
+            return converter.structure(response, response_cls)
+        except cattrs.errors.ClassValidationError as exc:
+            msg = f"Failed to structure response: '{response}'"
+            raise ResponseStructureError(msg) from exc
