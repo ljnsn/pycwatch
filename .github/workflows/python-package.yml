@@ -75,6 +75,8 @@ jobs:
           poetry run coverage xml
       - name: Upload coverage
         uses: codecov/codecov-action@v3
+        with:
+          files: reports/.coverage
 
   bump-version:
     runs-on: ubuntu-latest
