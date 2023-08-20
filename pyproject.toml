@@ -114,8 +114,6 @@ ignore = [
   "ANN102",
   # Dynamically typed expressions (typing.Any) are disallowed in `*args`
   "ANN401",
-  # Exception must not use a string literal, assign to variable first
-  "EM101",
 ]
 fix = true
 unfixable = ["ERA001", "F401", "F841"]
