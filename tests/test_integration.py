@@ -12,7 +12,7 @@ import pytest
 import ujson
 from apiclient.exceptions import ClientError
 from pycwatch import CryptoWatchClient, models
-from pycwatch.client import converter
+from pycwatch.conversion import converter
 from pycwatch.endpoints import Endpoint
 from pycwatch.models import PaginatedResponse, Response, ResponseRoot
 from vcr.cassette import Cassette
