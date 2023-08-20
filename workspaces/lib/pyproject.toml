@@ -122,5 +122,5 @@ show_error_codes = true
 warn_unreachable = true
 # TODO: remove this and make stubs
 ignore_missing_imports = true
-exclude = "src/pycwatch/__init__.py"
+exclude = "src/pycwatch/lib/__init__.py"
 # --strict end
