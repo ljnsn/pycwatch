@@ -23,6 +23,12 @@ pycwatch-lib = { path = "workspaces/lib", develop = true }
 [tool.poetry.group.lib-test.dependencies]
 pycwatch-lib = { path = "workspaces/lib", develop = true, extras = ["test"] }
 
+[tool.poetry.group.cli.dependencies]
+pycwatch-cli = { path = "workspaces/cli", develop = true }
+
+[tool.poetry.group.cli-test.dependencies]
+pycwatch-cli = { path = "workspaces/cli", develop = true, extras = ["test"] }
+
 [tool.commitizen]
 name = "cz_gitmoji"
 version = "1.1.4"
