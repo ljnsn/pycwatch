@@ -36,6 +36,7 @@ jobs:
       matrix:
         python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
         platform: [ubuntu-latest, macos-latest]
+        package: ["lib", "cli"]
       fail-fast: false
     runs-on: ${{ matrix.platform }}
 
@@ -50,7 +51,7 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install poetry>=1.2.0
       - name: Test
-        run: make test-isolated-lib
+        run: make "test-isolated-${{ matrix.package }}"
       - name: Upload coverage
         uses: codecov/codecov-action@v3
         with:
