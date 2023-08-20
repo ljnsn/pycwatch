@@ -46,3 +46,6 @@ from pycwatch import CryptoWatchClient
 api_key = "my-awesome-key"
 client = CryptoWatchClient(api_key)
 ```
+
+Note that anonymous users are limited to 10 Cryptowatch Credits worth of API calls per 24-hour period.
+See <https://docs.cryptowat.ch/rest-api/rate-limit#api-request-pricing-structure> for more information.
