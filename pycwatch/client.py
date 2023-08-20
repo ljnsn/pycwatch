@@ -221,10 +221,10 @@ class CryptoWatchClient(APIClient):
     ) -> Response[AllSummaries]:
         """Get 24h summaries of all markets."""
         # TODO: use alias in unstructuring for params and in structuring for responses
-        params = MarketSummariesQueryParams(  # type: ignore[call-arg]
+        params = MarketSummariesQueryParams(
             cursor=cursor,
             limit=limit,
-            keyBy=key_by,
+            key_by=key_by,  # type: ignore[arg-type]
         )
         return self._make_request(
             Endpoint.all_market_summaries,
