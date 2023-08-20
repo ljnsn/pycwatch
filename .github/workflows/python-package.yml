@@ -63,6 +63,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [python-test]
     steps:
+      - uses: actions/checkout@v3
       - name: Download coverage reports
         uses: actions/download-artifact@v3
       - name: Install coverage
@@ -72,6 +73,7 @@ jobs:
       - name: Combine reports
         run: |
           coverage combine $(ls **/.coverage)
+          coverage report
           coverage xml
       - name: Upload coverage
         uses: codecov/codecov-action@v3
