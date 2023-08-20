@@ -12,10 +12,10 @@ init: .clean-venv .venv
 
 test-%: .venv
 	poetry install --sync --with $*
-	poetry run pytest workspaces/$*
+	poetry run bash scripts/test.sh $*
 
 tests: .venv $(addprefix test-, $(PROJECTS))
 
 test-isolated-%: .venv
 	poetry install --sync --only $*,$*-test
-	poetry run pytest workspaces/$*
+	poetry run bash scripts/test.sh $*
