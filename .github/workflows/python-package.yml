@@ -64,10 +64,8 @@ jobs:
     needs: [python-test]
     steps:
       - uses: actions/checkout@v3
-      - name: Install poetry
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install poetry>=1.2.0
+      - name: Install tools
+        run: python -m pip install coverage requests tomli
       - name: Download coverage reports
         uses: actions/download-artifact@v3
       - name: Combine reports
