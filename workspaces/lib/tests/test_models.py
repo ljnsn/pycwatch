@@ -2,7 +2,7 @@ from typing import List, Optional, Union
 
 import pytest
 
-from pycwatch.models import OHLCVQueryParams
+from pycwatch.lib.models import OHLCVQueryParams
 
 
 @pytest.mark.parametrize(

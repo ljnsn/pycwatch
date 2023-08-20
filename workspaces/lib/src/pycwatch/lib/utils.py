@@ -1,4 +1,5 @@
 """Utility functions for the client."""
+
 from typing import Dict, List, Union
 
 ONE_WEEK_MONDAY = "604800_Monday"

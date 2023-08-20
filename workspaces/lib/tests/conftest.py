@@ -4,7 +4,7 @@ from pathlib import Path
 import pytest
 import vcr
 
-from pycwatch import CryptoWatchClient
+from pycwatch.lib import CryptoWatchClient
 
 BASE_DIR = Path(__file__).parent.absolute()
 

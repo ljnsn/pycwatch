@@ -2,7 +2,7 @@ from typing import Optional
 
 import pytest
 
-from pycwatch.config import Settings
+from pycwatch.lib.config import Settings
 
 
 @pytest.mark.parametrize(

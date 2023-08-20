@@ -1,4 +1,5 @@
 """The endpoints available on cryptowat.ch."""
+
 from apiclient import endpoint
 
 

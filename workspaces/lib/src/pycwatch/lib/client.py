@@ -12,11 +12,11 @@ from apiclient.response import Response as APIClientResponse
 from apiclient.response_handlers import BaseResponseHandler
 from apiclient.utils.typing import JsonType
 
-from pycwatch.config import settings
-from pycwatch.conversion import converter
-from pycwatch.endpoints import Endpoint
-from pycwatch.exceptions import ResponseStructureError
-from pycwatch.models import (
+from pycwatch.lib.config import settings
+from pycwatch.lib.conversion import converter
+from pycwatch.lib.endpoints import Endpoint
+from pycwatch.lib.exceptions import ResponseStructureError
+from pycwatch.lib.models import (
     AllPrices,
     AllSummaries,
     Asset,
@@ -224,7 +224,7 @@ class CryptoWatchClient(APIClient):
         params = MarketSummariesQueryParams(
             cursor=cursor,
             limit=limit,
-            key_by=key_by,  # type: ignore[arg-type]
+            key_by=key_by,
         )
         return self._make_request(
             Endpoint.all_market_summaries,
@@ -331,7 +331,10 @@ class CryptoWatchClient(APIClient):
     ) -> ResponseCls:
         """Structure the response."""
         try:
-            return converter.structure(response, response_cls)
+            return converter.structure(  # type: ignore[no-any-return]
+                response,
+                response_cls,
+            )
         except cattrs.errors.ClassValidationError as exc:
             msg = f"Failed to structure response: '{response}'"
             raise ResponseStructureError(msg) from exc
