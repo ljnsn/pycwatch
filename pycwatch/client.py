@@ -47,14 +47,6 @@ from pycwatch.models import (
     TradeQueryParams,
 )
 
-NO_KEY_MESSAGE = """\
-You have not set an API Key. Anonymous users are limited to 10 Cryptowatch
-Credits worth of API calls per 24-hour period.
-
-See https://docs.cryptowat.ch/rest-api/rate-limit#api-request-pricing-structure
-for more information.\
-"""
-
 ResponseCls = TypeVar("ResponseCls", bound=ResponseRoot[Any])
 
 
@@ -85,7 +77,9 @@ class CryptoWatchClient(APIClient):
             authentication_method = NoAuthentication()
         else:
             authentication_method = HeaderAuthentication(
-                token=api_key, parameter="X-CW-API-Key", scheme=None
+                token=api_key,
+                parameter="X-CW-API-Key",
+                scheme=None,
             )
 
         super().__init__(
