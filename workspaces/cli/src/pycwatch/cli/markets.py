@@ -1,6 +1,6 @@
 """Commands related to markets."""
 
-from typing import Annotated, Optional
+from typing import Annotated, Optional, Union
 
 import typer
 from rich import print
@@ -134,7 +134,7 @@ def get_market_ohlcv(  # noqa: PLR0913
         Optional[int], typer.Option("-a", "--after")  # noqa: UP007
     ] = None,
     periods: Annotated[
-        Optional[list[int | str]], typer.Option("-p", "--periods")  # noqa: UP007
+        Optional[list[Union[int, str]]], typer.Option("-p", "--periods")  # noqa: UP007
     ] = None,
 ) -> None:
     """Get a market's OHLCV data."""
