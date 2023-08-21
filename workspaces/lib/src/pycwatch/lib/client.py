@@ -224,7 +224,7 @@ class CryptoWatchClient(APIClient):
         params = MarketSummariesQueryParams(
             cursor=cursor,
             limit=limit,
-            key_by=key_by,  # type: ignore[arg-type]
+            key_by=key_by,
         )
         return self._make_request(
             Endpoint.all_market_summaries,
