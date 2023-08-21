@@ -80,13 +80,13 @@ Run `pycw --help` to get usage info.
                                                                                                             
  PyCwatch CLI.                                                                                              
                                                                                                            
-╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────────────╮
-│ assets                           Get or list assets.                                                     │
-│ exchanges                        Get or list exchanges.                                                  │
-│ info                             Get API info.                                                           │
-│ markets                          Get or list markets.                                                    │
-│ pairs                            Get or list pairs.                                                      │
-╰──────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ───────────────────────────────────────────────────────────────╮
+│ assets                           Get or list assets.                     │
+│ exchanges                        Get or list exchanges.                  │
+│ info                             Get API info.                           │
+│ markets                          Get or list markets.                    │
+│ pairs                            Get or list pairs.                      │
+╰──────────────────────────────────────────────────────────────────────────╯
 ```
 
 All the endpoints implemented by `pycwatch-lib` are available via the `pycw` command.
