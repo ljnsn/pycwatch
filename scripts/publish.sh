@@ -11,5 +11,10 @@ sed -i "s/^version = \".*\"/version = \"$version\"/" "$package/pyproject.toml"
 # replace all path dependencies
 sed -i "s/^\(pycwatch-.*\) = { path = \".*\" }/\1 = \"$version\"/" "$package/pyproject.toml"
 
-# poetry publish --build
-cd "$package" && poetry build
+rootdir=$(pwd)
+
+cd "$package" || exit 1
+
+poetry publish --build
+
+cd "$rootdir" || exit 1
