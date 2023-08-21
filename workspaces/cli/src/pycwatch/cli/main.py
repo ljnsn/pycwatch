@@ -21,8 +21,8 @@ app.add_typer(exchanges_app)
 @app.command()
 def info(ctx: typer.Context) -> None:
     """Get API info."""
-    result = get_client(ctx).get_info()
-    print(converter.unstructure(result))
+    response = get_client(ctx).get_info()
+    print(converter.unstructure(response.result))
 
 
 @app.callback()
