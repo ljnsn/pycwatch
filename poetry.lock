@@ -799,7 +799,6 @@ cattrs = ">=23.1.2"
 commitizen = {version = ">=2.38.0", optional = true}
 coverage = {version = ">=6.3.2,<7.0.0", extras = ["toml"], optional = true}
 cz-conventional-gitmoji = {version = ">=0.1.2", optional = true}
-identify = {version = "<=2.5.24", optional = true}
 importlib-metadata = {version = "<4.3", markers = "python_version < \"3.8\""}
 mypy = {version = ">=0.931,<1.4", optional = true}
 pre-commit = {version = "<3.0", optional = true}
@@ -816,7 +815,7 @@ ujson = ">=5.7.0"
 vcrpy = {version = ">=4.1.1", optional = true}
 
 [package.extras]
-test = ["black (>=22.1,<23.7)", "commitizen (>=2.38.0)", "coverage[toml] (>=6.3.2,<7.0.0)", "cz-conventional-gitmoji (>=0.1.2)", "identify (<=2.5.24)", "mypy (>=0.931,<1.4)", "pre-commit (<3.0)", "pytest (>=7.0.1)", "pytest-cov (>=3,<5)", "pytest-mock (>=3.7.0)", "requests-mock (>=1.9.3)", "ruff (>=0.0.253)", "types-requests (>=2.27.11)", "types-ujson (>=5.8.0.1)", "vcrpy (>=4.1.1)"]
+test = ["black (>=22.1,<23.7)", "commitizen (>=2.38.0)", "coverage[toml] (>=6.3.2,<7.0.0)", "cz-conventional-gitmoji (>=0.1.2)", "mypy (>=0.931,<1.4)", "pre-commit (<3.0)", "pytest (>=7.0.1)", "pytest-cov (>=3,<5)", "pytest-mock (>=3.7.0)", "requests-mock (>=1.9.3)", "ruff (>=0.0.253)", "types-requests (>=2.27.11)", "types-ujson (>=5.8.0.1)", "vcrpy (>=4.1.1)"]
 
 [package.source]
 type = "directory"
