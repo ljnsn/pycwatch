@@ -12,6 +12,14 @@ updates:
       interval: "daily"
 
   - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    commit-message:
+      prefix: ⬆️  dep-bump
+      include: "scope"
+
+  - package-ecosystem: "pip"
     directory: "/workspaces/lib"
     schedule:
       interval: "daily"
