@@ -1,6 +1,6 @@
 """Commands related to markets."""
 
-from typing import Annotated, Optional, Union
+from typing import Annotated, Optional
 
 import typer
 from rich import print
@@ -134,9 +134,20 @@ def get_market_ohlcv(  # noqa: PLR0913
         Optional[int], typer.Option("-a", "--after")  # noqa: UP007
     ] = None,
     periods: Annotated[
-        Optional[list[Union[int, str]]], typer.Option("-p", "--periods")  # noqa: UP007
+        Optional[list[str]], typer.Option("-p", "--periods")  # noqa: UP007
     ] = None,
 ) -> None:
     """Get a market's OHLCV data."""
-    response = get_client(ctx).get_ohlcv(exchange, pair, before, after, periods)
+    periods_ = (
+        periods
+        if periods is None
+        else [int(period) if period.isdigit() else period for period in periods]
+    )
+    response = get_client(ctx).get_ohlcv(
+        exchange,
+        pair,
+        before,
+        after,
+        periods_,  # type: ignore[arg-type]
+    )
     print(converter.unstructure(response.result))
