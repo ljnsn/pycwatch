@@ -20,22 +20,22 @@ def list_markets(
     limit: Annotated[Optional[int], typer.Option()] = None,  # noqa: UP007
 ) -> None:
     """List markets."""
-    result = get_client(ctx).list_markets(cursor, limit)
-    print(converter.unstructure(result))
+    response = get_client(ctx).list_markets(cursor, limit)
+    print(converter.unstructure(response.result))
 
 
 @app.command(name="get")
 def get_market(ctx: typer.Context, exchange: str, pair: str) -> None:
     """Get a market."""
-    result = get_client(ctx).get_market(exchange, pair)
-    print(converter.unstructure(result))
+    response = get_client(ctx).get_market(exchange, pair)
+    print(converter.unstructure(response.result))
 
 
 @app.command(name="price")
 def get_market_price(ctx: typer.Context, exchange: str, pair: str) -> None:
     """Get a market price."""
-    result = get_client(ctx).get_market_price(exchange, pair)
-    print(converter.unstructure(result))
+    response = get_client(ctx).get_market_price(exchange, pair)
+    print(converter.unstructure(response.result))
 
 
 @app.command(name="prices")
@@ -45,8 +45,8 @@ def list_market_prices(
     limit: Annotated[Optional[int], typer.Option()] = None,  # noqa: UP007
 ) -> None:
     """Get a market price."""
-    result = get_client(ctx).get_all_market_prices(cursor, limit)
-    print(converter.unstructure(result))
+    response = get_client(ctx).get_all_market_prices(cursor, limit)
+    print(converter.unstructure(response.result))
 
 
 @app.command(name="trades")
@@ -58,8 +58,8 @@ def get_market_trades(
     limit: Annotated[Optional[int], typer.Option()] = None,  # noqa: UP007
 ) -> None:
     """Get market trades."""
-    result = get_client(ctx).get_market_trades(exchange, pair, since, limit)
-    print(converter.unstructure(result))
+    response = get_client(ctx).get_market_trades(exchange, pair, since, limit)
+    print(converter.unstructure(response.result))
 
 
 @app.command(name="summary")
