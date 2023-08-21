@@ -41,7 +41,7 @@ typing-extensions = { version = ">=4.7.1", python = "<3.10" }
 # test dependencies
 pytest = { version = ">=7.0.1", optional = true }
 pytest-cov = { version = ">=3,<5", optional = true }
-mypy = { version = ">=0.931,<1.4", optional = true }
+mypy = { version = ">=0.931,<1.5", optional = true }
 black = { version = ">=22.1,<23.7", optional = true }
 coverage = { version = ">=6.3.2,<7.0.0", extras = ["toml"], optional = true }
 types-requests = { version = ">=2.27.11", optional = true }
