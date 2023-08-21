@@ -69,6 +69,7 @@ def _structure_from_list(value: Any, type_: Type[IsList]) -> IsList:
 converter.register_unstructure_hook_factory(attrs.has, _to_alias_unstructure)
 converter.register_structure_hook_factory(attrs.has, _to_alias_structure)
 converter.register_structure_hook(Decimal, lambda v, _: Decimal(str(v)))
+converter.register_unstructure_hook(Decimal, lambda v: str(v))
 converter.register_structure_hook_func(
     lambda t: hasattr(t, "from_list"),
     _structure_from_list,
