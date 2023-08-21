@@ -52,7 +52,7 @@ class MarketSummariesQueryParams(PaginationQueryParams):
 
     key_by: Optional[MarketSummaryKey] = attrs.field(
         default=None,
-        converter=MarketSummaryKey,
+        converter=attrs.converters.optional(MarketSummaryKey),
         validator=attrs.validators.optional(
             attrs.validators.instance_of(MarketSummaryKey)
         ),
