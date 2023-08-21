@@ -20,8 +20,8 @@ def list_assets(
     limit: Annotated[Optional[int], typer.Option()] = None,  # noqa: UP007
 ) -> None:
     """List assets."""
-    result = get_client(ctx).list_assets(cursor, limit)
-    print(converter.unstructure(result))
+    response = get_client(ctx).list_assets(cursor, limit)
+    print(converter.unstructure(response.result))
 
 
 @app.command(name="get")
@@ -30,5 +30,5 @@ def get_asset(
     code: str = typer.Argument(..., help="Asset code."),
 ) -> None:
     """Get asset."""
-    result = get_client(ctx).get_asset(code)
-    print(converter.unstructure(result))
+    response = get_client(ctx).get_asset(code)
+    print(converter.unstructure(response.result))

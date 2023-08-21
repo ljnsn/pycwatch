@@ -24,8 +24,8 @@ def get_exchange(
     code: str = typer.Argument(..., help="Exchange code."),
 ) -> None:
     """Get exchange."""
-    result = get_client(ctx).get_exchange(code)
-    print(converter.unstructure(result))
+    response = get_client(ctx).get_exchange(code)
+    print(converter.unstructure(response.result))
 
 
 @app.command(name="markets")
@@ -34,5 +34,5 @@ def list_exchange_markets(
     code: str = typer.Argument(..., help="Exchange code."),
 ) -> None:
     """List exchange markets."""
-    result = get_client(ctx).list_exchange_markets(code)
-    print(converter.unstructure(result))
+    response = get_client(ctx).list_exchange_markets(code)
+    print(converter.unstructure(response.result))
