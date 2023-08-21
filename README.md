@@ -1,7 +1,8 @@
 # pycwatch
 
 [![Coverage](https://img.shields.io/codecov/c/github/ljnsn/pycwatch?color=%2334D058)](https://codecov.io/gh/ljnsn/pycwatch)
-[![Package version](https://img.shields.io/pypi/v/pycwatch?color=%2334D058&label=pypi%20package)](https://pypi.org/project/pycwatch)
+![PyPI CLI - Version](https://img.shields.io/pypi/v/pycwatch-cli?logo=pypi&label=pycwatch-cli&color=limegreen)
+![PyPI LIB - Version](https://img.shields.io/pypi/v/pycwatch-lib?logo=pypi&label=pycwatch-lib&color=limegreen)
 [![Python versions](https://img.shields.io/pypi/pyversions/pycwatch.svg)](https://pypi.org/project/pycwatch)
 [![Black style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
