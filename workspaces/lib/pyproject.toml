@@ -53,7 +53,8 @@ cz-conventional-gitmoji = { version = ">=0.1.2", optional = true }
 ruff = { version = ">=0.0.253", optional = true }
 pre-commit = { version = "<3.0", optional = true }
 types-ujson = { version = ">=5.8.0.1", optional = true }
-identify = { version = "<=2.5.24", optional = true }
+identify = { version = "<=2.5.24", optional = true, python = "<3.8" }
+cfgv = { version = "<3.4.0", optional = true }
 
 [tool.poetry.extras]
 test = [
@@ -71,7 +72,6 @@ test = [
   "ruff",
   "pre-commit",
   "types-ujson",
-  "identify",
 ]
 
 [tool.ruff]
