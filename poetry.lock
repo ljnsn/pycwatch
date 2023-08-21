@@ -351,13 +351,13 @@ testing = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "diff-cover (>=7.5)", "p
 
 [[package]]
 name = "identify"
-version = "2.5.27"
+version = "2.5.24"
 description = "File identification library for Python"
 optional = false
-python-versions = ">=3.8"
+python-versions = ">=3.7"
 files = [
-    {file = "identify-2.5.27-py2.py3-none-any.whl", hash = "sha256:fdb527b2dfe24602809b2201e033c2a113d7bdf716db3ca8e3243f735dcecaba"},
-    {file = "identify-2.5.27.tar.gz", hash = "sha256:287b75b04a0e22d727bc9a41f0d4f3c1bcada97490fa6eabb5b28f0e9097e733"},
+    {file = "identify-2.5.24-py2.py3-none-any.whl", hash = "sha256:986dbfb38b1140e763e413e6feb44cd731faf72d1909543178aa79b0e258265d"},
+    {file = "identify-2.5.24.tar.gz", hash = "sha256:0aac67d5b4812498056d28a9a512a483f5085cc28640b02b258a59dac34301d4"},
 ]
 
 [package.extras]
@@ -799,9 +799,10 @@ cattrs = ">=23.1.2"
 commitizen = {version = ">=2.38.0", optional = true}
 coverage = {version = ">=6.3.2,<7.0.0", extras = ["toml"], optional = true}
 cz-conventional-gitmoji = {version = ">=0.1.2", optional = true}
+identify = {version = "<=2.5.24", optional = true}
 importlib-metadata = {version = "<4.3", markers = "python_version < \"3.8\""}
 mypy = {version = ">=0.931,<1.4", optional = true}
-pre-commit = {version = "<2.20.0", optional = true}
+pre-commit = {version = "<3.0", optional = true}
 pytest = {version = ">=7.0.1", optional = true}
 pytest-cov = {version = ">=3,<5", optional = true}
 pytest-mock = {version = ">=3.7.0", optional = true}
@@ -815,7 +816,7 @@ ujson = ">=5.7.0"
 vcrpy = {version = ">=4.1.1", optional = true}
 
 [package.extras]
-test = ["black (>=22.1,<23.7)", "commitizen (>=2.38.0)", "coverage[toml] (>=6.3.2,<7.0.0)", "cz-conventional-gitmoji (>=0.1.2)", "mypy (>=0.931,<1.4)", "pre-commit (<2.20.0)", "pytest (>=7.0.1)", "pytest-cov (>=3,<5)", "pytest-mock (>=3.7.0)", "requests-mock (>=1.9.3)", "ruff (>=0.0.253)", "types-requests (>=2.27.11)", "types-ujson (>=5.8.0.1)", "vcrpy (>=4.1.1)"]
+test = ["black (>=22.1,<23.7)", "commitizen (>=2.38.0)", "coverage[toml] (>=6.3.2,<7.0.0)", "cz-conventional-gitmoji (>=0.1.2)", "identify (<=2.5.24)", "mypy (>=0.931,<1.4)", "pre-commit (<3.0)", "pytest (>=7.0.1)", "pytest-cov (>=3,<5)", "pytest-mock (>=3.7.0)", "requests-mock (>=1.9.3)", "ruff (>=0.0.253)", "types-requests (>=2.27.11)", "types-ujson (>=5.8.0.1)", "vcrpy (>=4.1.1)"]
 
 [package.source]
 type = "directory"
