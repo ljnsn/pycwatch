@@ -72,6 +72,8 @@ test = [
   "ruff",
   "pre-commit",
   "types-ujson",
+  "identify",
+  "cfgv",
 ]
 
 [tool.ruff]
