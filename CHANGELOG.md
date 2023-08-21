@@ -2,6 +2,128 @@
 
 All notable changes to this project will be documented in this file.
 
+## v2.0.0 (2023-08-21)
+
+### 💥 Boom
+
+- move to monorepo setup
+
+### ✨ Features
+
+- **cli**: add exchanges commands
+- **lib**: add markets cli
+- **cli**: add pairs command
+- **cli**: add info and assets commands and tests
+- add cli
+
+### 🐛🚑️ Fixes
+
+- **cli**: return only result everywhere
+- **lib**: pin cfgv
+- **lib**: add identify for compat
+- pin pre-commit below 2.20
+- **lib**: key by is optional
+- **lib**: pin black to below 23.7
+- **lib**: coverage 7 dropped support for 3.7
+- **cli**: typer doesn't support pipe union
+- **cli**: always return result
+- **lib**: pin mypy for 3.7
+- **lib**: add unstructuring for decimals
+- **lib**: add converter for MarketSummaryKey
+- **main**: only install cli if python >= 3.10
+- **cli**: require python >= 3.10
+- **cli**: remove module running
+- **cli**: fix entrypoint
+- **main**: add cli dependencies
+- **cli**: add script entrypoint
+- **lib**: ignore correct file
+- **lib**: add namespace level
+- **lib**: fix version
+- ignore reports and ruff cache
+- move scripts back to top level
+- **pyproject**: include namespace package
+
+### ✅🤡🧪 Tests
+
+- **cli**: add tests for market commands
+
+### 🏷️ Types
+
+- add py.typed to lib and cli
+
+### 💚👷 CI & Build
+
+- **dependabot**: monitor workspace dirs
+- **publish**: publish both packages
+- **package**: remove unnecessary quotes
+- update lock file
+- **package**: only lint on 310 and 311
+- **pre-commit**: pass packages to mypy
+- **package**: list excludes line by line
+- **package**: only run cli tests for python >= 3.10
+- **coverage**: enable parallel again and add combine
+- **package**: upload all test run reports
+- **package**: upload correct file
+- **package**: don't poetry run
+- **package**: fix upload file
+- **package**: fix installs
+- **package**: checkout repo
+- **package**: checkout repo
+- **package**: remove report step
+- **package**: properly combine reports
+- **package**: install coverage
+- **package**: download all reports
+- **package**: upload coverage only once
+- **package**: remove mac from lint job too
+- **package**: remove macos due to weird make behaviour
+- **package**: run tests for both packages
+- **package**: fix job name
+- **package**: update pipeline
+- change coverate report location
+
+### 📌➕⬇️ ➖⬆️  Dependencies
+
+- **lib**: remove requests-mock and pytest-mock
+- bump mypy
+
+### 📝💡 Documentation
+
+- **cli**: update readme
+- **readme**: better formatting
+- **readme**: add usage info
+- update readme
+
+### 🔐🚧📈✏️ 💩👽️🍻💬🥚🌱🚩🥅🩺 Others
+
+- cfgv
+
+### 🔥⚰️  Clean up
+
+- remove changelog from lib
+
+### 🔧🔨📦️ Configuration, Scripts, Packages
+
+- **publish**: fix publishing
+- **cli**: set proper target versions
+- **lint**: check packages with mypy instead of paths
+- **mypy**: ignore missing imports for apiclient
+- **main**: no need to combine without parallel
+- **coverage**: reduce threshold
+- **main**: include only src in coverage run
+- **main**: replace version and path dependencies in publishs script
+- **cli**: lower coverage fail threshold
+- **main**: use test script in makefile
+- **main**: update lint and test scripts
+- **main**: exclude correct file
+- **main**: add makefile
+- **main**: use lib test extras
+- **lib**: rename extras to test and remove commitizen
+- **coverage**: add some config for coverage
+
+### 🚨 Linting
+
+- **lib**: add and remove ignores
+
 ## v1.1.4 (2023-08-20)
 
 ### 🐛🚑️ Fixes
