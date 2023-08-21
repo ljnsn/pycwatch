@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 package=workspaces/$1
 
 # get the current version of the main package
