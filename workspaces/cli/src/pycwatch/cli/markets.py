@@ -3,10 +3,16 @@
 from typing import Annotated, Optional
 
 import typer
-from rich import print
 
-from pycwatch.cli.utils import get_client
-from pycwatch.lib.conversion import converter
+from pycwatch.cli.utils import (
+    CursorOption,
+    FormatOption,
+    LimitOption,
+    OutputFormat,
+    echo,
+    get_client,
+)
+from pycwatch.lib.models import MarketSummaryKey
 
 app = typer.Typer(name="markets", help="Get or list markets.")
 
@@ -14,69 +20,89 @@ app = typer.Typer(name="markets", help="Get or list markets.")
 @app.command(name="list")
 def list_markets(
     ctx: typer.Context,
-    cursor: Annotated[Optional[str], typer.Option()] = None,
-    limit: Annotated[Optional[int], typer.Option()] = None,
+    cursor: CursorOption = None,
+    limit: LimitOption = None,
+    style: FormatOption = OutputFormat.RECORDS,
 ) -> None:
     """List markets."""
     response = get_client(ctx).list_markets(cursor, limit)
-    print(converter.unstructure(response.result))
+    echo(response.result, style)
 
 
 @app.command(name="get")
-def get_market(ctx: typer.Context, exchange: str, pair: str) -> None:
+def get_market(
+    ctx: typer.Context,
+    exchange: str,
+    pair: str,
+    style: FormatOption = OutputFormat.RECORDS,
+) -> None:
     """Get a market."""
     response = get_client(ctx).get_market(exchange, pair)
-    print(converter.unstructure(response.result))
+    echo(response.result, style)
 
 
 @app.command(name="price")
-def get_market_price(ctx: typer.Context, exchange: str, pair: str) -> None:
+def get_market_price(
+    ctx: typer.Context,
+    exchange: str,
+    pair: str,
+    style: FormatOption = OutputFormat.RECORDS,
+) -> None:
     """Get a market price."""
     response = get_client(ctx).get_market_price(exchange, pair)
-    print(converter.unstructure(response.result))
+    echo(response.result, style)
 
 
 @app.command(name="prices")
 def list_market_prices(
     ctx: typer.Context,
-    cursor: Annotated[Optional[str], typer.Option()] = None,
-    limit: Annotated[Optional[int], typer.Option()] = None,
+    cursor: CursorOption = None,
+    limit: LimitOption = None,
+    style: FormatOption = OutputFormat.RECORDS,
 ) -> None:
     """Get a market price."""
     response = get_client(ctx).get_all_market_prices(cursor, limit)
-    print(converter.unstructure(response.result))
+    echo(response.result, style)
 
 
 @app.command(name="trades")
-def get_market_trades(
+def get_market_trades(  # noqa: PLR0913
     ctx: typer.Context,
     exchange: str,
     pair: str,
     since: Annotated[Optional[int], typer.Option()] = None,
-    limit: Annotated[Optional[int], typer.Option()] = None,
+    limit: LimitOption = None,
+    style: FormatOption = OutputFormat.RECORDS,
 ) -> None:
     """Get market trades."""
     response = get_client(ctx).get_market_trades(exchange, pair, since, limit)
-    print(converter.unstructure(response.result))
+    echo(response.result, style)
 
 
 @app.command(name="summary")
-def get_market_summary(ctx: typer.Context, exchange: str, pair: str) -> None:
+def get_market_summary(
+    ctx: typer.Context,
+    exchange: str,
+    pair: str,
+    style: FormatOption = OutputFormat.RECORDS,
+) -> None:
     """Get a market summary."""
     response = get_client(ctx).get_market_summary(exchange, pair)
-    print(converter.unstructure(response.result))
+    echo(response.result, style)
 
 
 @app.command(name="summaries")
 def list_market_summaries(
     ctx: typer.Context,
-    cursor: Annotated[Optional[str], typer.Option()] = None,
-    limit: Annotated[Optional[int], typer.Option()] = None,
-    key_by: Annotated[Optional[str], typer.Option()] = None,
+    cursor: CursorOption = None,
+    limit: LimitOption = None,
+    key_by: Annotated[Optional[MarketSummaryKey], typer.Option()] = None,
+    style: FormatOption = OutputFormat.RECORDS,
 ) -> None:
     """List market summaries."""
-    response = get_client(ctx).get_all_market_summaries(cursor, limit, key_by)
-    print(converter.unstructure(response.result))
+    key = None if key_by is None else MarketSummaryKey(key_by)
+    response = get_client(ctx).get_all_market_summaries(cursor, limit, key)
+    echo(response.result, style)
 
 
 @app.command(name="orderbook")
@@ -86,11 +112,12 @@ def get_market_orderbook(  # noqa: PLR0913
     pair: str,
     depth: Annotated[Optional[int], typer.Option("--depth", "-d")] = None,
     span: Annotated[Optional[int], typer.Option("--span", "-s")] = None,
-    limit: Annotated[Optional[int], typer.Option("--limit", "-l")] = None,
+    limit: LimitOption = None,
+    style: FormatOption = OutputFormat.RECORDS,
 ) -> None:
     """Get a market's order book."""
     response = get_client(ctx).get_market_order_book(exchange, pair, depth, span, limit)
-    print(converter.unstructure(response.result))
+    echo(response.result, style)
 
 
 @app.command(name="orderbook-liquidity")
@@ -98,10 +125,11 @@ def get_market_order_book_liquidity(
     ctx: typer.Context,
     exchange: str,
     pair: str,
+    style: FormatOption = OutputFormat.RECORDS,
 ) -> None:
     """Get a market's order book liquidity."""
     response = get_client(ctx).get_market_order_book_liquidity(exchange, pair)
-    print(converter.unstructure(response.result))
+    echo(response.result, style)
 
 
 @app.command(name="calculate")
@@ -110,10 +138,11 @@ def calculate_quote(
     exchange: str,
     pair: str,
     amount: float,
+    style: FormatOption = OutputFormat.RECORDS,
 ) -> None:
     """Get a live quote from the order book for a given buy & sell amount."""
     response = get_client(ctx).calculate_quote(exchange, pair, amount)
-    print(converter.unstructure(response.result))
+    echo(response.result, style)
 
 
 @app.command(name="ohlcv")
@@ -124,6 +153,7 @@ def get_market_ohlcv(  # noqa: PLR0913
     before: Annotated[Optional[int], typer.Option("-b", "--before")] = None,
     after: Annotated[Optional[int], typer.Option("-a", "--after")] = None,
     periods: Annotated[Optional[list[str]], typer.Option("-p", "--periods")] = None,
+    style: FormatOption = OutputFormat.RECORDS,
 ) -> None:
     """Get a market's OHLCV data."""
     periods_ = (
@@ -138,4 +168,4 @@ def get_market_ohlcv(  # noqa: PLR0913
         after,
         periods_,  # type: ignore[arg-type]
     )
-    print(converter.unstructure(response.result))
+    echo(response.result, style)
