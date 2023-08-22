@@ -14,8 +14,8 @@ app = typer.Typer(name="pairs", help="Get or list pairs.")
 @app.command(name="list")
 def list_pairs(
     ctx: typer.Context,
-    cursor: Annotated[Optional[str], typer.Option()] = None,  # noqa: UP007
-    limit: Annotated[Optional[int], typer.Option()] = None,  # noqa: UP007
+    cursor: Annotated[Optional[str], typer.Option()] = None,
+    limit: Annotated[Optional[int], typer.Option()] = None,
 ) -> None:
     """List pairs."""
     result = get_client(ctx).list_pairs(cursor, limit)
