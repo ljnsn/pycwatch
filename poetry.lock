@@ -767,7 +767,7 @@ develop = true
 black = {version = ">=22.1,<24.0", optional = true}
 coverage = {version = ">=6.3.2,<8.0.0", extras = ["toml"], optional = true}
 mypy = {version = ">=0.931", optional = true}
-pre-commit = {version = "<3.0", optional = true}
+pre-commit = {version = "<4.0", optional = true}
 pycwatch-lib = {path = "../lib"}
 pytest = {version = ">=7.0.1", optional = true}
 pytest-cov = {version = ">=3,<5", optional = true}
@@ -776,7 +776,7 @@ ruff = {version = ">=0.0.253", optional = true}
 typer = "^0.9.0"
 
 [package.extras]
-test = ["black (>=22.1,<24.0)", "coverage[toml] (>=6.3.2,<8.0.0)", "mypy (>=0.931)", "pre-commit (<3.0)", "pytest (>=7.0.1)", "pytest-cov (>=3,<5)", "ruff (>=0.0.253)"]
+test = ["black (>=22.1,<24.0)", "coverage[toml] (>=6.3.2,<8.0.0)", "mypy (>=0.931)", "pre-commit (<4.0)", "pytest (>=7.0.1)", "pytest-cov (>=3,<5)", "ruff (>=0.0.253)"]
 
 [package.source]
 type = "directory"
@@ -801,8 +801,8 @@ commitizen = {version = ">=2.38.0", optional = true}
 coverage = {version = ">=6.3.2,<7.0.0", extras = ["toml"], optional = true}
 cz-conventional-gitmoji = {version = ">=0.1.2", optional = true}
 identify = {version = "<=2.5.24", optional = true, markers = "python_version < \"3.8\""}
-importlib-metadata = {version = "<4.3", markers = "python_version < \"3.8\""}
-mypy = {version = ">=0.931,<1.4", optional = true}
+importlib-metadata = {version = "<5.3", markers = "python_version < \"3.8\""}
+mypy = {version = ">=0.931,<1.5", optional = true}
 pre-commit = {version = "<3.0", optional = true}
 pytest = {version = ">=7.0.1", optional = true}
 pytest-cov = {version = ">=3,<5", optional = true}
@@ -815,7 +815,7 @@ ujson = ">=5.7.0"
 vcrpy = {version = ">=4.1.1", optional = true}
 
 [package.extras]
-test = ["black (>=22.1,<23.7)", "cfgv (<3.4.0)", "commitizen (>=2.38.0)", "coverage[toml] (>=6.3.2,<7.0.0)", "cz-conventional-gitmoji (>=0.1.2)", "identify (<=2.5.24)", "mypy (>=0.931,<1.4)", "pre-commit (<3.0)", "pytest (>=7.0.1)", "pytest-cov (>=3,<5)", "ruff (>=0.0.253)", "types-requests (>=2.27.11)", "types-ujson (>=5.8.0.1)", "vcrpy (>=4.1.1)"]
+test = ["black (>=22.1,<23.7)", "cfgv (<3.4.0)", "commitizen (>=2.38.0)", "coverage[toml] (>=6.3.2,<7.0.0)", "cz-conventional-gitmoji (>=0.1.2)", "identify (<=2.5.24)", "mypy (>=0.931,<1.5)", "pre-commit (<3.0)", "pytest (>=7.0.1)", "pytest-cov (>=3,<5)", "ruff (>=0.0.253)", "types-requests (>=2.27.11)", "types-ujson (>=5.8.0.1)", "vcrpy (>=4.1.1)"]
 
 [package.source]
 type = "directory"
