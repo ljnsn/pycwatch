@@ -73,17 +73,14 @@ def echo(
 def add_top_level_as_key(data: dict[str, Any]) -> list[dict[str, Any]]:
     """Add the top level as a key."""
     output = []
-    out_dict = {}
     for key, value in data.items():
-        out_dict["key"] = key
         if isinstance(value, dict):
-            out_dict.update(value)
-            output.append(out_dict)
+            output.append({"key": key, **value})
         elif isinstance(value, list):
             for item in value:
-                output.append({**out_dict, **item})
+                output.append({"key": key, **item})
         else:
-            output.append({**out_dict, "value": value})
+            output.append({"key": key, "value": value})
     return output
 
 
