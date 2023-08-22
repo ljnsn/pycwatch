@@ -68,6 +68,8 @@ target-version = "py310"
   "B008",
   # use X | Y for type annotations (not supported by typer)
   "UP007",
+  # boolean default value in function definition
+  "FBT002",
 ]
 "tests/*" = [
   # Magic value used in comparison
