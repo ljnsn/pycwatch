@@ -10,10 +10,10 @@ else:
     from typing import Protocol
 
 import attrs
-import cattrs
 from cattrs.gen import make_dict_structure_fn, make_dict_unstructure_fn, override
+from cattrs.preconf.ujson import make_converter
 
-converter = cattrs.Converter()
+converter = make_converter()
 
 
 def to_cwatch_key(field_name: str) -> str:
