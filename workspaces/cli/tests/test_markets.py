@@ -1,3 +1,4 @@
+import pytest
 from typer.testing import CliRunner
 
 from pycwatch.cli.main import app
@@ -21,9 +22,10 @@ def test_get_market_price(runner: CliRunner) -> None:
     assert result.exit_code == 0
 
 
-def test_list_market_prices(runner: CliRunner) -> None:
+@pytest.mark.parametrize("style", ["records", "objects", "json", "csv", "table"])
+def test_list_market_prices(runner: CliRunner, style: str) -> None:
     """Verify that the list prices command works."""
-    result = runner.invoke(app, ["markets", "prices", "--limit", "10"])
+    result = runner.invoke(app, ["markets", "prices", "--limit", "1", "-f", style])
     assert result.exit_code == 0
 
 
@@ -39,9 +41,10 @@ def test_get_market_summary(runner: CliRunner) -> None:
     assert result.exit_code == 0
 
 
-def test_list_market_summaries(runner: CliRunner) -> None:
+@pytest.mark.parametrize("style", ["records", "objects", "json", "csv", "table"])
+def test_list_market_summaries(runner: CliRunner, style: str) -> None:
     """Verify that the list summaries command works."""
-    result = runner.invoke(app, ["markets", "summaries", "--limit", "10"])
+    result = runner.invoke(app, ["markets", "summaries", "--limit", "5", "-f", style])
     assert result.exit_code == 0
 
 
@@ -69,10 +72,11 @@ def test_calculate_quote(runner: CliRunner) -> None:
     assert result.exit_code == 0
 
 
-def test_get_market_ohlcv(runner: CliRunner) -> None:
+@pytest.mark.parametrize("style", ["records", "objects", "json", "csv", "table"])
+def test_get_market_ohlcv(runner: CliRunner, style: str) -> None:
     """Verify that the get ohlcv command works."""
     result = runner.invoke(
         app,
-        ["markets", "ohlcv", "kraken", "btceur", "-p", "1h"],
+        ["markets", "ohlcv", "kraken", "btceur", "-p", "1h", "-f", style],
     )
     assert result.exit_code == 0
