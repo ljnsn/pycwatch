@@ -6,8 +6,6 @@ from rich import print
 from pycwatch.cli.utils import get_client
 from pycwatch.lib.conversion import converter
 
-# ruff: noqa: B008
-
 app = typer.Typer(name="exchanges", help="Get or list exchanges.")
 
 
