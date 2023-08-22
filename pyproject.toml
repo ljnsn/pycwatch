@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pycwatch"
-version = "2.0.0"
+version = "2.1.0"
 description = "A client library for the Cryptowatch Rest API."
 authors = ["ljnsn <82611987+ljnsn@users.noreply.github.com>"]
 readme = "README.md"
@@ -35,7 +35,7 @@ python = ">=3.10"
 
 [tool.commitizen]
 name = "cz_gitmoji"
-version = "2.0.0"
+version = "2.1.0"
 version_files = ["pyproject.toml:^version"]
 tag_format = "v$version"
 bump_message = "🔖 bump(release): v$current_version → v$new_version"

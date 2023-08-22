@@ -2,6 +2,46 @@
 
 All notable changes to this project will be documented in this file.
 
+## v2.1.0 (2023-08-22)
+
+### ✨ Features
+
+- **cli**: add different output format options
+
+### 🐛🚑️ Fixes
+
+- **cli**: fix adding key with multiple top level keys
+- **lib**: use ujson converter
+
+### ✅🤡🧪 Tests
+
+- **cli**: test some more commands with different formats
+- **cli**: add some tests for formatting
+
+### 💚👷 CI & Build
+
+- **main**: update lock file
+- **dependabot**: monitor root folder too
+- **publish**: use package specific tokens
+
+### 📝💡 Documentation
+
+- **readme**: update pypi badges
+
+### 🔧🔨📦️ Configuration, Scripts, Packages
+
+- **publish**: add set -e
+
+### 🚨 Linting
+
+- **cli**: remove noqas
+
+### 🧑‍💻 Developer Experience
+
+- **cli**: ignore FBT002 globally
+- **cli**: ignore UP007 globally
+- **cli**: ignore B008 globally
+
 ## v2.0.0 (2023-08-21)
 
 ### 💥 Boom
