@@ -14,8 +14,8 @@ app = typer.Typer(name="markets", help="Get or list markets.")
 @app.command(name="list")
 def list_markets(
     ctx: typer.Context,
-    cursor: Annotated[Optional[str], typer.Option()] = None,  # noqa: UP007
-    limit: Annotated[Optional[int], typer.Option()] = None,  # noqa: UP007
+    cursor: Annotated[Optional[str], typer.Option()] = None,
+    limit: Annotated[Optional[int], typer.Option()] = None,
 ) -> None:
     """List markets."""
     response = get_client(ctx).list_markets(cursor, limit)
@@ -39,8 +39,8 @@ def get_market_price(ctx: typer.Context, exchange: str, pair: str) -> None:
 @app.command(name="prices")
 def list_market_prices(
     ctx: typer.Context,
-    cursor: Annotated[Optional[str], typer.Option()] = None,  # noqa: UP007
-    limit: Annotated[Optional[int], typer.Option()] = None,  # noqa: UP007
+    cursor: Annotated[Optional[str], typer.Option()] = None,
+    limit: Annotated[Optional[int], typer.Option()] = None,
 ) -> None:
     """Get a market price."""
     response = get_client(ctx).get_all_market_prices(cursor, limit)
@@ -52,8 +52,8 @@ def get_market_trades(
     ctx: typer.Context,
     exchange: str,
     pair: str,
-    since: Annotated[Optional[int], typer.Option()] = None,  # noqa: UP007
-    limit: Annotated[Optional[int], typer.Option()] = None,  # noqa: UP007
+    since: Annotated[Optional[int], typer.Option()] = None,
+    limit: Annotated[Optional[int], typer.Option()] = None,
 ) -> None:
     """Get market trades."""
     response = get_client(ctx).get_market_trades(exchange, pair, since, limit)
@@ -70,9 +70,9 @@ def get_market_summary(ctx: typer.Context, exchange: str, pair: str) -> None:
 @app.command(name="summaries")
 def list_market_summaries(
     ctx: typer.Context,
-    cursor: Annotated[Optional[str], typer.Option()] = None,  # noqa: UP007
-    limit: Annotated[Optional[int], typer.Option()] = None,  # noqa: UP007
-    key_by: Annotated[Optional[str], typer.Option()] = None,  # noqa: UP007
+    cursor: Annotated[Optional[str], typer.Option()] = None,
+    limit: Annotated[Optional[int], typer.Option()] = None,
+    key_by: Annotated[Optional[str], typer.Option()] = None,
 ) -> None:
     """List market summaries."""
     response = get_client(ctx).get_all_market_summaries(cursor, limit, key_by)
@@ -84,13 +84,9 @@ def get_market_orderbook(  # noqa: PLR0913
     ctx: typer.Context,
     exchange: str,
     pair: str,
-    depth: Annotated[
-        Optional[int], typer.Option("--depth", "-d")  # noqa: UP007
-    ] = None,
-    span: Annotated[Optional[int], typer.Option("--span", "-s")] = None,  # noqa: UP007
-    limit: Annotated[
-        Optional[int], typer.Option("--limit", "-l")  # noqa: UP007
-    ] = None,
+    depth: Annotated[Optional[int], typer.Option("--depth", "-d")] = None,
+    span: Annotated[Optional[int], typer.Option("--span", "-s")] = None,
+    limit: Annotated[Optional[int], typer.Option("--limit", "-l")] = None,
 ) -> None:
     """Get a market's order book."""
     response = get_client(ctx).get_market_order_book(exchange, pair, depth, span, limit)
@@ -125,15 +121,9 @@ def get_market_ohlcv(  # noqa: PLR0913
     ctx: typer.Context,
     exchange: str,
     pair: str,
-    before: Annotated[
-        Optional[int], typer.Option("-b", "--before")  # noqa: UP007
-    ] = None,
-    after: Annotated[
-        Optional[int], typer.Option("-a", "--after")  # noqa: UP007
-    ] = None,
-    periods: Annotated[
-        Optional[list[str]], typer.Option("-p", "--periods")  # noqa: UP007
-    ] = None,
+    before: Annotated[Optional[int], typer.Option("-b", "--before")] = None,
+    after: Annotated[Optional[int], typer.Option("-a", "--after")] = None,
+    periods: Annotated[Optional[list[str]], typer.Option("-p", "--periods")] = None,
 ) -> None:
     """Get a market's OHLCV data."""
     periods_ = (
