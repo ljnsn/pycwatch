@@ -14,8 +14,8 @@ app = typer.Typer(name="assets", help="Get or list assets.")
 @app.command(name="list")
 def list_assets(
     ctx: typer.Context,
-    cursor: Annotated[Optional[str], typer.Option()] = None,  # noqa: UP007
-    limit: Annotated[Optional[int], typer.Option()] = None,  # noqa: UP007
+    cursor: Annotated[Optional[str], typer.Option()] = None,
+    limit: Annotated[Optional[int], typer.Option()] = None,
 ) -> None:
     """List assets."""
     response = get_client(ctx).list_assets(cursor, limit)
