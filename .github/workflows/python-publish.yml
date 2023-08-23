@@ -23,13 +23,9 @@ jobs:
         poetry install
     - name: Publish
       if: ${{ matrix.package }} == "lib"
-      env:
-        POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN_PYCWATCH_LIB }}
       run: |
-        ./scripts/publish.sh ${{ matrix.package }}
+        POETRY_PYPI_TOKEN_PYPI=${{ secrets.PYPI_TOKEN_PYCWATCH_LIB }} ./scripts/publish.sh ${{ matrix.package }}
     - name: Publish
       if: ${{ matrix.package }} == "cli"
-      env:
-        POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN_PYCWATCH_CLI }}
       run: |
-        ./scripts/publish.sh ${{ matrix.package }}
+        POETRY_PYPI_TOKEN_PYPI=${{ secrets.PYPI_TOKEN_PYCWATCH_CLI }} ./scripts/publish.sh ${{ matrix.package }}
