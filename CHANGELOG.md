@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## v2.1.1 (2023-08-23)
+
+### 🐛🚑️ Fixes
+
+- **cli**: add a version parameter
+
+### ✅🤡🧪 Tests
+
+- **cli**: add a test for the version flag
+
+### 🔧🔨📦️ Configuration, Scripts, Packages
+
+- **main**: improve publish script
+
 ## v2.1.0 (2023-08-22)
 
 ### ✨ Features
