@@ -6,10 +6,7 @@ on:
       - 'v*'
 
 jobs:
-  publish:
-    strategy:
-      matrix:
-        package: [lib, cli]
+  publish-lib:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -22,10 +19,25 @@ jobs:
         python -m pip install -U pip poetry
         poetry install
     - name: Publish
-      if: ${{ matrix.package }} == "lib"
+      env:
+        POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN_PYCWATCH_LIB }}
       run: |
-        POETRY_PYPI_TOKEN_PYPI=${{ secrets.PYPI_TOKEN_PYCWATCH_LIB }} ./scripts/publish.sh ${{ matrix.package }}
+        ./scripts/publish.sh lib
+
+  publish-cli:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        python -m pip install -U pip poetry
+        poetry install
     - name: Publish
-      if: ${{ matrix.package }} == "cli"
+      env:
+        POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN_PYCWATCH_CLI }}
       run: |
-        POETRY_PYPI_TOKEN_PYPI=${{ secrets.PYPI_TOKEN_PYCWATCH_CLI }} ./scripts/publish.sh ${{ matrix.package }}
+        ./scripts/publish.sh cli
