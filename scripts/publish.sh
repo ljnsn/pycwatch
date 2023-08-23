@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
-set -e
+error_exit() {
+  msg=$1
+  echo -e "$msg"
+  exit 1
+}
 
 package=workspaces/$1
 
@@ -15,8 +19,8 @@ sed -i "s/^\(pycwatch-.*\) = { path = \".*\" }/\1 = \"$version\"/" "$package/pyp
 
 rootdir=$(pwd)
 
-cd "$package" || exit 1
+cd "$package" || error_exit "Could not find package $package"
 
-poetry publish --build
+poetry publish --build || error_exit "Failed to publish package $package"
 
-cd "$rootdir" || exit 1
+cd "$rootdir" || error_exit "Failed to change back to directory $rootdir"
