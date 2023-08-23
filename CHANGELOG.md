@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## v2.1.2 (2023-08-23)
+
+### 🐛🚑️ Fixes
+
+- **publishing**: pass env vars differently
+
 ## v2.1.1 (2023-08-23)
 
 ### 🐛🚑️ Fixes
