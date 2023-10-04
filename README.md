@@ -6,6 +6,8 @@
 [![Python versions](https://img.shields.io/pypi/pyversions/pycwatch.svg)](https://pypi.org/project/pycwatch)
 [![Black style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
+# Archived, because [Cryptowat.ch is dead](https://cryptowat.ch/products/cryptocurrency-market-data-api) 😞
+
 This repository contains two packages, `pycwatch-lib` and `pycwatch-cli`.
 
 ## `pycwatch-lib`
